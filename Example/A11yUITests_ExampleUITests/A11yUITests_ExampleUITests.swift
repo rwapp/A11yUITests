@@ -37,7 +37,7 @@ class A11yUITests_ExampleUITests: XCTestCase {
     }
 
     func test_individualTest_individualButton() {
-        let button = XCUIApplication().buttons["ends with button"]
+        let button = XCUIApplication().buttons["Ends with button"]
         checkValidLabelFor(button: button)
     }
 }
