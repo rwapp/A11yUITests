@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'A11yUITests_Example' do
+  pod 'A11yUITests', :path => '../'
+
+  target 'A11yUITests_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end
