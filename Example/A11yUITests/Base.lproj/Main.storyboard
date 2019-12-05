@@ -41,10 +41,18 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="IK0-Xu-r0M"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="LSX-ry-o54"/>
                                 </constraints>
-                                <state key="normal" title="ends with button"/>
+                                <state key="normal" title="Ends with button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8l-93-lXx">
+                                <rect key="frame" x="16" y="175" width="69" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="eKU-Tu-wNx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="jN3-nK-q8K"/>
+                                </constraints>
+                                <state key="normal" title="lowercase"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Biz-z4-Rs6">
-                                <rect key="frame" x="16" y="175" width="144" height="44"/>
+                                <rect key="frame" x="16" y="227" width="144" height="44"/>
                                 <accessibility key="accessibilityConfiguration" label=" "/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="4cH-eZ-uL8"/>
@@ -53,8 +61,8 @@
                                 <state key="normal" title="No accessibility label"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bg-cb-wuu">
-                                <rect key="frame" x="16" y="227" width="159" height="44"/>
-                                <accessibility key="accessibilityConfiguration" label="A very long overly descriptive label that isn't required use contect instead to infer meaning or add a hint if required"/>
+                                <rect key="frame" x="16" y="279" width="159" height="44"/>
+                                <accessibility key="accessibilityConfiguration" label="A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="9U0-ja-dxd"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="X2K-N6-btW"/>
@@ -62,7 +70,7 @@
                                 <state key="normal" title="Long accessibility label"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label too small" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lme-nc-64l">
-                                <rect key="frame" x="16" y="279" width="17" height="17"/>
+                                <rect key="frame" x="16" y="331" width="17" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Nov-yU-qnT"/>
                                     <constraint firstAttribute="width" constant="17" id="aMO-hP-anN"/>
@@ -72,7 +80,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A11y_logo" translatesAutoresizingMaskIntoConstraints="NO" id="lJw-cj-fHr">
-                                <rect key="frame" x="16" y="304" width="44" height="59.5"/>
+                                <rect key="frame" x="16" y="356" width="44" height="59.5"/>
                                 <accessibility key="accessibilityConfiguration" label="A11y_logo">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -82,7 +90,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A11y_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aPJ-3W-qDK">
-                                <rect key="frame" x="16" y="371.5" width="44" height="59.5"/>
+                                <rect key="frame" x="16" y="423.5" width="44" height="59.5"/>
                                 <accessibility key="accessibilityConfiguration" label="image of the Mobile A11y logo">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -97,8 +105,9 @@
                             <constraint firstItem="XFT-69-rUL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="5mJ-J5-i9U"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="9W8-YC-SvW"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="top" secondItem="8bg-cb-wuu" secondAttribute="bottom" constant="8" id="ClV-Xc-dIu"/>
-                            <constraint firstItem="Biz-z4-Rs6" firstAttribute="top" secondItem="gbJ-jp-Hev" secondAttribute="bottom" constant="8" id="OCD-mE-iFB"/>
+                            <constraint firstItem="Biz-z4-Rs6" firstAttribute="top" secondItem="B8l-93-lXx" secondAttribute="bottom" constant="8" id="KtK-nG-7Rg"/>
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="RqE-t5-cCU"/>
+                            <constraint firstItem="B8l-93-lXx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ulk-GB-hC0"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="top" secondItem="Biz-z4-Rs6" secondAttribute="bottom" constant="8" id="VtF-a3-lnD"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ygu-tg-wij"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aqD-ey-eNr"/>
@@ -111,6 +120,7 @@
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="top" secondItem="lJw-cj-fHr" secondAttribute="bottom" constant="8" id="vTO-mN-7dX"/>
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="top" secondItem="XFT-69-rUL" secondAttribute="bottom" constant="8" id="wc8-Xf-ROI"/>
                             <constraint firstItem="XFT-69-rUL" firstAttribute="top" secondItem="TC2-DV-qmK" secondAttribute="bottom" constant="8" id="x8C-7U-BMt"/>
+                            <constraint firstItem="B8l-93-lXx" firstAttribute="top" secondItem="gbJ-jp-Hev" secondAttribute="bottom" constant="8" id="xuU-eb-ZWW"/>
                         </constraints>
                     </view>
                 </viewController>
