@@ -15,6 +15,7 @@ A library of common accessibility tests for use with XCUI Tests
   s.social_media_url = 'https://twitter.com/MobileA11y'
 
   s.ios.deployment_target = '11.0'
+  s.swift_version = '5.0'
 
   s.source_files = 'A11yUITests/Classes/**/*'
 

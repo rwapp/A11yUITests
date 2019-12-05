@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "Accessibility tests for XCUI Testing.",
   "description": "A library of common accessibility tests for use with XCUI Tests",
-  "homepage": "https://github.com/r.whitaker@mac.com/A11yUITests",
+  "homepage": "https://github.com/rwapp/A11yUITests",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,13 +12,15 @@
     "Rob Whitaker": "rw@rwapp.co.uk"
   },
   "source": {
-    "git": "https://github.com/r.whitaker@mac.com/A11yUITests.git",
+    "git": "https://github.com/rwapp/A11yUITests.git",
     "tag": "0.1.0"
   },
   "social_media_url": "https://twitter.com/MobileA11y",
   "platforms": {
     "ios": "11.0"
   },
+  "swift_versions": "5.0",
   "source_files": "A11yUITests/Classes/**/*",
-  "frameworks": "XCTest"
+  "frameworks": "XCTest",
+  "swift_version": "5.0"
 }

@@ -103,6 +103,8 @@ A11yUITests_ExampleUITests.swift contains example tests that show a fail for eac
 
 iOS 11
 
+Swift 5
+
 ## Installation
 
 A11yUITests is available through [CocoaPods](https://cocoapods.org). To install
