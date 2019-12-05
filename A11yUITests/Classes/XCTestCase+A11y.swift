@@ -30,10 +30,13 @@ extension XCTestCase {
     }
 
     public var interactiveA11yTestSuite: [A11yTests] {
+        // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
+        // Note: Many standard Apple controls fail these tests.
         return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength]
     }
 
     public var labelA11yTestSuite: [A11yTests] {
+        // valid for any text elements, eg. labels, text views
         return [.minimumSize, .labelPresence]
     }
 
@@ -41,7 +44,7 @@ extension XCTestCase {
 
     public func runAllA11yTestsOnScreen(file: StaticString = #file,
                                         line: UInt = #line) {
-        
+
         let elements = XCUIApplication().descendants(matching: .any).allElementsBoundByAccessibilityElement
         runAllA11yTestsOn(elements: elements, file: file, line: line)
     }
@@ -129,7 +132,7 @@ extension XCTestCase {
                        file: file,
                        line: line)
 
-        XCTAssert(button.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter",
+        XCTAssert(button.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(button.description)",
                   file: file,
                   line: line)
 
