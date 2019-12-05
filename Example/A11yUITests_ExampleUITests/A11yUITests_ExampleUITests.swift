@@ -37,4 +37,9 @@ class A11yUITests_ExampleUITests: XCTestCase {
         run(a11yTests: labelA11yTestSuite(), on: labels)
     }
 
+    func test_individualTest_individualButton() {
+        let button = XCUIApplication().buttons["ends with button"]
+        run(a11yTests: [.buttonLabel], on: [button])
+    }
+
 }
