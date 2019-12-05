@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
 A library of common accessibility tests for use with XCUI Tests
                        DESC
 
-  s.homepage         = 'https://github.com/r.whitaker@mac.com/A11yUITests'
+  s.homepage         = 'https://github.com/rwapp/A11yUITests'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Rob Whitaker' => 'rw@rwapp.co.uk' }
-  s.source           = { :git => 'https://github.com/r.whitaker@mac.com/A11yUITests.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/rwapp/A11yUITests.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MobileA11y'
 
   s.ios.deployment_target = '11.0'

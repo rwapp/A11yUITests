@@ -1,6 +1,5 @@
 # A11yUITests
 
-[![CI Status](https://img.shields.io/travis/r.whitaker@mac.com/A11yUITests.svg?style=flat)](https://travis-ci.org/r.whitaker@mac.com/A11yUITests)
 [![Version](https://img.shields.io/cocoapods/v/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![License](https://img.shields.io/cocoapods/l/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![Platform](https://img.shields.io/cocoapods/p/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
@@ -22,7 +21,7 @@ pod 'A11yUITests'
 
 ## Author
 
-r.whitaker@mac.com, r.whitaker@mac.com
+Rob Whitaker, rw@rwapp.co.uk
 
 ## License
 
