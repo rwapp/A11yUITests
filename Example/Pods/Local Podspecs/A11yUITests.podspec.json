@@ -1,6 +1,6 @@
 {
   "name": "A11yUITests",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "summary": "Accessibility tests for XCUI Testing.",
   "description": "A library of common accessibility tests for use with XCUI Tests",
   "homepage": "https://github.com/rwapp/A11yUITests",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/rwapp/A11yUITests.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "social_media_url": "https://twitter.com/MobileA11y",
   "platforms": {
