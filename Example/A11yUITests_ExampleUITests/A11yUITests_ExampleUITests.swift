@@ -18,26 +18,26 @@ class A11yUITests_ExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        runAllA11yTestsOnScreen()
+        a11yCheckAllOnScreen()
     }
 
     func test_images() {
         let images = XCUIApplication().images.allElementsBoundByIndex
-        run(a11yTests: imageA11yTestSuite, on: images)
+        a11y(tests: a11yTestSuiteImages, on: images)
     }
 
     func test_buttons() {
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
-        run(a11yTests: interactiveA11yTestSuite, on: buttons)
+        a11y(tests: a11yTestSuiteInteractive, on: buttons)
     }
 
     func test_labels() {
         let labels = XCUIApplication().staticTexts.allElementsBoundByIndex
-        run(a11yTests: labelA11yTestSuite, on: labels)
+        a11y(tests: a11yTestSuiteLabels, on: labels)
     }
 
     func test_individualTest_individualButton() {
         let button = XCUIApplication().buttons["Ends with button"]
-        checkValidLabelFor(button: button)
+        a11yCheckValidLabelFor(button: button)
     }
 }

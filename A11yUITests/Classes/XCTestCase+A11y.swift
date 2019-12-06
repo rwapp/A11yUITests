@@ -21,78 +21,78 @@ extension XCTestCase {
 
     // MARK: - Test Suites
 
-    public var allA11yTestSuite: [A11yTests] {
+    public var a11yTestSuiteAll: [A11yTests] {
         return A11yTests.allCases
     }
 
-    public var imageA11yTestSuite: [A11yTests] {
+    public var a11yTestSuiteImages: [A11yTests] {
         return [.minimumSize, .labelPresence, .imageLabel, .labelLength]
     }
 
-    public var interactiveA11yTestSuite: [A11yTests] {
+    public var a11yTestSuiteInteractive: [A11yTests] {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
         return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength]
     }
 
-    public var labelA11yTestSuite: [A11yTests] {
+    public var a11yTestSuiteLabels: [A11yTests] {
         // valid for any text elements, eg. labels, text views
         return [.minimumSize, .labelPresence]
     }
 
     // MARK: - Test Groups
 
-    public func runAllA11yTestsOnScreen(file: StaticString = #file,
+    public func a11yCheckAllOnScreen(file: StaticString = #file,
                                         line: UInt = #line) {
 
         let elements = XCUIApplication().descendants(matching: .any).allElementsBoundByAccessibilityElement
-        runAllA11yTestsOn(elements: elements, file: file, line: line)
+        a11yAllTestsOn(elements: elements, file: file, line: line)
     }
 
-    public func runAllA11yTestsOn(elements: [XCUIElement],
+    public func a11yAllTestsOn(elements: [XCUIElement],
                                   file: StaticString = #file,
                                   line: UInt = #line) {
-        run(a11yTests: allA11yTestSuite, on: elements, file: file, line: line)
+        a11y(tests: a11yTestSuiteAll, on: elements, file: file, line: line)
     }
 
-    public func run(a11yTests: [A11yTests],
+    public func a11y(tests: [A11yTests],
                     on elements: [XCUIElement],
                     file: StaticString = #file,
                     line: UInt = #line) {
 
         for element in elements {
 
-            if a11yTests.contains(.minimumSize) {
-                checkValidSizeFor(element: element, file: file, line: line)
+            if tests.contains(.minimumSize) {
+                a11yCheckValidSizeFor(element: element, file: file, line: line)
             }
 
-            if a11yTests.contains(.minimumInteractiveSize) {
+            if tests.contains(.minimumInteractiveSize) {
                 if element.isInteractive {
-                    checkValidSizeFor(interactiveElement: element, file: file, line: line)
+                    a11yCheckValidSizeFor(interactiveElement: element, file: file, line: line)
                 }
             }
 
-            if a11yTests.contains(.labelPresence) {
-                checkValidLabelFor(element: element, file: file, line: line)
+            if tests.contains(.labelPresence) {
+                a11yCheckValidLabelFor(element: element, file: file, line: line)
             }
 
-            if a11yTests.contains(.buttonLabel) {
-                checkValidLabelFor(button: element, file: file, line: line)
+            if tests.contains(.buttonLabel) {
+                a11yCheckValidLabelFor(button: element, file: file, line: line)
             }
 
-            if a11yTests.contains(.imageLabel) {
-                checkValidLabelFor(image: element, file: file, line: line)
+            if tests.contains(.imageLabel) {
+                a11yCheckValidLabelFor(image: element, file: file, line: line)
             }
 
-            if a11yTests.contains(.labelLength) {
-                checkLabelLength(element: element, file: file, line: line)
+            if tests.contains(.labelLength) {
+                a11yCheckLabelLength(element: element, file: file, line: line)
             }
         }
     }
 
     // MARK: - Individual Tests
 
-    public func checkValidSizeFor(element: XCUIElement,
+    public func a11yCheckValidSizeFor(element: XCUIElement,
                                   file: StaticString = #file,
                                   line: UInt = #line) {
 
@@ -107,7 +107,7 @@ extension XCTestCase {
                  line: line)
     }
 
-    public func checkValidLabelFor(element: XCUIElement,
+    public func a11yCheckValidLabelFor(element: XCUIElement,
                                    file: StaticString = #file,
                                    line: UInt = #line) {
 
@@ -120,7 +120,7 @@ extension XCTestCase {
                  line: line)
     }
 
-    public func checkValidLabelFor(button: XCUIElement,
+    public func a11yCheckValidLabelFor(button: XCUIElement,
                                    file: StaticString = #file,
                                    line: UInt = #line) {
 
@@ -142,7 +142,7 @@ extension XCTestCase {
                   line: line)
     }
 
-    public func checkValidLabelFor(image: XCUIElement,
+    public func a11yCheckValidLabelFor(image: XCUIElement,
                                    file: StaticString = #file,
                                    line: UInt = #line) {
 
@@ -168,7 +168,7 @@ extension XCTestCase {
         }
     }
 
-    public func checkLabelLength(element: XCUIElement,
+    public func a11yCheckLabelLength(element: XCUIElement,
                                  file: StaticString = #file,
                                  line: UInt = #line) {
 
@@ -181,7 +181,7 @@ extension XCTestCase {
                       line: line)
     }
 
-    public func checkValidSizeFor(interactiveElement: XCUIElement,
+    public func a11yCheckValidSizeFor(interactiveElement: XCUIElement,
                                   file: StaticString = #file,
                                   line: UInt = #line) {
 
