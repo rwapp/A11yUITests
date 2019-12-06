@@ -16,7 +16,8 @@ extension XCTestCase {
         labelPresence,
         buttonLabel,
         imageLabel,
-        labelLength
+        labelLength,
+        overlapping
     }
 
     // MARK: - Test Suites
@@ -86,6 +87,12 @@ extension XCTestCase {
 
             if a11yTests.contains(.labelLength) {
                 checkLabelLength(element: element, file: file, line: line)
+            }
+
+            if a11yTests.contains(.overlapping) {
+                for element2 in elements {
+                    check(element1: element, doesNotOverlap: element2, file: file, line: line)
+                }
             }
         }
     }
@@ -194,6 +201,28 @@ extension XCTestCase {
                   "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
                   file: file,
                   line: line)
+    }
+
+    public func check(element1: XCUIElement, doesNotOverlap element2: XCUIElement,
+                      file: StaticString = #file,
+                      line: UInt = #line) {
+        let label1 = element1.label
+        let label2 = element2.label
+        let type1 = element1.elementType
+        let type2 = element2.elementType
+
+        guard !label1.isEmpty,
+            !label2.isEmpty,
+            label1 != label2,
+            !orLabels(type1: type1, type2: type2),
+            element1 != element2 else { return }
+
+        XCTAssertFalse(element1.frame.intersects(element2.frame),
+                       "Accessibility Failure: Elements overlap: \(element1.description), \(element2.description)", file: file, line: line)
+    }
+
+    private func orLabels(type1: XCUIElement.ElementType, type2: XCUIElement.ElementType) -> Bool {
+        return ((type1 == .staticText) || (type2 == .staticText))
     }
 }
 
