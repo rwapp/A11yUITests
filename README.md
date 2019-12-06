@@ -47,11 +47,11 @@ A11yUITests contains 4 pre-built test suites with tests suitible for different e
 
 `allA11yTestSuite` Runs all tests.
 
-`imageA11yTestSuite` Runs tests suitible for images.
+`a11yTestSuiteImages` Runs tests suitible for images.
 
-`interactiveA11yTestSuite` runs tests suitible for interactive elements.
+`a11yTestSuiteInteractive` runs tests suitible for interactive elements.
 
-`labelA11yTestSuite` runs tests suitible for static text elements.
+`a11yTestSuiteLabels` runs tests suitible for static text elements.
 
 
 Alternatively you can create an array of `A11yTests` enum values for the tests you want to run.
