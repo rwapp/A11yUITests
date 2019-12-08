@@ -87,6 +87,10 @@ extension XCTestCase {
             if tests.contains(.labelLength) {
                 a11yCheckLabelLength(element: element, file: file, line: line)
             }
+
+            for element2 in elements {
+                a11yCheckNoDuplicatedLabels(element1: element, element2: element2, file: file, line: line)
+            }
         }
     }
 
@@ -194,6 +198,18 @@ extension XCTestCase {
                   "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
                   file: file,
                   line: line)
+    }
+
+    public func a11yCheckNoDuplicatedLabels(element1: XCUIElement, element2: XCUIElement,
+                                            file: StaticString = #file,
+                                            line: UInt = #line) {
+        guard element1.isInteractive,
+            element2.isInteractive,
+        element1 != element2 else { return }
+        XCTAssertFalse(element1.label == element2.label,
+                       "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
+            file: file,
+            line: line)
     }
 }
 

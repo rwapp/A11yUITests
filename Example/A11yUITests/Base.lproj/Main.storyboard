@@ -99,16 +99,34 @@
                                     <constraint firstAttribute="width" constant="44" id="VWD-aL-iMB"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExF-yl-Ptx">
+                                <rect key="frame" x="16" y="491" width="111" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="1A7-hq-8fg"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="p3v-gF-xH7"/>
+                                </constraints>
+                                <state key="normal" title="Duplicated label"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbt-uh-813">
+                                <rect key="frame" x="16" y="543" width="111" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="2PO-zd-on5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="L86-lL-sRg"/>
+                                </constraints>
+                                <state key="normal" title="Duplicated label"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XFT-69-rUL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="5mJ-J5-i9U"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="9W8-YC-SvW"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="top" secondItem="8bg-cb-wuu" secondAttribute="bottom" constant="8" id="ClV-Xc-dIu"/>
+                            <constraint firstItem="ExF-yl-Ptx" firstAttribute="top" secondItem="aPJ-3W-qDK" secondAttribute="bottom" constant="8" id="EDZ-jf-2Ag"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="top" secondItem="B8l-93-lXx" secondAttribute="bottom" constant="8" id="KtK-nG-7Rg"/>
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="RqE-t5-cCU"/>
                             <constraint firstItem="B8l-93-lXx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ulk-GB-hC0"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="top" secondItem="Biz-z4-Rs6" secondAttribute="bottom" constant="8" id="VtF-a3-lnD"/>
+                            <constraint firstItem="Rbt-uh-813" firstAttribute="top" secondItem="ExF-yl-Ptx" secondAttribute="bottom" constant="8" id="Xf2-xA-0AW"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ygu-tg-wij"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aqD-ey-eNr"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="top" secondItem="lme-nc-64l" secondAttribute="bottom" constant="8" id="ckv-J0-9TD"/>
@@ -116,7 +134,9 @@
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fTX-uW-itu"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="fyo-Fb-ZbR"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="width" secondItem="aPJ-3W-qDK" secondAttribute="height" multiplier="200:271" id="ki3-7L-2mY"/>
+                            <constraint firstItem="Rbt-uh-813" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="l7Y-xc-Srn"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="m8Y-jL-NGP"/>
+                            <constraint firstItem="ExF-yl-Ptx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="sbP-Hh-NS0"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="top" secondItem="lJw-cj-fHr" secondAttribute="bottom" constant="8" id="vTO-mN-7dX"/>
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="top" secondItem="XFT-69-rUL" secondAttribute="bottom" constant="8" id="wc8-Xf-ROI"/>
                             <constraint firstItem="XFT-69-rUL" firstAttribute="top" secondItem="TC2-DV-qmK" secondAttribute="bottom" constant="8" id="x8C-7U-BMt"/>
