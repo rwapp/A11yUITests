@@ -11,6 +11,7 @@ struct A11yElement {
     let label: String
     let frame: CGRect
     let type: XCUIElement.ElementType
+    let underlyingElement: XCUIElement
 
     var isWindow: Bool {
         return self.type == .window
