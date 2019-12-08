@@ -46,13 +46,18 @@ extension XCTestCase {
                                         line: UInt = #line) {
 
         let elements = XCUIApplication().descendants(matching: .any).allElementsBoundByAccessibilityElement
-        a11yAllTestsOn(elements: elements, file: file, line: line)
+        a11yAllTestsOn(elements: elements,
+                       file: file,
+                       line: line)
     }
 
     public func a11yAllTestsOn(elements: [XCUIElement],
                                   file: StaticString = #file,
                                   line: UInt = #line) {
-        a11y(tests: a11yTestSuiteAll, on: elements, file: file, line: line)
+        a11y(tests: a11yTestSuiteAll,
+             on: elements,
+             file: file,
+             line: line)
     }
 
     public func a11y(tests: [A11yTests],
@@ -69,33 +74,48 @@ extension XCTestCase {
         for a11yElement in a11yElements {
 
             if tests.contains(.minimumSize) {
-                a11yCheckValidSizeFor(element: a11yElement, file: file, line: line)
+                a11yCheckValidSizeFor(element: a11yElement,
+                                      file: file,
+                                      line: line)
             }
 
             if tests.contains(.minimumInteractiveSize) {
                 if a11yElement.isInteractive {
-                    a11yCheckValidSizeFor(interactiveElement: a11yElement, file: file, line: line)
+                    a11yCheckValidSizeFor(interactiveElement: a11yElement,
+                                          file: file,
+                                          line: line)
                 }
             }
 
             if tests.contains(.labelPresence) {
-                a11yCheckValidLabelFor(element: a11yElement, file: file, line: line)
+                a11yCheckValidLabelFor(element: a11yElement,
+                                       file: file,
+                                       line: line)
             }
 
             if tests.contains(.buttonLabel) {
-                a11yCheckValidLabelFor(button: a11yElement, file: file, line: line)
+                a11yCheckValidLabelFor(button: a11yElement,
+                                       file: file,
+                                       line: line)
             }
 
             if tests.contains(.imageLabel) {
-                a11yCheckValidLabelFor(image: a11yElement, file: file, line: line)
+                a11yCheckValidLabelFor(image: a11yElement,
+                                       file: file,
+                                       line: line)
             }
 
             if tests.contains(.labelLength) {
-                a11yCheckLabelLength(element: a11yElement, file: file, line: line)
+                a11yCheckLabelLength(element: a11yElement,
+                                     file: file,
+                                     line: line)
             }
 
             for a11yElement2 in a11yElements {
-                a11yCheckNoDuplicatedLabels(element1: a11yElement, element2: a11yElement2, file: file, line: line)
+                a11yCheckNoDuplicatedLabels(element1: a11yElement,
+                                            element2: a11yElement2,
+                                            file: file,
+                                            line: line)
             }
         }
     }
@@ -107,7 +127,9 @@ extension XCTestCase {
                                line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: element)
-        a11yCheckValidSizeFor(element: a11yElement, file: file,
+
+        a11yCheckValidSizeFor(element: a11yElement,
+                              file: file,
                               line: line)
     }
 
@@ -116,7 +138,9 @@ extension XCTestCase {
                                 line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: element)
-        a11yCheckValidLabelFor(element: a11yElement, file: file,
+
+        a11yCheckValidLabelFor(element: a11yElement,
+                               file: file,
                                line: line)
     }
 
@@ -125,31 +149,42 @@ extension XCTestCase {
                                 line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: button)
-        a11yCheckValidLabelFor(button: a11yElement, file: file,
+
+        a11yCheckValidLabelFor(button: a11yElement,
+                               file: file,
                                line: line)
     }
 
     public func a11yCheckValidLabelFor(image: XCUIElement,
                                 file: StaticString = #file,
                                 line: UInt = #line) {
+        
         let a11yElement = createA11yElementFrom(element: image)
-        a11yCheckValidLabelFor(image: a11yElement, file: file,
+
+        a11yCheckValidLabelFor(image: a11yElement,
+                               file: file,
                                line: line)
     }
 
     public func a11yCheckLabelLength(element: XCUIElement,
                               file: StaticString = #file,
                               line: UInt = #line) {
+
         let a11yElement = createA11yElementFrom(element: element)
-        a11yCheckLabelLength(element: a11yElement, file: file,
+
+        a11yCheckLabelLength(element: a11yElement,
+                             file: file,
                              line: line)
     }
 
     public func a11yCheckValidSizeFor(interactiveElement: XCUIElement,
                                file: StaticString = #file,
                                line: UInt = #line) {
+
         let a11yElement = createA11yElementFrom(element: interactiveElement)
-        a11yCheckValidSizeFor(interactiveElement: a11yElement, file: file,
+
+        a11yCheckValidSizeFor(interactiveElement: a11yElement,
+                              file: file,
                               line: line)
     }
 
@@ -157,10 +192,14 @@ extension XCTestCase {
                                      element2: XCUIElement,
                                      file: StaticString = #file,
                                      line: UInt = #line) {
+
         let a11yElement1 = createA11yElementFrom(element: element1)
         let a11yElement2 = createA11yElementFrom(element: element2)
-        a11yCheckNoDuplicatedLabels(element1: a11yElement1, element2: a11yElement2, file: file,
-            line: line)
+
+        a11yCheckNoDuplicatedLabels(element1: a11yElement1,
+                                    element2: a11yElement2,
+                                    file: file,
+                                    line: line)
     }
 
 

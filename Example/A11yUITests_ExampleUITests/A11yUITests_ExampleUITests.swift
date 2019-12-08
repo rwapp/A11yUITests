@@ -11,7 +11,7 @@ import A11yUITests
 
 @testable import A11yUITests_Example
 
-class A11yUITests_ExampleUITests: XCTestCase {
+class A11yUITestsExampleUITests: XCTestCase {
 
     override func setUp() {
         XCUIApplication().launch()
