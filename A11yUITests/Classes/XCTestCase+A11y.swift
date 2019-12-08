@@ -16,7 +16,8 @@ extension XCTestCase {
         labelPresence,
         buttonLabel,
         imageLabel,
-        labelLength
+        labelLength,
+        duplicated
     }
 
     // MARK: - Test Suites
@@ -32,7 +33,7 @@ extension XCTestCase {
     public var a11yTestSuiteInteractive: [A11yTests] {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
-        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength]
+        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
     }
 
     public var a11yTestSuiteLabels: [A11yTests] {
@@ -86,6 +87,15 @@ extension XCTestCase {
 
             if tests.contains(.labelLength) {
                 a11yCheckLabelLength(element: element, file: file, line: line)
+            }
+
+            for element2 in elements {
+                if tests.contains(.duplicated) {
+                a11yCheckNoDuplicatedLabels(element1: element,
+                                            element2: element2,
+                                            file: file,
+                                            line: line)
+                }
             }
         }
     }
@@ -194,6 +204,20 @@ extension XCTestCase {
                   "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
                   file: file,
                   line: line)
+    }
+
+    public func a11yCheckNoDuplicatedLabels(element1: XCUIElement,
+                                            element2: XCUIElement,
+                                            file: StaticString = #file,
+                                            line: UInt = #line) {
+        guard element1.isInteractive,
+            element2.isInteractive,
+            element1 != element2 else { return }
+
+        XCTAssertFalse(element1.label == element2.label,
+                       "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
+                       file: file,
+                       line: line)
     }
 }
 
