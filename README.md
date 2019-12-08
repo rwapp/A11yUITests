@@ -17,18 +17,18 @@ Tests can be run individually or in suites.
 ```swift
 func test_allTests() {
     XCUIApplication().launch()
-    runAllA11yTestsOnScreen()
+    a11yCheckAllOnScreen()
 }
 ```
 
 ### Specifying Tests/Elements
 
-To specify elements and tests use  `run(a11yTests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of eliments to run them on. To run all interactive element tests on all buttons:
+To specify elements and tests use  `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of eliments to run them on. To run all interactive element tests on all buttons:
 
 ```swift
 func test_buttons() {
     let buttons = XCUIApplication().buttons.allElementsBoundByIndex
-    run(a11yTests: interactiveA11yTestSuite, on: buttons)
+    a11y(tests: a11yTestSuiteInteractive, on: buttons)
 }
 ```
 
@@ -37,7 +37,7 @@ To run a single test on a single eliment call that test directly. To check if a 
 ```swift
 func test_individualTest_individualButton() {
     let button = XCUIApplication().buttons["My Button"]
-    checkValidLabelFor(button: button)
+    a11yCheckValidLabelFor(button: button)
 }
 ```
 
@@ -47,11 +47,11 @@ A11yUITests contains 4 pre-built test suites with tests suitible for different e
 
 `allA11yTestSuite` Runs all tests.
 
-`imageA11yTestSuite` Runs tests suitible for images.
+`a11yTestSuiteImages` Runs tests suitible for images.
 
-`interactiveA11yTestSuite` runs tests suitible for interactive elements.
+`a11yTestSuiteInteractive` runs tests suitible for interactive elements.
 
-`labelA11yTestSuite` runs tests suitible for static text elements.
+`a11yTestSuiteLabels` runs tests suitible for static text elements.
 
 
 Alternatively you can create an array of `A11yTests` enum values for the tests you want to run.
@@ -60,39 +60,39 @@ Alternatively you can create an array of `A11yTests` enum values for the tests y
 
 ### Minimum Size
 
-`minimumSize` or `checkValidSizeFor(element: XCUIElement)` checks an element is at least 18px x 18px.
+`minimumSize` or `a11yCheckValidSizeFor(element: XCUIElement)` checks an element is at least 18px x 18px.
 
 Note: 18px is arbitrary.
 
 ### Minimum Interactive Size
 
-`minimumInteractiveSize` or `checkValidSizeFor(interactiveElement: XCUIElement)` checks tappable elements are a minimum of 44px x 44px.
+`minimumInteractiveSize` or `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` checks tappable elements are a minimum of 44px x 44px.
 This satisfies [WCAG 2.1 Sucess Criteria 2.5.5 Target Size Level AAA](https://www.w3.org/TR/WCAG21/#target-size)
 
 Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s for example.
-For full compliance, you should run `checkValidSizeFor(interactiveElement: XCUIElement)` on any element that your user might interact with, eg. sliders, steppers, switches, segmented controls. But you will need to make your own subclass as Apple's are not strictly adherent to WCAG.
+For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` on any element that your user might interact with, eg. sliders, steppers, switches, segmented controls. But you will need to make your own subclass as Apple's are not strictly adherent to WCAG.
 
 ### Label Presence
 
-`labelPresence` or `checkValidLabelFor(element: XCUIElement)` checks the element has an accessibility label that is a minimum of 2 characters long.
+`labelPresence` or `a11yCheckValidLabelFor(element: XCUIElement)` checks the element has an accessibility label that is a minimum of 2 characters long.
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 
 ### Button Label
 
-`buttonLabel` or `checkValidLabelFor(button: XCUIElement)` checks button labels begin with a capital letter and don't contain a full stop or the word button.
+`buttonLabel` or `a11yCheckValidLabelFor(button: XCUIElement)` checks button labels begin with a capital letter and don't contain a full stop or the word button.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
 
 Note: This test is not localised.
 
 ### Image Label
 
-`imageLabel` or `checkValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename.
+`imageLabel` or `a11yCheckValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Images should all have the image trait applied, but this is currently untestable. Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
 
 Note: This test is not localised.
 
 ### Label Length
-`labelLength` or `checkLabelLength(element: XCUIElement)` checks accessibility labels are <= 40 characters.
+`labelLength` or `a11yCheckLabelLength(element: XCUIElement)` checks accessibility labels are <= 40 characters.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 
