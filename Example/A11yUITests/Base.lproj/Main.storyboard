@@ -100,20 +100,20 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExF-yl-Ptx">
-                                <rect key="frame" x="16" y="491" width="111" height="44"/>
+                                <rect key="frame" x="16" y="491" width="74" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="1A7-hq-8fg"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="p3v-gF-xH7"/>
                                 </constraints>
-                                <state key="normal" title="Duplicated label"/>
+                                <state key="normal" title="Duplicated"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbt-uh-813">
-                                <rect key="frame" x="16" y="543" width="111" height="44"/>
+                                <rect key="frame" x="16" y="543" width="74" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="2PO-zd-on5"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="L86-lL-sRg"/>
                                 </constraints>
-                                <state key="normal" title="Duplicated label"/>
+                                <state key="normal" title="Duplicated"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
