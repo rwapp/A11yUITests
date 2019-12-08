@@ -20,7 +20,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     func test_allTests() {
         // Produces 15 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
-        // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
+        // Accessibility Failure: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image
         // Accessibility Failure: Images should not contain the word image in the accessibility label, set the image accessibility trait: "image of the Mobile A11y logo" Image
         // Accessibility failure: Button accessibility labels shouldn't contain punctuation: "Punctuated." Button
@@ -50,7 +50,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     func test_buttons() {
         // produces 9 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
-        // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
+        // Accessibility Failure: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button
         // Accessibility failure: Button accessibility labels shouldn't contain punctuation: "Punctuated." Button
         // Accessibility Failure: Buttons should begin with a capital letter: " " Button
         // Accessibility Failure: Buttons should begin with a capital letter: "lowercase" Button
