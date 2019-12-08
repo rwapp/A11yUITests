@@ -16,7 +16,8 @@ extension XCTestCase {
         labelPresence,
         buttonLabel,
         imageLabel,
-        labelLength
+        labelLength,
+        duplicated
     }
 
     // MARK: - Test Suites
@@ -32,7 +33,7 @@ extension XCTestCase {
     public var a11yTestSuiteInteractive: [A11yTests] {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
-        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength]
+        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
     }
 
     public var a11yTestSuiteLabels: [A11yTests] {
@@ -89,7 +90,12 @@ extension XCTestCase {
             }
 
             for element2 in elements {
-                a11yCheckNoDuplicatedLabels(element1: element, element2: element2, file: file, line: line)
+                if tests.contains(.duplicated) {
+                a11yCheckNoDuplicatedLabels(element1: element,
+                                            element2: element2,
+                                            file: file,
+                                            line: line)
+                }
             }
         }
     }
@@ -200,16 +206,18 @@ extension XCTestCase {
                   line: line)
     }
 
-    public func a11yCheckNoDuplicatedLabels(element1: XCUIElement, element2: XCUIElement,
+    public func a11yCheckNoDuplicatedLabels(element1: XCUIElement,
+                                            element2: XCUIElement,
                                             file: StaticString = #file,
                                             line: UInt = #line) {
         guard element1.isInteractive,
             element2.isInteractive,
-        element1 != element2 else { return }
+            element1 != element2 else { return }
+
         XCTAssertFalse(element1.label == element2.label,
                        "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
-            file: file,
-            line: line)
+                       file: file,
+                       line: line)
     }
 }
 
