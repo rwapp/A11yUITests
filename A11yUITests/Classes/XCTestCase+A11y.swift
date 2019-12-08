@@ -17,7 +17,8 @@ extension XCTestCase {
         buttonLabel,
         imageLabel,
         labelLength,
-        overlapping
+        overlapping,
+        duplicated
     }
 
     // MARK: - Test Suites
@@ -33,7 +34,7 @@ extension XCTestCase {
     public var a11yTestSuiteInteractive: [A11yTests] {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
-        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength]
+        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
     }
 
     public var a11yTestSuiteLabels: [A11yTests] {
@@ -113,16 +114,19 @@ extension XCTestCase {
             }
 
             for a11yElement2 in a11yElements {
-                a11yCheckNoDuplicatedLabels(element1: a11yElement,
-                                            element2: a11yElement2,
-                                            file: file,
-                                            line: line)
+                if tests.contains(.duplicated) {
+                    a11yCheckNoDuplicatedLabels(element1: a11yElement,
+                                                element2: a11yElement2,
+                                                file: file,
+                                                line: line)
 
-                if tests.contains(.overlapping) {
-                    a11yCheck(element1: a11yElement,
-                              doesNotOverlap: a11yElement2,
-                              file: file,
-                              line: line)
+                    if tests.contains(.overlapping) {
+                        a11yCheck(element1: a11yElement,
+                                  doesNotOverlap: a11yElement2,
+                                  file: file,
+                                  line: line)
+
+                    }
                 }
             }
         }
