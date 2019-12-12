@@ -112,6 +112,10 @@ extension XCTestCase {
                                      line: line)
             }
 
+            a11yCheckScrollView(element: a11yElement,
+                                file: file,
+                                line: line)
+
             for a11yElement2 in a11yElements {
             if tests.contains(.duplicated) {
                 a11yCheckNoDuplicatedLabels(element1: a11yElement,
@@ -228,6 +232,7 @@ extension XCTestCase {
                                    line: UInt = #line) {
 
         guard !element.isWindow,
+            element.type != .scrollView,
             element.type != .other else { return }
 
         XCTAssert(element.label.count > 2,
@@ -323,6 +328,60 @@ extension XCTestCase {
                        "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
                         file: file,
                         line: line)
+    }
+
+    func a11yCheckScrollView(element: A11yElement,
+                             file: StaticString = #file,
+                             line: UInt = #line) {
+        let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
+
+        let navBars = XCUIApplication().descendants(matching: .navigationBar).allElementsBoundByAccessibilityElement
+        let tabBars = XCUIApplication().descendants(matching: .tabBar).allElementsBoundByAccessibilityElement
+
+        if element.type == .staticText {
+            guard !scrollViews.isEmpty else { XCTFail(
+                "Accessibility Failure: Text presented outside of scroll view: \(element.description)",
+                file: file,
+                line: line)
+                return
+            }
+
+            var fail = true
+
+            for scrollView in scrollViews {
+                let descendants = scrollView.descendants(matching: .staticText).allElementsBoundByIndex
+                for descendant in descendants {
+                    if descendant.label == element.label {
+                        fail = false
+                    }
+                }
+            }
+
+            for navBar in navBars {
+                let descendants = navBar.descendants(matching: .staticText).allElementsBoundByIndex
+                for descendant in descendants {
+                    if descendant.label == element.label {
+                        fail = false
+                    }
+                }
+            }
+
+            for tabBar in tabBars {
+                let descendants = tabBar.descendants(matching: .staticText).allElementsBoundByIndex
+                for descendant in descendants {
+                    if descendant.label == element.label {
+                        fail = false
+                    }
+                }
+            }
+
+
+            if fail {
+                XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
+                    file: file,
+                    line: line)
+            }
+        }
     }
 
     // MARK: - helpers

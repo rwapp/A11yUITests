@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 13 failures
+        // Produces 14 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
         // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image
@@ -32,6 +32,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Interactive element not wide enough: "Too Small" Button
         // Accessibility Failure: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button
         // Accessibility Failure: Label not meaningful: " " Button
+        // Accessibility Failure: Text presented outside of scroll view: "Outside scroll view" Label
 
         a11yCheckAllOnScreen()
     }
