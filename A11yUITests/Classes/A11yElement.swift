@@ -13,8 +13,10 @@ struct A11yElement {
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
 
-    var isWindow: Bool {
-        return self.type == .window
+    var shouldIgnore: Bool {
+        return self.type == .window ||
+        self.type == .scrollBar ||
+        self.type == .other
     }
 
     var isInteractive: Bool {
