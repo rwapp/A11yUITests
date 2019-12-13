@@ -85,11 +85,9 @@ extension XCTestCase {
                 }
 
                 if tests.contains(.minimumInteractiveSize) {
-                    if a11yElement.isInteractive {
-                        a11yCheckValidSizeFor(interactiveElement: a11yElement,
-                                              file: file,
-                                              line: line)
-                    }
+                    a11yCheckValidSizeFor(interactiveElement: a11yElement,
+                                          file: file,
+                                          line: line)
                 }
 
                 if tests.contains(.labelPresence) {
@@ -99,7 +97,7 @@ extension XCTestCase {
                 }
 
                 if tests.contains(.buttonLabel) {
-                    a11yCheckValidLabelFor(button: a11yElement,
+                    a11yCheckValidLabelFor(interactiveElement: a11yElement,
                                            file: file,
                                            line: line)
                 }
@@ -159,7 +157,7 @@ extension XCTestCase {
 
         let a11yElement = createA11yElementFrom(element: button)
 
-        a11yCheckValidLabelFor(button: a11yElement,
+        a11yCheckValidLabelFor(interactiveElement: a11yElement,
                                file: file,
                                line: line)
     }
@@ -244,24 +242,24 @@ extension XCTestCase {
                  line: line)
     }
 
-    func a11yCheckValidLabelFor(button: A11yElement,
+    func a11yCheckValidLabelFor(interactiveElement: A11yElement,
                                 file: StaticString = #file,
                                 line: UInt = #line) {
 
-        guard button.type == .button else { return }
+        guard interactiveElement.isControl else { return }
 
         // TODO: Localise this check
-        XCTAssertFalse(button.label.contains(substring: "button"),
-                       "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(button.description)",
+        XCTAssertFalse(interactiveElement.label.contains(substring: "button"),
+                       "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(interactiveElement.description)",
                        file: file,
                        line: line)
 
-        XCTAssert(button.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(button.description)",
+        XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(interactiveElement.description)",
                   file: file,
                   line: line)
 
-        XCTAssert((button.label.range(of: ".") == nil),
-                  "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(button.description)",
+        XCTAssert((interactiveElement.label.range(of: ".") == nil),
+                  "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(interactiveElement.description)",
                   file: file,
                   line: line)
     }
@@ -310,7 +308,7 @@ extension XCTestCase {
                                file: StaticString = #file,
                                line: UInt = #line) {
 
-        guard !interactiveElement.shouldIgnore else { return }
+        guard interactiveElement.isInteractive else { return }
 
         XCTAssert(interactiveElement.frame.size.height >= 44,
                   "Accessibility Failure: Interactive element not tall enough: \(interactiveElement.description)",
@@ -328,8 +326,8 @@ extension XCTestCase {
                                      file: StaticString = #file,
                                      line: UInt = #line) {
 
-        guard element1.type == .button,
-            element2.type == .button,
+        guard element1.isInteractive,
+            element2.isInteractive,
             element1.underlyingElement != element2.underlyingElement else { return }
 
         XCTAssertFalse(element1.label == element2.label,
