@@ -8,6 +8,13 @@ A11yTests is an extension to `XCTestCase` that adds tests for common accessibili
 
 Tests can either be run separately or integrated into existing XCUI Tests.
 
+## Using These Tests
+
+Good accessibility is not about ticking boxes and conforming to regulations and guidelines, but about how your app is experienced. You will only ever know if your app is acutally accessible by letting real people use it. Consider these tests as hints for where you might be able to do better, and use them to detect regressions.
+
+Failures for these tests should be seen as warnings for further investigation, not strict failures. As such i'd recommend always having `continueAfterFailure = true` set.
+
+
 ## Running tests
 
 Tests can be run individually or in suites.
@@ -117,6 +124,10 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'A11yUITests'
 ```
+
+## Known Issues
+
+If two elements of the same type have the same identifier this will cause the tests to crash on iOS 13+. eg, two buttons both labeled 'Next'.
 
 ## Author
 
