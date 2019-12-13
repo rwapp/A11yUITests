@@ -326,8 +326,8 @@ extension XCTestCase {
                                      file: StaticString = #file,
                                      line: UInt = #line) {
 
-        guard element1.isInteractive,
-            element2.isInteractive,
+        guard element1.isControl,
+            element2.isControl,
             element1.underlyingElement != element2.underlyingElement else { return }
 
         XCTAssertFalse(element1.label == element2.label,
