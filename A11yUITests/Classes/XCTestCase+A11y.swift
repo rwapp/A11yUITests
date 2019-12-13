@@ -218,8 +218,7 @@ extension XCTestCase {
                                file: StaticString = #file,
                                line: UInt = #line) {
 
-        guard !element.shouldIgnore,
-            element.type != .scrollView else { return }
+        guard !element.shouldIgnore else { return }
 
         XCTAssert(element.frame.size.height >= 18,
                   "Accessibility Failure: Element not tall enough: \(element.description)",
@@ -236,7 +235,8 @@ extension XCTestCase {
                                 file: StaticString = #file,
                                 line: UInt = #line) {
 
-        guard !element.shouldIgnore else { return }
+        guard !element.shouldIgnore,
+            element.type != .cell else { return }
 
         XCTAssert(element.label.count > 2,
                   "Accessibility Failure: Label not meaningful: \(element.description)",
@@ -328,8 +328,8 @@ extension XCTestCase {
                                      file: StaticString = #file,
                                      line: UInt = #line) {
 
-        guard element1.isInteractive,
-            element2.isInteractive,
+        guard element1.type == .button,
+            element2.type == .button,
             element1.underlyingElement != element2.underlyingElement else { return }
 
         XCTAssertFalse(element1.label == element2.label,

@@ -16,7 +16,13 @@ struct A11yElement {
     var shouldIgnore: Bool {
         return self.type == .window ||
         self.type == .scrollBar ||
-        self.type == .other
+        self.type == .other ||
+        self.type == .navigationBar ||
+        self.type == .table ||
+        self.type == .scrollView ||
+        self.type == .key ||
+        self.type == .keyboard ||
+        self.type == .tabBar
     }
 
     var isInteractive: Bool {
