@@ -151,11 +151,11 @@ extension XCTestCase {
                                line: line)
     }
 
-    public func a11yCheckValidLabelFor(button: XCUIElement,
+    public func a11yCheckValidLabelFor(interactiveElement: XCUIElement,
                                        file: StaticString = #file,
                                        line: UInt = #line) {
 
-        let a11yElement = createA11yElementFrom(element: button)
+        let a11yElement = createA11yElementFrom(element: interactiveElement)
 
         a11yCheckValidLabelFor(interactiveElement: a11yElement,
                                file: file,

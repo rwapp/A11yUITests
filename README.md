@@ -86,7 +86,7 @@ This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.or
 
 ### Button Label
 
-`buttonLabel` or `a11yCheckValidLabelFor(button: XCUIElement)` checks button labels begin with a capital letter and don't contain a full stop or the word button.
+`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a full stop or the word button.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
 
 Note: This test is not localised.
