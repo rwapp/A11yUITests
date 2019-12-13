@@ -16,7 +16,13 @@ struct A11yElement {
     var shouldIgnore: Bool {
         return self.type == .window ||
         self.type == .scrollBar ||
-        self.type == .other
+        self.type == .other ||
+        self.type == .navigationBar ||
+        self.type == .table ||
+        self.type == .scrollView ||
+        self.type == .key ||
+        self.type == .keyboard ||
+        self.type == .tabBar
     }
 
     var isInteractive: Bool {
@@ -25,6 +31,22 @@ struct A11yElement {
 
         return self.type == .button ||
             self.type == .cell
+    }
+
+    var isControl: Bool {
+        return self.type == .button ||
+        self.type == .slider ||
+        self.type == .stepper ||
+        self.type == .segmentedControl ||
+        self.type == .textField ||
+        self.type == .switch ||
+        self.type == .pageIndicator ||
+        self.type == .link ||
+        self.type == .searchField ||
+        self.type == .secureTextField ||
+        self.type == .datePicker ||
+        self.type == .picker ||
+        self.type == .pickerWheel
     }
 
     var description: String {
@@ -45,14 +67,8 @@ private extension XCUIElement.ElementType {
             return "Cell"
         case .switch:
             return "Switch"
-        case .window:
-            return "Window"
         case .alert:
             return "Alert"
-        case .keyboard:
-            return "Keyboard"
-        case .key:
-            return "Key"
         case .pageIndicator:
             return "Page Indicator"
         case .activityIndicator:
@@ -69,20 +85,10 @@ private extension XCUIElement.ElementType {
             return "Secure Text Field"
         case .datePicker:
             return "Date Picker"
-        case .map:
-            return "Map"
-        case .webView:
-            return "Web View"
         case .stepper:
             return "Stepper"
         case .dialog:
             return "Dialog"
-        case .tabBar:
-            return "Tab Bar"
-        case .statusBar:
-            return "Status Bar"
-        case .collectionView:
-            return "Collection View"
         case .progressIndicator:
             return "Progress Indicator"
         case .segmentedControl:

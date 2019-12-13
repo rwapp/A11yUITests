@@ -8,6 +8,13 @@ A11yTests is an extension to `XCTestCase` that adds tests for common accessibili
 
 Tests can either be run separately or integrated into existing XCUI Tests.
 
+## Using These Tests
+
+Good accessibility is not about ticking boxes and conforming to regulations and guidelines, but about how your app is experienced. You will only ever know if your app is acutally accessible by letting real people use it. Consider these tests as hints for where you might be able to do better, and use them to detect regressions.
+
+Failures for these tests should be seen as warnings for further investigation, not strict failures. As such i'd recommend always having `continueAfterFailure = true` set.
+
+
 ## Running tests
 
 Tests can be run individually or in suites.
@@ -79,7 +86,7 @@ This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.or
 
 ### Button Label
 
-`buttonLabel` or `a11yCheckValidLabelFor(button: XCUIElement)` checks button labels begin with a capital letter and don't contain a full stop or the word button.
+`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a full stop or the word button.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
 
 Note: This test is not localised.
@@ -117,6 +124,10 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'A11yUITests'
 ```
+
+## Known Issues
+
+If two elements of the same type have the same identifier this will cause the tests to crash on iOS 13+. eg, two buttons both labeled 'Next'.
 
 ## Author
 
