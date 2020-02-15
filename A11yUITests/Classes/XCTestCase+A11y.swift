@@ -17,7 +17,8 @@ extension XCTestCase {
         buttonLabel,
         imageLabel,
         labelLength,
-        duplicated
+        duplicated,
+        scrollView
     }
 
     // MARK: - Test Suites
@@ -73,6 +74,7 @@ extension XCTestCase {
         }
 
         for a11yElement in a11yElements {
+            if !a11yElement.shouldIgnore {
 
             if tests.contains(.minimumSize) {
                 a11yCheckValidSizeFor(element: a11yElement,
@@ -80,13 +82,11 @@ extension XCTestCase {
                                       line: line)
             }
 
-            if tests.contains(.minimumInteractiveSize) {
-                if a11yElement.isInteractive {
+                if tests.contains(.minimumInteractiveSize) {
                     a11yCheckValidSizeFor(interactiveElement: a11yElement,
                                           file: file,
                                           line: line)
                 }
-            }
 
             if tests.contains(.labelPresence) {
                 a11yCheckValidLabelFor(element: a11yElement,
@@ -110,18 +110,21 @@ extension XCTestCase {
                 a11yCheckLabelLength(element: a11yElement,
                                      file: file,
                                      line: line)
-            }
+                }
 
-            a11yCheckScrollView(element: a11yElement,
-                                file: file,
-                                line: line)
+                if tests.contains(.scrollView) {
+                    a11yCheckScrollView(element: a11yElement,
+                                        file: file,
+                                        line: line)
+                }
 
-            for a11yElement2 in a11yElements {
-            if tests.contains(.duplicated) {
-                a11yCheckNoDuplicatedLabels(element1: a11yElement,
-                                            element2: a11yElement2,
-                                            file: file,
-                                            line: line)
+                for a11yElement2 in a11yElements {
+                    if tests.contains(.duplicated) {
+                        a11yCheckNoDuplicatedLabels(element1: a11yElement,
+                                                    element2: a11yElement2,
+                                                    file: file,
+                                                    line: line)
+                    }
                 }
             }
         }
@@ -215,6 +218,7 @@ extension XCTestCase {
     func a11yCheckValidSizeFor(element: A11yElement,
                                   file: StaticString = #file,
                                   line: UInt = #line) {
+        guard !element.shouldIgnore else { return }
 
         XCTAssert(element.frame.size.height >= 18,
                   "Accessibility Failure: Element not tall enough: \(element.description)",
@@ -231,9 +235,8 @@ extension XCTestCase {
                                    file: StaticString = #file,
                                    line: UInt = #line) {
 
-        guard !element.isWindow,
-            element.type != .scrollView,
-            element.type != .other else { return }
+        guard !element.shouldIgnore,
+            element.type != .cell else { return }
 
         XCTAssert(element.label.count > 2,
                   "Accessibility Failure: Label not meaningful: \(element.description)",
@@ -274,7 +277,7 @@ extension XCTestCase {
 
         for word in avoidWords {
             XCTAssertFalse(image.label.contains(substring: word),
-                           "Accessibility Failure: Images should not contain the word \(word) in the accessibility label, set the image accessibility trait: \(image.description)",
+                           "Accessibility Failure: Images should not contain the word \(word) in the accessibility label. Use the image accessibility trait: \(image.description)",
                            file: file,
                            line: line)
         }
@@ -294,7 +297,8 @@ extension XCTestCase {
                                  line: UInt = #line) {
 
         guard element.type != .staticText,
-            element.type != .textView else { return }
+            element.type != .textView,
+            !element.shouldIgnore else { return }
 
         XCTAssertTrue(element.label.count <= 40,
                       "Accessibility Failure: Label is too long: \(element.description)",
@@ -305,6 +309,8 @@ extension XCTestCase {
     func a11yCheckValidSizeFor(interactiveElement: A11yElement,
                                   file: StaticString = #file,
                                   line: UInt = #line) {
+
+        guard interactiveElement.isInteractive else { return }
 
         XCTAssert(interactiveElement.frame.size.height >= 44,
                   "Accessibility Failure: Interactive element not tall enough: \(interactiveElement.description)",
@@ -321,13 +327,16 @@ extension XCTestCase {
                                      element2: A11yElement,
                                      file: StaticString = #file,
                                      line: UInt = #line) {
-        guard element1.isInteractive,
-            element2.isInteractive,
+
+        guard element1.isControl,
+            element2.isControl,
             element1.underlyingElement != element2.underlyingElement else { return }
-        XCTAssertFalse(element1.label == element2.label,
+
+        XCTAssertNotEqual(element1.label,
+                          element2.label,
                        "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
-                        file: file,
-                        line: line)
+                       file: file,
+                       line: line)
     }
 
     func a11yCheckScrollView(element: A11yElement,

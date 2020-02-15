@@ -4,15 +4,22 @@
 [![License](https://img.shields.io/cocoapods/l/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![Platform](https://img.shields.io/cocoapods/p/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 
-A11yTests is an extension to `XCTestCase` that adds tests for common accessibility issues that can be run as part of an XCUI Test suite.
+A11yUITests is an extension to `XCTestCase` that adds tests for common accessibility issues that can be run as part of an XCUI Test suite.
 
 Tests can either be run separately or integrated into existing XCUI Tests.
+
+## Using These Tests
+
+Good accessibility is not about ticking boxes and conforming to regulations and guidelines, but about how your app is experienced. You will only ever know if your app is actually accessible by letting real people use it. Consider these tests as hints for where you might be able to do better and use them to detect regressions.
+
+Failures for these tests should be seen as warnings for further investigation, not strict failures. As such, I'd recommend always having `continueAfterFailure = true` set.
+
 
 ## Running tests
 
 Tests can be run individually or in suites.
 
-### Running All Tests on All Eliments
+### Running All Tests on All Elements
 
 ```swift
 func test_allTests() {
@@ -23,7 +30,7 @@ func test_allTests() {
 
 ### Specifying Tests/Elements
 
-To specify elements and tests use  `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of eliments to run them on. To run all interactive element tests on all buttons:
+To specify elements and tests use `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of elements to run them on. To run all interactive element tests on all buttons:
 
 ```swift
 func test_buttons() {
@@ -32,7 +39,7 @@ func test_buttons() {
 }
 ```
 
-To run a single test on a single eliment call that test directly. To check if a button has a valid accessibility label:
+To run a single test on a single element call that test directly. To check if a button has a valid accessibility label:
 
 ```swift
 func test_individualTest_individualButton() {
@@ -54,7 +61,7 @@ A11yUITests contains 4 pre-built test suites with tests suitible for different e
 `a11yTestSuiteLabels` runs tests suitible for static text elements.
 
 
-Alternatively you can create an array of `A11yTests` enum values for the tests you want to run.
+Alternatively, you can create an array of `A11yTests` enum values for the tests you want to run.
 
 ## Tests
 
@@ -69,7 +76,7 @@ Note: 18px is arbitrary.
 `minimumInteractiveSize` or `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` checks tappable elements are a minimum of 44px x 44px.
 This satisfies [WCAG 2.1 Sucess Criteria 2.5.5 Target Size Level AAA](https://www.w3.org/TR/WCAG21/#target-size)
 
-Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s for example.
+Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s, for example.
 For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` on any element that your user might interact with, eg. sliders, steppers, switches, segmented controls. But you will need to make your own subclass as Apple's are not strictly adherent to WCAG.
 
 ### Label Presence
@@ -79,7 +86,7 @@ This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.or
 
 ### Button Label
 
-`buttonLabel` or `a11yCheckValidLabelFor(button: XCUIElement)` checks button labels begin with a capital letter and don't contain a full stop or the word button.
+`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a full stop or the word button.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
 
 Note: This test is not localised.
@@ -92,9 +99,10 @@ This follows [Apple's guidelines for writing accessibility labels](https://devel
 Note: This test is not localised.
 
 ### Label Length
+
 `labelLength` or `a11yCheckLabelLength(element: XCUIElement)` checks accessibility labels are <= 40 characters.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
-Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
+Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context, consider adding an accessibility hint.
 
 
 ## Example
@@ -117,6 +125,16 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'A11yUITests'
 ```
+
+## Contributing
+
+I welcome and encourage contributions to improve or expand this test suite.
+If you would like to suggest a change, consider opening an issue against the repo first, to allow for discussion and planning.
+To make code changes, please fork this repo and make changes there. Then open a pull request to contribute your changes back to this repo.
+
+## Known Issues
+
+If two elements of the same type have the same identifier, this will cause the tests to crash on iOS 13+. E.g., two buttons, both labelled 'Next'.
 
 ## Author
 

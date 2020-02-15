@@ -15,7 +15,7 @@
 		8367203F4962EAA5F0B2BFFB7F210701 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033A36A29482FD32230FE0CA177F9BD3 /* Foundation.framework */; };
 		8674D266B52525EA2EB12CD22CE779AB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C061463250766C9C05995AB8EE63E66 /* XCTest.framework */; };
 		AC7A76C487EB50547D3CAB8A6CD04A23 /* Pods-A11yUITests_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6418B7E6BB7698182C01F81569F93979 /* Pods-A11yUITests_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B57CB128239D6E5C0073EF87 /* A11yElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CB127239D6E5C0073EF87 /* A11yElement.swift */; };
+		B56D587023A2C35700BBFED2 /* A11yElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D586F23A2C35700BBFED2 /* A11yElement.swift */; };
 		CC1A27C919C04C57E92B0790C1A0F8B1 /* Pods-A11yUITests_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F5BE202F945BDD5F08D62226B8979 /* Pods-A11yUITests_Example-dummy.m */; };
 		DEC4EE3B8260A486C3AE486C9FC4F268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033A36A29482FD32230FE0CA177F9BD3 /* Foundation.framework */; };
 		FBA774BBC2EDEC38579C652C83D6151E /* Pods-A11yUITests_ExampleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 194ED318FCC5418CB903C4D1EA0AFB8B /* Pods-A11yUITests_ExampleUITests-dummy.m */; };
@@ -66,7 +66,7 @@
 		969DE492AE61A0143EB3AF5E7ED9350C /* A11yUITests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = A11yUITests.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A03C76D4957732DC2D03CAC031A739A2 /* Pods-A11yUITests_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-A11yUITests_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B57CB127239D6E5C0073EF87 /* A11yElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A11yElement.swift; sourceTree = "<group>"; };
+		B56D586F23A2C35700BBFED2 /* A11yElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = A11yElement.swift; path = A11yUITests/Classes/A11yElement.swift; sourceTree = "<group>"; };
 		B8C4E69F4D3AD50953A8716FAB8AA193 /* A11yUITests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "A11yUITests-prefix.pch"; sourceTree = "<group>"; };
 		B8CB243D68E343282AB2BFB05512AEBC /* Pods-A11yUITests_ExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BCA42AF9766943558108BC586923734E /* Pods-A11yUITests_ExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		1EB76C42D6410863DDB4617F74F68B90 /* A11yUITests */ = {
 			isa = PBXGroup;
 			children = (
+				B56D586F23A2C35700BBFED2 /* A11yElement.swift */,
 				F017F768146BB5F0735E93F7DD346F43 /* XCTestCase+A11y.swift */,
-				B57CB127239D6E5C0073EF87 /* A11yElement.swift */,
 				701C1AFB7C8CC94FB0268C5B7BC49424 /* Pod */,
 				EE68D8502EEF396E1DA6EDBC8D1B8541 /* Support Files */,
 			);
@@ -373,7 +373,7 @@
 			files = (
 				1812E433C642DFDC44DAD20576E9CD78 /* A11yUITests-dummy.m in Sources */,
 				79801795B57099BE2095367515F56002 /* XCTestCase+A11y.swift in Sources */,
-				B57CB128239D6E5C0073EF87 /* A11yElement.swift in Sources */,
+				B56D587023A2C35700BBFED2 /* A11yElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
