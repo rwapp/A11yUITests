@@ -347,54 +347,52 @@ extension XCTestCase {
     func a11yCheckScrollView(element: A11yElement,
                              file: StaticString = #file,
                              line: UInt = #line) {
-        let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
-
-        let navBars = XCUIApplication().descendants(matching: .navigationBar).allElementsBoundByAccessibilityElement
-        let tabBars = XCUIApplication().descendants(matching: .tabBar).allElementsBoundByAccessibilityElement
 
         if element.type == .staticText {
-            guard !scrollViews.isEmpty else { XCTFail(
-                "Accessibility Failure: Text presented outside of scroll view: \(element.description)",
-                file: file,
-                line: line)
+
+            let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
+
+            guard !scrollViews.isEmpty else {
+                XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
+                    file: file,
+                    line: line)
                 return
             }
-
-            var fail = true
 
             for scrollView in scrollViews {
                 let descendants = scrollView.descendants(matching: .staticText).allElementsBoundByIndex
                 for descendant in descendants {
                     if descendant.label == element.label {
-                        fail = false
+                        return
                     }
                 }
             }
+
+            let navBars = XCUIApplication().descendants(matching: .navigationBar).allElementsBoundByAccessibilityElement
 
             for navBar in navBars {
                 let descendants = navBar.descendants(matching: .staticText).allElementsBoundByIndex
                 for descendant in descendants {
                     if descendant.label == element.label {
-                        fail = false
+                        return
                     }
                 }
             }
+
+            let tabBars = XCUIApplication().descendants(matching: .tabBar).allElementsBoundByAccessibilityElement
 
             for tabBar in tabBars {
                 let descendants = tabBar.descendants(matching: .staticText).allElementsBoundByIndex
                 for descendant in descendants {
                     if descendant.label == element.label {
-                        fail = false
+                        return
                     }
                 }
             }
 
-
-            if fail {
-                XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
-                    file: file,
-                    line: line)
-            }
+            XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
+                file: file,
+                line: line)
         }
     }
 
