@@ -23,21 +23,27 @@ extension XCTestCase {
 
     // MARK: - Test Suites
 
-    public var a11yTestSuiteAll: [A11yTests] {
-        return A11yTests.allCases
+    public var a11yTestSuiteAll: Set<A11yTests> {
+        return Set(A11yTests.allCases)
     }
 
-    public var a11yTestSuiteImages: [A11yTests] {
+    public var a11yTestSuiteExcludingLongRunning: Set<A11yTests> {
+        var all = a11yTestSuiteAll
+        all.remove(.scrollView)
+        return all
+    }
+
+    public var a11yTestSuiteImages: Set<A11yTests> {
         return [.minimumSize, .labelPresence, .imageLabel, .labelLength]
     }
 
-    public var a11yTestSuiteInteractive: [A11yTests] {
+    public var a11yTestSuiteInteractive: Set<A11yTests> {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
         return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
     }
 
-    public var a11yTestSuiteLabels: [A11yTests] {
+    public var a11yTestSuiteLabels: Set<A11yTests> {
         // valid for any text elements, eg. labels, text views
         return [.minimumSize, .labelPresence]
     }
@@ -62,10 +68,10 @@ extension XCTestCase {
              line: line)
     }
 
-    public func a11y(tests: [A11yTests],
-                    on elements: [XCUIElement],
-                    file: StaticString = #file,
-                    line: UInt = #line) {
+    public func a11y(tests: Set<A11yTests>,
+                     on elements: [XCUIElement],
+                     file: StaticString = #file,
+                     line: UInt = #line) {
 
         var a11yElements = [A11yElement]()
 
