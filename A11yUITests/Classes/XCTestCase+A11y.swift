@@ -262,7 +262,7 @@ extension XCTestCase {
                                 file: StaticString = #file,
                                 line: UInt = #line) {
 
-         guard interactiveElement.isControl else { return }
+        guard interactiveElement.isControl else { return }
 
         // TODO: Localise this check
         XCTAssertFalse(interactiveElement.label.contains(substring: "button"),
@@ -357,52 +357,51 @@ extension XCTestCase {
                              file: StaticString = #file,
                              line: UInt = #line) {
 
-        if element.type == .staticText {
+        guard element.type == .staticText else { return }
 
-            let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
+        let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
 
-            guard !scrollViews.isEmpty else {
-                XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
-                    file: file,
-                    line: line)
-                return
-            }
-
-            for scrollView in scrollViews {
-                let descendants = scrollView.descendants(matching: .staticText).allElementsBoundByIndex
-                for descendant in descendants {
-                    if descendant.label == element.label {
-                        return
-                    }
-                }
-            }
-
-            let navBars = XCUIApplication().descendants(matching: .navigationBar).allElementsBoundByAccessibilityElement
-
-            for navBar in navBars {
-                let descendants = navBar.descendants(matching: .staticText).allElementsBoundByIndex
-                for descendant in descendants {
-                    if descendant.label == element.label {
-                        return
-                    }
-                }
-            }
-
-            let tabBars = XCUIApplication().descendants(matching: .tabBar).allElementsBoundByAccessibilityElement
-
-            for tabBar in tabBars {
-                let descendants = tabBar.descendants(matching: .staticText).allElementsBoundByIndex
-                for descendant in descendants {
-                    if descendant.label == element.label {
-                        return
-                    }
-                }
-            }
-
+        guard !scrollViews.isEmpty else {
             XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
                 file: file,
                 line: line)
+            return
         }
+
+        for scrollView in scrollViews {
+            let descendants = scrollView.descendants(matching: .staticText).allElementsBoundByIndex
+            for descendant in descendants {
+                if descendant.label == element.label {
+                    return
+                }
+            }
+        }
+
+        let navBars = XCUIApplication().descendants(matching: .navigationBar).allElementsBoundByAccessibilityElement
+
+        for navBar in navBars {
+            let descendants = navBar.descendants(matching: .staticText).allElementsBoundByIndex
+            for descendant in descendants {
+                if descendant.label == element.label {
+                    return
+                }
+            }
+        }
+
+        let tabBars = XCUIApplication().descendants(matching: .tabBar).allElementsBoundByAccessibilityElement
+
+        for tabBar in tabBars {
+            let descendants = tabBar.descendants(matching: .staticText).allElementsBoundByIndex
+            for descendant in descendants {
+                if descendant.label == element.label {
+                    return
+                }
+            }
+        }
+
+        XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
+            file: file,
+            line: line)
     }
 
     // MARK: - helpers
