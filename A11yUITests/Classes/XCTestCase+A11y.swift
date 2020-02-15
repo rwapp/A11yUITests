@@ -218,6 +218,15 @@ extension XCTestCase {
                                     line: line)
     }
 
+    public func a11yCheckInScrollView(element: XCUIElement,
+                                      file: StaticString = #file,
+                                      line: UInt = #line) {
+
+        let a11yElement = createA11yElementFrom(element: element)
+
+        a11yCheckScrollView(element: a11yElement)
+    }
+
     // MARK: - Tests
 
     func a11yCheckValidSizeFor(element: A11yElement,
