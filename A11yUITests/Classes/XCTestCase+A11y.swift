@@ -101,7 +101,7 @@ extension XCTestCase {
                 }
 
                 if tests.contains(.buttonLabel) {
-                    a11yCheckValidLabelFor(button: a11yElement,
+                    a11yCheckValidLabelFor(interactiveElement: a11yElement,
                                            file: file,
                                            line: line)
                 }
@@ -160,13 +160,13 @@ extension XCTestCase {
                                line: line)
     }
 
-    public func a11yCheckValidLabelFor(button: XCUIElement,
+    public func a11yCheckValidLabelFor(interactiveElement: XCUIElement,
                                        file: StaticString = #file,
                                        line: UInt = #line) {
 
-        let a11yElement = createA11yElementFrom(element: button)
+        let a11yElement = createA11yElementFrom(element: interactiveElement)
 
-        a11yCheckValidLabelFor(button: a11yElement,
+        a11yCheckValidLabelFor(interactiveElement: a11yElement,
                                file: file,
                                line: line)
     }
@@ -249,24 +249,24 @@ extension XCTestCase {
             line: line)
     }
 
-    func a11yCheckValidLabelFor(button: A11yElement,
+    func a11yCheckValidLabelFor(interactiveElement: A11yElement,
                                 file: StaticString = #file,
                                 line: UInt = #line) {
 
-        guard button.type == .button else { return }
+         guard interactiveElement.isControl else { return }
 
         // TODO: Localise this check
-        XCTAssertFalse(button.label.contains(substring: "button"),
-                       "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(button.description)",
+        XCTAssertFalse(interactiveElement.label.contains(substring: "button"),
+                       "Accessibility Failure: Button should not contain the word button in the accessibility label. Use the button accessibility triat: \(interactiveElement.description)",
             file: file,
             line: line)
 
-        XCTAssert(button.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(button.description)",
+        XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Button labels should begin with a capital letter: \(interactiveElement.description)",
             file: file,
             line: line)
 
-        XCTAssert((button.label.range(of: ".") == nil),
-                  "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(button.description)",
+        XCTAssert((interactiveElement.label.range(of: ".") == nil),
+                  "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(interactiveElement.description)",
             file: file,
             line: line)
     }
