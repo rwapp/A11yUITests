@@ -32,8 +32,8 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Interactive element not wide enough: "Too Small" Button
         // Accessibility Failure: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button
         // Accessibility Failure: Label not meaningful: " " Button
-        // Accessibility Failure: Elements overlap: "Underlapping" Button, "Overlapping" Button
-        // Accessibility Failure: Elements overlap: "Overlapping" Button, "Underlapping" Button
+        // Accessibility Failure: Elements overlap: "Under" Button, "Over" Button
+        // Accessibility Failure: Elements overlap: "Over" Button, "Under" Button
         // Accessibility Failure: Text presented outside of scroll view: "Outside scroll view" Label
 
         a11yCheckAllOnScreen()

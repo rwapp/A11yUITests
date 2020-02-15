@@ -31,6 +31,7 @@ extension XCTestCase {
     public var a11yTestSuiteExcludingLongRunning: Set<A11yTests> {
         var all = a11yTestSuiteAll
         all.remove(.scrollView)
+        all.remove(.overlapping)
         return all
     }
 
@@ -119,10 +120,23 @@ extension XCTestCase {
                                      line: line)
             }
 
-            if tests.contains(.scrollView) {
-                a11yCheckScrollView(element: a11yElement,
-                                    file: file,
-                                    line: line)
+            if tests.contains(.scrollView) || tests.contains(.overlapping) {
+                let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
+
+                if tests.contains(.scrollView) {
+                    a11yCheckScrollView(element: a11yElement,
+                                        scrollViews: scrollViews,
+                                        file: file,
+                                        line: line)
+                }
+
+                if tests.contains(.overlapping) {
+                    a11yCheck(element: a11yElement,
+                              doesNotOverlap: a11yElements,
+                              scrollViews: scrollViews,
+                              file: file,
+                              line: line)
+                }
             }
 
             if tests.contains(.duplicated) {
@@ -131,15 +145,6 @@ extension XCTestCase {
                                                 element2: a11yElement2,
                                                 file: file,
                                                 line: line)
-                }
-            }
-
-            if tests.contains(.overlapping) {
-                for a11yElement2 in a11yElements {
-                    a11yCheck(element1: a11yElement,
-                              doesNotOverlap: a11yElement2,
-                              file: file,
-                              line: line)
                 }
             }
         }
@@ -233,7 +238,10 @@ extension XCTestCase {
 
         let a11yElement = createA11yElementFrom(element: element)
 
-        a11yCheckScrollView(element: a11yElement)
+        let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
+
+        a11yCheckScrollView(element: a11yElement,
+                            scrollViews: scrollViews)
     }
 
     // MARK: - Tests
@@ -348,19 +356,42 @@ extension XCTestCase {
             line: line)
     }
 
-    func a11yCheck(element1: A11yElement,
-                   doesNotOverlap element2: A11yElement,
+    func a11yCheck(element: A11yElement,
+                   doesNotOverlap elements: [A11yElement],
+                   scrollViews: [XCUIElement],
                    file: StaticString = #file,
                    line: UInt = #line) {
 
-        guard element1.type == .staticText,
-            element2.type == .staticText,
-            element1.underlyingElement != element2.underlyingElement else { return }
+        guard element.type == .staticText else { return }
 
-        XCTAssertFalse(element1.frame.intersects(element2.frame),
-                       "Accessibility Failure: Elements overlap: \(element1.description), \(element2.description)",
-            file: file,
-            line: line)
+        var filteredElements = elements.filter({ $0.type == .staticText })
+        filteredElements = filteredElements.filter({ $0.label != element.label })
+
+        guard scrollViews.count > 0 else {
+            assert(element: element,
+                   doesNotOverlap: filteredElements,
+                   file: file,
+                   line: line)
+            return
+        }
+
+        assert(element: element,
+               doesNotOverlap: filteredElements,
+               file: file,
+               line: line)
+    }
+
+    private func assert(element: A11yElement,
+                        doesNotOverlap elements: [A11yElement],
+                        file: StaticString = #file,
+                        line: UInt = #line) {
+
+        for element2 in elements {
+            XCTAssertFalse(element.frame.intersects(element2.frame),
+                           "Accessibility Failure: Elements overlap: \(element.description), \(element2.description)",
+                file: file,
+                line: line)
+        }
     }
 
     func a11yCheckNoDuplicatedLabels(element1: A11yElement,
@@ -380,12 +411,11 @@ extension XCTestCase {
     }
 
     func a11yCheckScrollView(element: A11yElement,
+                             scrollViews: [XCUIElement],
                              file: StaticString = #file,
                              line: UInt = #line) {
 
         guard element.type == .staticText else { return }
-
-        let scrollViews = XCUIApplication().descendants(matching: .scrollView).allElementsBoundByAccessibilityElement
 
         guard !scrollViews.isEmpty else {
             XCTFail("Accessibility Failure: Text presented outside of scroll view: \(element.description)",
