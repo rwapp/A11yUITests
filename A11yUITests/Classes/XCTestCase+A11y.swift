@@ -51,7 +51,7 @@ extension XCTestCase {
     // MARK: - Test Groups
 
     public func a11yCheckAllOnScreen(file: StaticString = #file,
-                                        line: UInt = #line) {
+                                     line: UInt = #line) {
 
         let elements = XCUIApplication().descendants(matching: .any).allElementsBoundByAccessibilityElement
         a11yAllTestsOn(elements: elements,
@@ -60,8 +60,8 @@ extension XCTestCase {
     }
 
     public func a11yAllTestsOn(elements: [XCUIElement],
-                                  file: StaticString = #file,
-                                  line: UInt = #line) {
+                               file: StaticString = #file,
+                               line: UInt = #line) {
         a11y(tests: a11yTestSuiteAll,
              on: elements,
              file: file,
@@ -82,11 +82,11 @@ extension XCTestCase {
         for a11yElement in a11yElements {
             if !a11yElement.shouldIgnore {
 
-            if tests.contains(.minimumSize) {
-                a11yCheckValidSizeFor(element: a11yElement,
-                                      file: file,
-                                      line: line)
-            }
+                if tests.contains(.minimumSize) {
+                    a11yCheckValidSizeFor(element: a11yElement,
+                                          file: file,
+                                          line: line)
+                }
 
                 if tests.contains(.minimumInteractiveSize) {
                     a11yCheckValidSizeFor(interactiveElement: a11yElement,
@@ -94,28 +94,28 @@ extension XCTestCase {
                                           line: line)
                 }
 
-            if tests.contains(.labelPresence) {
-                a11yCheckValidLabelFor(element: a11yElement,
-                                       file: file,
-                                       line: line)
-            }
+                if tests.contains(.labelPresence) {
+                    a11yCheckValidLabelFor(element: a11yElement,
+                                           file: file,
+                                           line: line)
+                }
 
-            if tests.contains(.buttonLabel) {
-                a11yCheckValidLabelFor(button: a11yElement,
-                                       file: file,
-                                       line: line)
-            }
+                if tests.contains(.buttonLabel) {
+                    a11yCheckValidLabelFor(button: a11yElement,
+                                           file: file,
+                                           line: line)
+                }
 
-            if tests.contains(.imageLabel) {
-                a11yCheckValidLabelFor(image: a11yElement,
-                                       file: file,
-                                       line: line)
-            }
+                if tests.contains(.imageLabel) {
+                    a11yCheckValidLabelFor(image: a11yElement,
+                                           file: file,
+                                           line: line)
+                }
 
-            if tests.contains(.labelLength) {
-                a11yCheckLabelLength(element: a11yElement,
-                                     file: file,
-                                     line: line)
+                if tests.contains(.labelLength) {
+                    a11yCheckLabelLength(element: a11yElement,
+                                         file: file,
+                                         line: line)
                 }
 
                 if tests.contains(.scrollView) {
@@ -139,8 +139,8 @@ extension XCTestCase {
     // MARK: - Individual Tests
 
     public func a11yCheckValidSizeFor(element: XCUIElement,
-                               file: StaticString = #file,
-                               line: UInt = #line) {
+                                      file: StaticString = #file,
+                                      line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: element)
 
@@ -150,8 +150,8 @@ extension XCTestCase {
     }
 
     public func a11yCheckValidLabelFor(element: XCUIElement,
-                                file: StaticString = #file,
-                                line: UInt = #line) {
+                                       file: StaticString = #file,
+                                       line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: element)
 
@@ -161,8 +161,8 @@ extension XCTestCase {
     }
 
     public func a11yCheckValidLabelFor(button: XCUIElement,
-                                file: StaticString = #file,
-                                line: UInt = #line) {
+                                       file: StaticString = #file,
+                                       line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: button)
 
@@ -172,8 +172,8 @@ extension XCTestCase {
     }
 
     public func a11yCheckValidLabelFor(image: XCUIElement,
-                                file: StaticString = #file,
-                                line: UInt = #line) {
+                                       file: StaticString = #file,
+                                       line: UInt = #line) {
         
         let a11yElement = createA11yElementFrom(element: image)
 
@@ -183,8 +183,8 @@ extension XCTestCase {
     }
 
     public func a11yCheckLabelLength(element: XCUIElement,
-                              file: StaticString = #file,
-                              line: UInt = #line) {
+                                     file: StaticString = #file,
+                                     line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: element)
 
@@ -194,8 +194,8 @@ extension XCTestCase {
     }
 
     public func a11yCheckValidSizeFor(interactiveElement: XCUIElement,
-                               file: StaticString = #file,
-                               line: UInt = #line) {
+                                      file: StaticString = #file,
+                                      line: UInt = #line) {
 
         let a11yElement = createA11yElementFrom(element: interactiveElement)
 
@@ -205,9 +205,9 @@ extension XCTestCase {
     }
 
     public func a11yCheckNoDuplicatedLabels(element1: XCUIElement,
-                                     element2: XCUIElement,
-                                     file: StaticString = #file,
-                                     line: UInt = #line) {
+                                            element2: XCUIElement,
+                                            file: StaticString = #file,
+                                            line: UInt = #line) {
 
         let a11yElement1 = createA11yElementFrom(element: element1)
         let a11yElement2 = createA11yElementFrom(element: element2)
@@ -218,63 +218,62 @@ extension XCTestCase {
                                     line: line)
     }
 
-
     // MARK: - Tests
 
     func a11yCheckValidSizeFor(element: A11yElement,
-                                  file: StaticString = #file,
-                                  line: UInt = #line) {
+                               file: StaticString = #file,
+                               line: UInt = #line) {
         guard !element.shouldIgnore else { return }
 
         XCTAssert(element.frame.size.height >= 18,
                   "Accessibility Failure: Element not tall enough: \(element.description)",
-                 file: file,
-                 line: line)
+            file: file,
+            line: line)
 
         XCTAssert(element.frame.size.width >= 18,
                   "Accessibility Failure: Element not wide enough: \(element.description)",
-                 file: file,
-                 line: line)
+            file: file,
+            line: line)
     }
 
     func a11yCheckValidLabelFor(element: A11yElement,
-                                   file: StaticString = #file,
-                                   line: UInt = #line) {
+                                file: StaticString = #file,
+                                line: UInt = #line) {
 
         guard !element.shouldIgnore,
             element.type != .cell else { return }
 
         XCTAssert(element.label.count > 2,
                   "Accessibility Failure: Label not meaningful: \(element.description)",
-                 file: file,
-                 line: line)
+            file: file,
+            line: line)
     }
 
     func a11yCheckValidLabelFor(button: A11yElement,
-                                   file: StaticString = #file,
-                                   line: UInt = #line) {
+                                file: StaticString = #file,
+                                line: UInt = #line) {
 
         guard button.type == .button else { return }
 
         // TODO: Localise this check
         XCTAssertFalse(button.label.contains(substring: "button"),
                        "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(button.description)",
-                       file: file,
-                       line: line)
+            file: file,
+            line: line)
 
         XCTAssert(button.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(button.description)",
-                  file: file,
-                  line: line)
+            file: file,
+            line: line)
 
         XCTAssert((button.label.range(of: ".") == nil),
                   "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(button.description)",
-                  file: file,
-                  line: line)
+            file: file,
+            line: line)
     }
 
     func a11yCheckValidLabelFor(image: A11yElement,
-                                   file: StaticString = #file,
-                                   line: UInt = #line) {
+                                file: StaticString = #file,
+                                line: UInt = #line) {
 
         guard image.type == .image else { return }
 
@@ -284,8 +283,8 @@ extension XCTestCase {
         for word in avoidWords {
             XCTAssertFalse(image.label.contains(substring: word),
                            "Accessibility Failure: Images should not contain the word \(word) in the accessibility label. Use the image accessibility trait: \(image.description)",
-                           file: file,
-                           line: line)
+                file: file,
+                line: line)
         }
 
         let possibleFilenames = ["_", "-", ".png", ".jpg", ".jpeg", ".pdf", ".avci", ".heic", ".heif"]
@@ -293,14 +292,14 @@ extension XCTestCase {
         for word in possibleFilenames {
             XCTAssertFalse(image.label.contains(substring: word),
                            "Accessibility Failure: Image file name is used as the accessibility label: \(image.description)",
-                           file: file,
-                           line: line)
+                file: file,
+                line: line)
         }
     }
 
     func a11yCheckLabelLength(element: A11yElement,
-                                 file: StaticString = #file,
-                                 line: UInt = #line) {
+                              file: StaticString = #file,
+                              line: UInt = #line) {
 
         guard element.type != .staticText,
             element.type != .textView,
@@ -308,25 +307,25 @@ extension XCTestCase {
 
         XCTAssertTrue(element.label.count <= 40,
                       "Accessibility Failure: Label is too long: \(element.description)",
-                      file: file,
-                      line: line)
+            file: file,
+            line: line)
     }
 
     func a11yCheckValidSizeFor(interactiveElement: A11yElement,
-                                  file: StaticString = #file,
-                                  line: UInt = #line) {
+                               file: StaticString = #file,
+                               line: UInt = #line) {
 
         guard interactiveElement.isInteractive else { return }
 
         XCTAssert(interactiveElement.frame.size.height >= 44,
                   "Accessibility Failure: Interactive element not tall enough: \(interactiveElement.description)",
-                  file: file,
-                  line: line)
+            file: file,
+            line: line)
 
         XCTAssert(interactiveElement.frame.size.width >= 44,
                   "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
-                  file: file,
-                  line: line)
+            file: file,
+            line: line)
     }
 
     func a11yCheckNoDuplicatedLabels(element1: A11yElement,
@@ -340,9 +339,9 @@ extension XCTestCase {
 
         XCTAssertNotEqual(element1.label,
                           element2.label,
-                       "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
-                       file: file,
-                       line: line)
+                          "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
+            file: file,
+            line: line)
     }
 
     func a11yCheckScrollView(element: A11yElement,
