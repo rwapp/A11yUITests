@@ -250,11 +250,11 @@ extension XCTestCase {
 
         // TODO: Localise this check
         XCTAssertFalse(interactiveElement.label.contains(substring: "button"),
-                       "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(interactiveElement.description)",
+                       "Accessibility Failure: Button should not contain the word button in the accessibility label. Use the button accessibility triat: \(interactiveElement.description)",
                        file: file,
                        line: line)
 
-        XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(interactiveElement.description)",
+        XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Button labels should begin with a capital letter: \(interactiveElement.description)",
                   file: file,
                   line: line)
 
@@ -275,7 +275,7 @@ extension XCTestCase {
 
         for word in avoidWords {
             XCTAssertFalse(image.label.contains(substring: word),
-                           "Accessibility Failure: Images should not contain the word \(word) in the accessibility label, set the image accessibility trait: \(image.description)",
+                           "Accessibility Failure: Images should not contain the word \(word) in the accessibility label. Use the image accessibility trait: \(image.description)",
                            file: file,
                            line: line)
         }
@@ -330,7 +330,8 @@ extension XCTestCase {
             element2.isControl,
             element1.underlyingElement != element2.underlyingElement else { return }
 
-        XCTAssertFalse(element1.label == element2.label,
+        XCTAssertNotEqual(element1.label,
+                          element2.label,
                        "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
                        file: file,
                        line: line)
