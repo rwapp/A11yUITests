@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 15 failures
+        // Produces 16 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
         // Accessibility Failure: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image
@@ -34,6 +34,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Label not meaningful: " " Button
         // Accessibility Failure: Elements overlap: "Underlapping" Button, "Overlapping" Button
         // Accessibility Failure: Elements overlap: "Overlapping" Button, "Underlapping" Button
+        // Accessibility Failure: Text presented outside of scroll view: "Outside scroll view" Label
 
         a11yCheckAllOnScreen()
     }
@@ -77,6 +78,6 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
 
         let button = XCUIApplication().buttons["Ends with button"]
-        a11yCheckValidLabelFor(button: button)
+        a11yCheckValidLabelFor(interactiveElement: button)
     }
 }

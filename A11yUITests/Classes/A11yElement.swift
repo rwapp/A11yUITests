@@ -13,8 +13,17 @@ struct A11yElement {
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
 
-    var isWindow: Bool {
-        return self.type == .window
+    var shouldIgnore: Bool {
+        return self.type == .window ||
+            self.type == .scrollBar ||
+            self.type == .other ||
+            self.type == .navigationBar ||
+            self.type == .table ||
+            self.type == .scrollView ||
+            self.type == .key ||
+            self.type == .keyboard ||
+            self.type == .tabBar ||
+            self.type == .scrollBar
     }
 
     var isInteractive: Bool {
@@ -23,6 +32,22 @@ struct A11yElement {
 
         return self.type == .button ||
             self.type == .cell
+    }
+
+    var isControl: Bool {
+        return self.type == .button ||
+            self.type == .slider ||
+            self.type == .stepper ||
+            self.type == .segmentedControl ||
+            self.type == .textField ||
+            self.type == .switch ||
+            self.type == .pageIndicator ||
+            self.type == .link ||
+            self.type == .searchField ||
+            self.type == .secureTextField ||
+            self.type == .datePicker ||
+            self.type == .picker ||
+            self.type == .pickerWheel
     }
 
     var description: String {
