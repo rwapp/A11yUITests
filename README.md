@@ -54,6 +54,8 @@ A11yUITests contains 4 pre-built test suites with tests suitible for different e
 
 `allA11yTestSuite` Runs all tests.
 
+`a11yTestSuiteExcludingLongRunning` Runs all tests excluding the scroll view test.
+
 `a11yTestSuiteImages` Runs tests suitible for images.
 
 `a11yTestSuiteInteractive` runs tests suitible for interactive elements.
@@ -104,6 +106,11 @@ Note: This test is not localised.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context, consider adding an accessibility hint.
 
+### Scroll Views
+
+`scrollView` or `a11yCheckInScrollView(element: XCUIElement)` checks text elements are presented inside a scroll view.
+Any text that is not inside a scroll view can't be guaranteed to have enough space to scale as required.
+This test is long running. It takes around the same time to run as all the other tests combined and is excluded from `a11yTestSuiteExcludingLongRunning`.
 
 ## Example
 
