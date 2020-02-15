@@ -30,7 +30,7 @@ func test_allTests() {
 
 ### Specifying Tests/Elements
 
-To specify elements and tests use `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of eliments to run them on. To run all interactive element tests on all buttons:
+To specify elements and tests use `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of elements to run them on. To run all interactive element tests on all buttons:
 
 ```swift
 func test_buttons() {
