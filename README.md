@@ -125,6 +125,12 @@ it, simply add the following line to your Podfile:
 pod 'A11yUITests'
 ```
 
+## Contributing
+
+I welcome and encourage contributions to improve or expand this test suite.
+If you would like to suggest a change, consider opening an issue against the repo first, to allow for discussion and planning.
+To make code changes, please fork this repo and make changes there. Then open a pull request to contribute your changes back to this repo.
+
 ## Known Issues
 
 If two elements of the same type have the same identifier this will cause the tests to crash on iOS 13+. eg, two buttons both labeled 'Next'.
