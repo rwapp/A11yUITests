@@ -353,7 +353,9 @@ extension XCTestCase {
                    file: StaticString = #file,
                    line: UInt = #line) {
 
-        guard element1.underlyingElement != element2.underlyingElement else { return }
+        guard element1.type == .staticText,
+            element2.type == .staticText,
+            element1.underlyingElement != element2.underlyingElement else { return }
 
         XCTAssertFalse(element1.frame.intersects(element2.frame),
                        "Accessibility Failure: Elements overlap: \(element1.description), \(element2.description)",
