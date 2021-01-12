@@ -253,10 +253,12 @@ extension XCTestCase {
                        "Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: \(interactiveElement.description)",
                        file: file,
                        line: line)
-
-        XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(interactiveElement.description)",
-                  file: file,
-                  line: line)
+        
+        if !interactiveElement.label.isEmpty {
+            XCTAssert(interactiveElement.label.first!.isUppercase, "Accessibility Failure: Buttons should begin with a capital letter: \(interactiveElement.description)",
+                      file: file,
+                      line: line)
+        }
 
         XCTAssert((interactiveElement.label.range(of: ".") == nil),
                   "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(interactiveElement.description)",
