@@ -52,7 +52,7 @@ func test_individualTest_individualButton() {
 
 A11yUITests contains 4 pre-built test suites with tests suitible for different elements.
 
-`allA11yTestSuite` Runs all tests.
+`a11yTestSuiteAll` Runs all tests.
 
 `a11yTestSuiteImages` Runs tests suitible for images.
 
@@ -81,19 +81,22 @@ For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: X
 
 ### Label Presence
 
-`labelPresence` or `a11yCheckValidLabelFor(element: XCUIElement)` checks the element has an accessibility label that is a minimum of 2 characters long.
+`labelPresence` or `a11yCheckValidLabelFor(element: XCUIElement)` checks the element has an accessibility label that is a minimum of 2 characters long. 
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 
 ### Button Label
 
-`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a full stop or the word button.
+`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
 
 Note: This test is not localised.
 
 ### Image Label
 
-`imageLabel` or `a11yCheckValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename.
+`imageLabel` or `a11yCheckValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Images should all have the image trait applied, but this is currently untestable. Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
 
 Note: This test is not localised.
@@ -102,6 +105,10 @@ Note: This test is not localised.
 `labelLength` or `a11yCheckLabelLength(element: XCUIElement)` checks accessibility labels are <= 40 characters.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
+
+### Duplicated labels
+`duplicated` checks all elements provided for duplication of accessibility labels.
+Duplicated accessibility labels are not an accessibility failure - but can make your screen confusing to navigate with VoiceOver, and make Voice Control fail. Ideally you should avoid duplication if possible.
 
 
 ## Example

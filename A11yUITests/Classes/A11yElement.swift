@@ -15,19 +15,19 @@ struct A11yElement {
 
     var shouldIgnore: Bool {
         return self.type == .window ||
-        self.type == .scrollBar ||
-        self.type == .other ||
-        self.type == .navigationBar ||
-        self.type == .table ||
-        self.type == .scrollView ||
-        self.type == .key ||
-        self.type == .keyboard ||
-        self.type == .tabBar
+            self.type == .scrollBar ||
+            self.type == .other ||
+            self.type == .navigationBar ||
+            self.type == .table ||
+            self.type == .scrollView ||
+            self.type == .key ||
+            self.type == .keyboard ||
+            self.type == .tabBar
     }
 
     var isInteractive: Bool {
         // strictly switches, steppers, sliders, segmented controls, & text fields should be included
-        // but standard iOS implimentations aren't large enough.
+        // but standard iOS implementations aren't large enough.
 
         return self.type == .button ||
             self.type == .cell
@@ -35,18 +35,18 @@ struct A11yElement {
 
     var isControl: Bool {
         return self.type == .button ||
-        self.type == .slider ||
-        self.type == .stepper ||
-        self.type == .segmentedControl ||
-        self.type == .textField ||
-        self.type == .switch ||
-        self.type == .pageIndicator ||
-        self.type == .link ||
-        self.type == .searchField ||
-        self.type == .secureTextField ||
-        self.type == .datePicker ||
-        self.type == .picker ||
-        self.type == .pickerWheel
+            self.type == .slider ||
+            self.type == .stepper ||
+            self.type == .segmentedControl ||
+            self.type == .textField ||
+            self.type == .switch ||
+            self.type == .pageIndicator ||
+            self.type == .link ||
+            self.type == .searchField ||
+            self.type == .secureTextField ||
+            self.type == .datePicker ||
+            self.type == .picker ||
+            self.type == .pickerWheel
     }
 
     var description: String {
