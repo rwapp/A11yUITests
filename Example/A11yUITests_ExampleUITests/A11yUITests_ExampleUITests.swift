@@ -37,7 +37,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_images() {
-        // produces 2 failures
+        // produces 3 failures
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image. Offending word: _
         // Accessibility Failure: Images should not contain image words in the accessibility label, set the image accessibility trait: "image of the Mobile A11y logo" Image. Offending word: image
         //  Accessibility Failure: Label not meaningful: "A11y_logo" Image. Minimum length: 10
