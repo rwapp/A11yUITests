@@ -270,10 +270,12 @@ extension XCTestCase {
                        file: file,
                        line: line)
 
-        XCTAssert(element.label.first!.isUppercase,
-                  "Accessibility Failure: Buttons should begin with a capital letter: \(element.description)",
-                  file: file,
-                  line: line)
+        if let first = element.label.first {
+            XCTAssert(first.isUppercase,
+                      "Accessibility Failure: Buttons should begin with a capital letter: \(element.description)",
+                      file: file,
+                      line: line)
+        }
 
         XCTAssert((element.label.range(of: ".") == nil),
                   "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(element.description)",
