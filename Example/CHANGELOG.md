@@ -1,5 +1,9 @@
 #  Changelog
 
+## 0.3.1
+
+* Minor code quality improvements and clarification to the readme
+
 ## 0.3.0
 
 * Improvements for label checks

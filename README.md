@@ -127,11 +127,15 @@ Swift 5
 
 ## Installation
 
-A11yUITests is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+A11yUITests is available through [CocoaPods](https://cocoapods.org). 
+To install add the pod to your target's test target in your podfile. eg
 
 ```ruby
-pod 'A11yUITests'
+target 'My_Application' do
+    target 'My_Application_UITests' do
+    pod 'A11yUITests'
+    end
+end
 ```
 
 ## Known Issues
@@ -140,7 +144,7 @@ If two elements of the same type have the same identifier this will cause the te
 
 ## Author
 
-Rob Whitaker, rw@rwapp.co.uk
+Rob Whitaker, rw@rwapp.co.uk\
 https://mobilea11y.com
 
 ## License

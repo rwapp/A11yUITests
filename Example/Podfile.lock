@@ -1,5 +1,5 @@
 PODS:
-  - A11yUITests (0.2.0)
+  - A11yUITests (0.3.1)
 
 DEPENDENCIES:
   - A11yUITests (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  A11yUITests: 91dec0f7822727e5b885e7870be36efaeddd8d7f
+  A11yUITests: f9fe69b73bc02bbbbedc5a765a5ff26bfc943eee
 
 PODFILE CHECKSUM: 47cffe31a780b8ec7a2183219ce63d59a93a5f37
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1
