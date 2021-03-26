@@ -133,7 +133,7 @@ To install add the pod to your target's test target in your podfile. eg
 ```ruby
 target 'My_Application' do
     target 'My_Application_UITests' do
-    pod 'A11yUITests', :path => '../'
+    pod 'A11yUITests'
     end
 end
 ```
