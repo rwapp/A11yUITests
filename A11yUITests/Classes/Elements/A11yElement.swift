@@ -12,6 +12,7 @@ struct A11yElement {
     let frame: CGRect
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
+    let traits: UIAccessibilityTraits?
 
     var shouldIgnore: Bool {
         return self.type == .window ||
@@ -58,5 +59,22 @@ struct A11yElement {
         frame = element.frame
         type = element.elementType
         underlyingElement = element
+
+        guard let snapshot = try? element.snapshot() as? NSObject else {
+            traits = nil
+            return
+        }
+
+        traits = snapshot.getTraits()
     }
+}
+
+
+private extension NSObject {
+    func getTraits() -> UIAccessibilityTraits? {
+        value(forKey: "_traits") as? UIAccessibilityTraits
+    }
+
+    // Somehow override value(forUndefinedKey key: String) -> Any?
+    // return nil if the property is not found to prevent crashes
 }
