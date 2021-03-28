@@ -54,7 +54,7 @@ struct A11yElement {
         return "\"\(self.label)\" \(self.type.name())"
     }
 
-    init(element: XCUIElement) {
+    init(_ element: XCUIElement) {
         label = element.label
         frame = element.frame
         type = element.elementType
