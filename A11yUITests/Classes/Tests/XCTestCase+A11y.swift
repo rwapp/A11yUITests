@@ -10,17 +10,6 @@ import XCTest
 
 extension XCTestCase {
 
-    public enum A11yTests: CaseIterable {
-        case minimumSize,
-             minimumInteractiveSize,
-             labelPresence,
-             buttonLabel,
-             imageLabel,
-             labelLength,
-             duplicated,
-             imageTrait
-    }
-
     private var assertions: A11yAssertions {
         A11yAssertions()
     }
@@ -28,24 +17,24 @@ extension XCTestCase {
     // MARK: - Test Suites
 
     public var a11yTestSuiteAll: [A11yTests] {
-        return A11yTests.allCases
+        A11yTests.allCases
     }
 
     public var a11yTestSuiteImages: [A11yTests] {
-        return [.minimumSize, .labelPresence, .imageLabel, .labelLength, .imageTrait]
+        [.minimumSize, .labelPresence, .imageLabel, .labelLength, .imageTrait]
     }
 
     public var a11yTestSuiteInteractive: [A11yTests] {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
-        return [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
+
+        [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated]
     }
 
     public var a11yTestSuiteLabels: [A11yTests] {
         // valid for any text elements, eg. labels, text views
-        return [.minimumSize, .labelPresence]
+        [.minimumSize, .labelPresence]
     }
-
 
     // MARK: - Test Groups
 
@@ -165,19 +154,5 @@ extension XCTestCase {
         assertions.validSizeFor(interactiveElement: a11yElement,
                                 file,
                                 line)
-    }
-
-    public func a11yCheckNoDuplicatedLabels(element1: XCUIElement,
-                                            element2: XCUIElement,
-                                            file: StaticString = #file,
-                                            line: UInt = #line) {
-
-        let a11yElement1 = A11yElement(element1)
-        let a11yElement2 = A11yElement(element2)
-
-        assertions.duplicatedLabels(a11yElement1,
-                                    a11yElement2,
-                                    file,
-                                    line)
     }
 }
