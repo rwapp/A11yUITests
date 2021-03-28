@@ -74,10 +74,15 @@ struct A11yElement {
 
 private extension XCUIElementSnapshot where Self: NSObject {
     func swizzle() {
-        let undefinedKey = class_getInstanceMethod(NSObject.self, #selector(NSObject.value(forUndefinedKey:)))
-        let undefinedKeyNil = class_getInstanceMethod(NSObject.self, #selector(NSObject.nilValue(_:)))
+        guard let undefinedKey = class_getInstanceMethod(NSObject.self,
+                                                         #selector(NSObject.value(forUndefinedKey:))),
+              let undefinedKeyNil = class_getInstanceMethod(NSObject.self,
+                                                            #selector(NSObject.nilValue(_:))) else {
+            print("Unable to swizzle \"value(forUndefinedKey:)\". Please raise an issue https://github.com/rwapp/A11yUITests/issues")
+            return
+        }
 
-        method_exchangeImplementations(undefinedKey!, undefinedKeyNil!)
+        method_exchangeImplementations(undefinedKey, undefinedKeyNil)
     }
 
     func getTraits() -> UIAccessibilityTraits? {
@@ -90,6 +95,7 @@ private extension XCUIElementSnapshot where Self: NSObject {
 private extension NSObject {
     @objc
     func nilValue(_ key: String) -> Any? {
+        print("Unable to get property \"\(key)\". This is likely due to a change in Apple's private API. Please raise an issue https://github.com/rwapp/A11yUITests/issues")
         return nil
     }
 }
