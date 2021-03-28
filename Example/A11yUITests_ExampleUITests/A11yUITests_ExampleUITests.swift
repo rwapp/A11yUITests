@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 14 failures
+        // Produces 15 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
         // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image. Offending word: _
@@ -33,6 +33,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button
         // Accessibility Failure: Label not meaningful: " " Button. Minimum length: 2
         // Accessibility Failure: Image should have Image trait: "A11y_logo" Image
+        // Accessibility Failure: Screen has no element with a header trait
 
         a11yCheckAllOnScreen()
     }

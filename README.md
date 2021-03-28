@@ -108,6 +108,10 @@ Note: This test is not localised.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 
+### Header
+`header` checks the screen has at least one text element with a header trait.
+Headers are used by VoiceOver users to orientate and quickly navigate content.
+
 ### Duplicated labels
 `duplicated` checks all elements provided for duplication of accessibility labels.
 Duplicated accessibility labels are not an accessibility failure - but can make your screen confusing to navigate with VoiceOver, and make Voice Control fail. Ideally you should avoid duplication if possible.
