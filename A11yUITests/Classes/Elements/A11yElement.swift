@@ -12,6 +12,7 @@ struct A11yElement {
     let frame: CGRect
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
+    let id = UUID()
 
     var shouldIgnore: Bool {
         return self.type == .window ||

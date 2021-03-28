@@ -129,7 +129,7 @@ internal extension XCTestCase {
 
         guard element1.isControl,
               element2.isControl,
-              element1.underlyingElement != element2.underlyingElement else { return }
+              element1.id != element2.id else { return }
 
         XCTAssertFalse(element1.label == element2.label,
                        "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
