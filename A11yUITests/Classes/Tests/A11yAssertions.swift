@@ -97,6 +97,12 @@ class A11yAssertions {
             hasHeader(element)
         }
 
+        if tests.contains(.conflictingTraits) {
+            conflictingTraits(element,
+                              file,
+                              line)
+        }
+
         for element2 in elements {
             if tests.contains(.duplicated) {
                 duplicatedLabels(element,
@@ -207,7 +213,6 @@ class A11yAssertions {
     func validTraitFor(image: A11yElement,
                        _ file: StaticString,
                        _ line: UInt) {
-
         guard image.type == .image else { return }
         XCTAssert(image.traits?.contains(.image) ?? false,
                   "Accessibility Failure: Image should have Image trait: \(image.description)",
@@ -222,6 +227,21 @@ class A11yAssertions {
         XCTAssert(button.traits?.contains(.button) ?? false ||
                     button.traits?.contains(.link) ?? false,
                   "Accessibility Failure: Button should have Button or Link trait: \(button.description)",
+                  file: file,
+                  line: line)
+    }
+
+    func conflictingTraits(_ element: A11yElement,
+                           _ file: StaticString,
+                           _ line: UInt) {
+        guard let traits = element.traits else { return }
+        XCTAssert(!traits.contains(.button) || !traits.contains(.link),
+                  "Accessibility Failure: Elements shouldn't have both Button and Link traits: \(element.description)",
+                  file: file,
+                  line: line)
+
+        XCTAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
+                  "Accessibility Failure: Elements shouldn't have both Static Text and Updates Frequently traits: \(element.description)",
                   file: file,
                   line: line)
     }
