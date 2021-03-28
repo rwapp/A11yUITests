@@ -14,5 +14,6 @@ public enum A11yTests: CaseIterable {
          labelLength,
          duplicated,
          imageTrait,
-         header
+         header,
+         buttonTrait
 }

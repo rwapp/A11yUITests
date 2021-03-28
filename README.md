@@ -91,7 +91,7 @@ This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.or
 
 `buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
-This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6). Buttons should all have the button trait applied, but this is currently untestable.
+This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6).
 
 Note: This test is not localised.
 
@@ -99,7 +99,7 @@ Note: This test is not localised.
 
 `imageLabel` or `a11yCheckValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
-This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Images should all have the image trait applied, but this is currently untestable. Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
+This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
 
 Note: This test is not localised.
 
@@ -111,6 +111,12 @@ Ideally, labels should be as short as possible while retaining meaning. If you f
 ### Header
 `header` checks the screen has at least one text element with a header trait.
 Headers are used by VoiceOver users to orientate and quickly navigate content.
+
+### Button Trait
+`buttonTrait` checks that a button element has the Button trait applied.
+
+### Image Trait
+`imageTrait` checks that an image element has the Image trait applied.
 
 ### Duplicated labels
 `duplicated` checks all elements provided for duplication of accessibility labels.

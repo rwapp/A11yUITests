@@ -83,8 +83,14 @@ class A11yAssertions {
 
         if tests.contains(.imageTrait) {
             validTraitFor(image: element,
-                          file: file,
-                          line: line)
+                          file,
+                          line)
+        }
+
+        if tests.contains(.buttonTrait) {
+            validTraitFor(button: element,
+                          file,
+                          line)
         }
 
         if tests.contains(.header) {
@@ -199,12 +205,22 @@ class A11yAssertions {
     }
 
     func validTraitFor(image: A11yElement,
-                       file: StaticString,
-                       line: UInt) {
+                       _ file: StaticString,
+                       _ line: UInt) {
 
         guard image.type == .image else { return }
         XCTAssert(image.traits?.contains(.image) ?? false,
                   "Accessibility Failure: Image should have Image trait: \(image.description)",
+                  file: file,
+                  line: line)
+    }
+
+    func validTraitFor(button: A11yElement,
+                       _ file: StaticString,
+                       _ line: UInt) {
+        guard button.type == .button else { return }
+        XCTAssert(button.traits?.contains(.button) ?? false,
+                  "Accessibility Failure: Button should have Button trait: \(button.description)",
                   file: file,
                   line: line)
     }
