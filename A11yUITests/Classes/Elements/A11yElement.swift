@@ -8,6 +8,9 @@
 import XCTest
 
 struct A11yElement {
+
+    typealias A11ySnapshot = XCUIElementSnapshot & NSObject
+
     let label: String
     let frame: CGRect
     let type: XCUIElement.ElementType
@@ -60,7 +63,7 @@ struct A11yElement {
         type = element.elementType
         underlyingElement = element
 
-        guard let snapshot = try? element.snapshot() as? NSObject else {
+        guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
             traits = nil
             return
         }
@@ -69,12 +72,24 @@ struct A11yElement {
     }
 }
 
+private extension XCUIElementSnapshot where Self: NSObject {
+    func swizzle() {
+        let undefinedKey = class_getInstanceMethod(NSObject.self, #selector(NSObject.value(forUndefinedKey:)))
+        let undefinedKeyNil = class_getInstanceMethod(NSObject.self, #selector(NSObject.nilValue(_:)))
 
-private extension NSObject {
-    func getTraits() -> UIAccessibilityTraits? {
-        value(forKey: "_traits") as? UIAccessibilityTraits
+        method_exchangeImplementations(undefinedKey!, undefinedKeyNil!)
     }
 
-    // Somehow override value(forUndefinedKey key: String) -> Any?
-    // return nil if the property is not found to prevent crashes
+    func getTraits() -> UIAccessibilityTraits? {
+        swizzle()
+
+        return value(forKey: "_traits") as? UIAccessibilityTraits
+    }
+}
+
+private extension NSObject {
+    @objc
+    func nilValue(_ key: String) -> Any? {
+        return nil
+    }
 }
