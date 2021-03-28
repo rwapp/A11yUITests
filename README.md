@@ -113,7 +113,7 @@ Ideally, labels should be as short as possible while retaining meaning. If you f
 Headers are used by VoiceOver users to orientate and quickly navigate content.
 
 ### Button Trait
-`buttonTrait` checks that a button element has the Button trait applied.
+`buttonTrait` checks that a button element has the Button or Link trait applied.
 
 ### Image Trait
 `imageTrait` checks that an image element has the Image trait applied.

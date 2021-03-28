@@ -219,8 +219,9 @@ class A11yAssertions {
                        _ file: StaticString,
                        _ line: UInt) {
         guard button.type == .button else { return }
-        XCTAssert(button.traits?.contains(.button) ?? false,
-                  "Accessibility Failure: Button should have Button trait: \(button.description)",
+        XCTAssert(button.traits?.contains(.button) ?? false ||
+                    button.traits?.contains(.link) ?? false,
+                  "Accessibility Failure: Button should have Button or Link trait: \(button.description)",
                   file: file,
                   line: line)
     }
