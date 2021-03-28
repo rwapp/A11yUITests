@@ -16,6 +16,7 @@ struct A11yElement {
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
     let traits: UIAccessibilityTraits?
+    let id = UUID()
 
     var shouldIgnore: Bool {
         return self.type == .window ||
