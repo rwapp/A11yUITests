@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 13 failures
+        // Produces 14 failures
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
         // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image. Offending word: _
@@ -32,15 +32,17 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Interactive element not wide enough: "Too Small" Button
         // Accessibility Failure: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button
         // Accessibility Failure: Label not meaningful: " " Button. Minimum length: 2
+        // Accessibility Failure: Image should have Image trait: "A11y_logo" Image
 
         a11yCheckAllOnScreen()
     }
 
     func test_images() {
-        // produces 3 failures
+        // produces 4 failures
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image. Offending word: _
         // Accessibility Failure: Images should not contain image words in the accessibility label, set the image accessibility trait: "image of the Mobile A11y logo" Image. Offending word: image
-        //  Accessibility Failure: Label not meaningful: "A11y_logo" Image. Minimum length: 10
+        // Accessibility Failure: Label not meaningful: "A11y_logo" Image. Minimum length: 10
+        // Accessibility Failure: Image should have Image trait: "A11y_logo" Image
 
         let images = XCUIApplication().images.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteImages, on: images, minMeaningfulLength: 10)
