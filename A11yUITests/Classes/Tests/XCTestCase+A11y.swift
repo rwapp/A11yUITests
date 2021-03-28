@@ -38,6 +38,7 @@ extension XCTestCase {
 
     // MARK: - Test Groups
 
+    /// Run all checks on every element on screen
     public func a11yCheckAllOnScreen(file: StaticString = #file,
                                      line: UInt = #line) {
 
@@ -50,6 +51,11 @@ extension XCTestCase {
                        line: line)
     }
 
+
+    /// Run all checks on the elements provided
+    /// - Parameters:
+    ///   - elements: Array of elements to run checks against
+    ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yAllTestsOn(elements: [XCUIElement],
                                minMeaningfulLength length: Int = 2,
                                file: StaticString = #file,
@@ -62,6 +68,12 @@ extension XCTestCase {
              line: line)
     }
 
+
+    /// Run the provided tests on the provided elements
+    /// - Parameters:
+    ///   - tests: Array of test suites to run
+    ///   - elements: Array of elements to run checks against
+    ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11y(tests: [A11yTests],
                      on elements: [XCUIElement],
                      minMeaningfulLength length: Int = 2,
@@ -84,6 +96,9 @@ extension XCTestCase {
 
     // MARK: - Individual Tests
 
+    /// Checks element has a minimum size of 10px square
+    /// - Parameters:
+    ///   - element: Element to run check against
     public func a11yCheckValidSizeFor(element: XCUIElement,
                                       file: StaticString = #file,
                                       line: UInt = #line) {
@@ -95,6 +110,11 @@ extension XCTestCase {
                                 line)
     }
 
+
+    /// Check the provided element has a label with a minimum length of `length`
+    /// - Parameters:
+    ///   - element: Element to run check against
+    ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(element: XCUIElement,
                                        minMeaningfulLength length: Int = 2,
                                        file: StaticString = #file,
@@ -108,6 +128,11 @@ extension XCTestCase {
                                  line)
     }
 
+
+    /// Check the provided interactive element has a valid label
+    /// - Parameters:
+    ///   - interactiveElement: Interactive element to run check against
+    ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(interactiveElement: XCUIElement,
                                        minMeaningfulLength length: Int = 2,
                                        file: StaticString = #file,
@@ -121,6 +146,11 @@ extension XCTestCase {
                                  line)
     }
 
+
+    /// Check the provided image has a valid label
+    /// - Parameters:
+    ///   - image: Image element to run the check against
+    ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(image: XCUIElement,
                                        minMeaningfulLength length: Int = 2,
                                        file: StaticString = #file,
@@ -134,6 +164,10 @@ extension XCTestCase {
                                  line)
     }
 
+
+    /// Check the provided element's label is less than 40 characters
+    /// - Parameters:
+    ///   - element: Element to run check against
     public func a11yCheckLabelLength(element: XCUIElement,
                                      file: StaticString = #file,
                                      line: UInt = #line) {
@@ -145,6 +179,10 @@ extension XCTestCase {
                                line)
     }
 
+
+    /// Check the provided interactive element has a minimum size of 44px square
+    /// - Parameters:
+    ///   - interactiveElement: Interactive element to run check against
     public func a11yCheckValidSizeFor(interactiveElement: XCUIElement,
                                       file: StaticString = #file,
                                       line: UInt = #line) {
