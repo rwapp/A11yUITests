@@ -15,15 +15,17 @@ internal extension XCTestCase {
 
         guard !element.shouldIgnore else { return }
 
-        XCTAssert(element.frame.size.height >= 18,
-                  "Accessibility Failure: Element not tall enough: \(element.description)",
-                  file: file,
-                  line: line)
+        XCTAssertGreaterThanOrEqual(element.frame.size.height,
+                                    18,
+                                    "Accessibility Failure: Element not tall enough: \(element.description)",
+                                    file: file,
+                                    line: line)
 
-        XCTAssert(element.frame.size.width >= 18,
-                  "Accessibility Failure: Element not wide enough: \(element.description)",
-                  file: file,
-                  line: line)
+        XCTAssertGreaterThanOrEqual(element.frame.size.width,
+                                    18,
+                                    "Accessibility Failure: Element not wide enough: \(element.description)",
+                                    file: file,
+                                    line: line)
     }
 
     func a11yCheckValidLabelFor(element: A11yElement,
@@ -34,10 +36,11 @@ internal extension XCTestCase {
         guard !element.shouldIgnore,
               element.type != .cell else { return }
 
-        XCTAssert(element.label.count > length,
-                  "Accessibility Failure: Label not meaningful: \(element.description). Minimum length: \(length)",
-                  file: file,
-                  line: line)
+        XCTAssertGreaterThan(element.label.count,
+                             length,
+                             "Accessibility Failure: Label not meaningful: \(element.description). Minimum length: \(length)",
+                             file: file,
+                             line: line)
     }
 
     func a11yCheckValidLabelFor(interactiveElement element: A11yElement,
@@ -62,10 +65,10 @@ internal extension XCTestCase {
                       line: line)
         }
 
-        XCTAssert((element.label.range(of: ".") == nil),
-                  "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(element.description)",
-                  file: file,
-                  line: line)
+        XCTAssertNil(element.label.range(of: "."),
+                     "Accessibility failure: Button accessibility labels shouldn't contain punctuation: \(element.description)",
+                     file: file,
+                     line: line)
     }
 
     func a11yCheckValidLabelFor(image: A11yElement,
@@ -99,10 +102,11 @@ internal extension XCTestCase {
               element.type != .textView,
               !element.shouldIgnore else { return }
 
-        XCTAssertTrue(element.label.count <= 40,
-                      "Accessibility Failure: Label is too long: \(element.description)",
-                      file: file,
-                      line: line)
+        XCTAssertLessThanOrEqual(element.label.count,
+                                 40,
+                                 "Accessibility Failure: Label is too long: \(element.description)",
+                                 file: file,
+                                 line: line)
     }
 
     func a11yCheckValidSizeFor(interactiveElement: A11yElement,
@@ -111,15 +115,17 @@ internal extension XCTestCase {
 
         guard interactiveElement.isInteractive else { return }
 
-        XCTAssert(interactiveElement.frame.size.height >= 44,
-                  "Accessibility Failure: Interactive element not tall enough: \(interactiveElement.description)",
-                  file: file,
-                  line: line)
+        XCTAssertGreaterThanOrEqual(interactiveElement.frame.size.height,
+                                    44,
+                                    "Accessibility Failure: Interactive element not tall enough: \(interactiveElement.description)",
+                                    file: file,
+                                    line: line)
 
-        XCTAssert(interactiveElement.frame.size.width >= 44,
-                  "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
-                  file: file,
-                  line: line)
+        XCTAssertGreaterThanOrEqual(interactiveElement.frame.size.width,
+                                    44,
+                                    "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
+                                    file: file,
+                                    line: line)
     }
 
     func a11yCheckNoDuplicatedLabels(element1: A11yElement,
@@ -131,10 +137,11 @@ internal extension XCTestCase {
               element2.isControl,
               element1.underlyingElement != element2.underlyingElement else { return }
 
-        XCTAssertFalse(element1.label == element2.label,
-                       "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
-                       file: file,
-                       line: line)
+        XCTAssertNotEqual(element1.label,
+                          element2.label,
+                          "Accessibility Failure: Elements have duplicated labels: \(element1.description), \(element2.description)",
+                          file: file,
+                          line: line)
     }
 }
 
