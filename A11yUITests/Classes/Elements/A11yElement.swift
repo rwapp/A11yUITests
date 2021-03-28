@@ -16,6 +16,7 @@ struct A11yElement {
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
     let traits: UIAccessibilityTraits?
+    let enabled: Bool
 
     var shouldIgnore: Bool {
         return self.type == .window ||
@@ -62,6 +63,7 @@ struct A11yElement {
         frame = element.frame
         type = element.elementType
         underlyingElement = element
+        enabled = element.isEnabled
 
         guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
             traits = nil

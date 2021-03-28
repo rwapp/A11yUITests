@@ -64,6 +64,12 @@ class A11yAssertions {
                               line: line)
             }
 
+            if tests.contains(.disabled) {
+                disabled(element,
+                         file,
+                         line)
+            }
+
             for element2 in elements {
                 if tests.contains(.duplicated) {
                     duplicatedLabels(element,
@@ -211,6 +217,15 @@ class A11yAssertions {
                                     "Accessibility Failure: Interactive element not wide enough: \(interactiveElement.description)",
                                     file: file,
                                     line: line)
+    }
+
+    func disabled(_ element: A11yElement,
+                  _ file: StaticString,
+                  _ line: UInt) {
+        XCTAssert(element.enabled,
+                  "Accessibility Failure: Element disabled: \(element.description)",
+                  file: file,
+                  line: line)
     }
 
     func duplicatedLabels(_ element1: A11yElement,
