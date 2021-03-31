@@ -118,7 +118,11 @@ Headers are used by VoiceOver users to orientate and quickly navigate content.
 ### Image Trait
 `imageTrait` checks that an image element has the Image trait applied.
 
-### Duplicated labels
+### Disabled Elements
+`disabled` checks that elements aren't disabled.
+Disabled elements can be confusing if it is not clear why the element is disabled. Ideally keep the element enabled and clearly message if your app is not ready to process the action.
+
+### Duplicated Labels
 `duplicated` checks all elements provided for duplication of accessibility labels.
 Duplicated accessibility labels are not an accessibility failure - but can make your screen confusing to navigate with VoiceOver, and make Voice Control fail. Ideally you should avoid duplication if possible.
 

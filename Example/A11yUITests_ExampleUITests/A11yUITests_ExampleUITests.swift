@@ -18,10 +18,10 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 16 failures
+        // Produces 17 failures
 
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
-        // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
+        // Accessibility Failure: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button
         // Accessibility Failure: Image file name is used as the accessibility label: "A11y_logo" Image. Offending word: _
         // Accessibility Failure: Images should not contain image words in the accessibility label, set the image accessibility trait: "image of the Mobile A11y logo" Image. Offending word: image
         // Accessibility failure: Button accessibility labels shouldn't contain punctuation: "Punctuated." Button
@@ -36,6 +36,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Image should have Image trait: "A11y_logo" Image
         // Accessibility Failure: Screen has no element with a header trait
         // Accessibility Failure: Button should have Button trait: "No trait" Button
+        // Accessibility Failure: Element disabled: "Disabled" Button
 
         a11yCheckAllOnScreen()
     }
@@ -53,18 +54,19 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_buttons() {
-        // produces 10 failures
+        // produces 11 failures
 
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
-        // Accessibility Failure: Elements have duplicated labels: "Duplicated label" Button, "Duplicated label" Button
+        // Accessibility Failure: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button
         // Accessibility failure: Button accessibility labels shouldn't contain punctuation: "Punctuated." Button
         // Accessibility Failure: Buttons should begin with a capital letter: " " Button
         // Accessibility Failure: Buttons should begin with a capital letter: "lowercase" Button
         // Accessibility Failure: Interactive element not tall enough: "Too Small" Button
         // Accessibility Failure: Interactive element not wide enough: "Too Small" Button
         // Accessibility Failure: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button
-        //  Accessibility Failure: Label not meaningful: " " Button. Minimum length: 2
+        // Accessibility Failure: Label not meaningful: " " Button. Minimum length: 2
         // Accessibility Failure: Button should have Button trait: "No trait" Button
+        // Accessibility Failure: Element disabled: "Disabled" Button
 
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteInteractive, on: buttons)
