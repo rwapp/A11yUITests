@@ -88,6 +88,6 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Button should not contain the word button in the accessibility label, set this as an accessibility trait: "Ends with button" Button
 
         let button = XCUIApplication().buttons["Ends with button"]
-        a11yCheckValidLabelFor(interactiveElement: button)
+        a11y(tests: [.buttonLabel], on: [button])
     }
 }

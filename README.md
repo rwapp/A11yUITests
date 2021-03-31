@@ -41,12 +41,12 @@ func test_buttons() {
 }
 ```
 
-To run a single test on a single element call that test directly. To check if a button has a valid accessibility label:
+To run a single test on a single element pass arrays with the test and element. To check if a button has a valid accessibility label:
 
 ```swift
 func test_individualTest_individualButton() {
     let button = XCUIApplication().buttons["My Button"]
-    a11yCheckValidLabelFor(button: button)
+    a11y(tests: [.buttonLabel], on: [button])
 }
 ```
 
@@ -69,13 +69,13 @@ Alternatively you can create an array of `A11yTests` enum values for the tests y
 
 ### Minimum Size
 
-`minimumSize` or `a11yCheckValidSizeFor(element: XCUIElement)` checks an element is at least 18px x 18px.
+`minimumSize` or checks an element is at least 18px x 18px.
 
 Note: 18px is arbitrary.
 
 ### Minimum Interactive Size
 
-`minimumInteractiveSize` or `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` checks tappable elements are a minimum of 44px x 44px.
+`minimumInteractiveSize` checks tappable elements are a minimum of 44px x 44px.
 This satisfies [WCAG 2.1 Success Criteria 2.5.5 Target Size Level AAA](https://www.w3.org/TR/WCAG21/#target-size)
 
 Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s for example.
@@ -83,13 +83,13 @@ For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: X
 
 ### Label Presence
 
-`labelPresence` or `a11yCheckValidLabelFor(element: XCUIElement)` checks the element has an accessibility label that is a minimum of 2 characters long. 
+`labelPresence` checks the element has an accessibility label that is a minimum of 2 characters long. 
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 
 ### Button Label
 
-`buttonLabel` or `a11yCheckValidLabelFor(interactiveElement: XCUIElement)` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
+`buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW6).
 
@@ -97,14 +97,14 @@ Note: This test is not localised.
 
 ### Image Label
 
-`imageLabel` or `a11yCheckValidLabelFor(image: XCUIElement)` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
+`imageLabel` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
 
 Note: This test is not localised.
 
 ### Label Length
-`labelLength` or `a11yCheckLabelLength(element: XCUIElement)` checks accessibility labels are <= 40 characters.
+`labelLength` checks accessibility labels are <= 40 characters.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 
