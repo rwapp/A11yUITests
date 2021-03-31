@@ -127,8 +127,16 @@
                                 </constraints>
                                 <state key="normal" title="No trait"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3AL-f7-ykx">
+                                <rect key="frame" x="20" y="691.33333333333337" width="60" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="AIv-1J-xnS"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="UcJ-z0-oQj"/>
+                                </constraints>
+                                <state key="normal" title="Disabled"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqB-ly-1kg">
-                                <rect key="frame" x="20" y="691.33333333333337" width="114" height="44"/>
+                                <rect key="frame" x="20" y="743.33333333333337" width="114" height="44"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" link="YES"/>
                                 </accessibility>
@@ -145,6 +153,7 @@
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="9W8-YC-SvW"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="top" secondItem="8bg-cb-wuu" secondAttribute="bottom" constant="8" id="ClV-Xc-dIu"/>
                             <constraint firstItem="ExF-yl-Ptx" firstAttribute="top" secondItem="aPJ-3W-qDK" secondAttribute="bottom" constant="8" id="EDZ-jf-2Ag"/>
+                            <constraint firstItem="3AL-f7-ykx" firstAttribute="top" secondItem="hEj-Oo-XLH" secondAttribute="bottom" constant="8" id="KDR-S1-0BE"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="top" secondItem="B8l-93-lXx" secondAttribute="bottom" constant="8" id="KtK-nG-7Rg"/>
                             <constraint firstItem="hEj-Oo-XLH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="RMb-k3-F7k"/>
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="RqE-t5-cCU"/>
@@ -158,7 +167,7 @@
                             <constraint firstItem="lme-nc-64l" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dWD-0U-PNn"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fTX-uW-itu"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="fyo-Fb-ZbR"/>
-                            <constraint firstItem="AqB-ly-1kg" firstAttribute="top" secondItem="hEj-Oo-XLH" secondAttribute="bottom" constant="8" id="iIk-Qu-8nJ"/>
+                            <constraint firstItem="AqB-ly-1kg" firstAttribute="top" secondItem="3AL-f7-ykx" secondAttribute="bottom" constant="8" id="iIk-Qu-8nJ"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="width" secondItem="aPJ-3W-qDK" secondAttribute="height" multiplier="200:271" id="ki3-7L-2mY"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="l7Y-xc-Srn"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="m8Y-jL-NGP"/>
@@ -167,6 +176,7 @@
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="top" secondItem="XFT-69-rUL" secondAttribute="bottom" constant="8" id="wc8-Xf-ROI"/>
                             <constraint firstItem="XFT-69-rUL" firstAttribute="top" secondItem="TC2-DV-qmK" secondAttribute="bottom" constant="8" id="x8C-7U-BMt"/>
                             <constraint firstItem="B8l-93-lXx" firstAttribute="top" secondItem="gbJ-jp-Hev" secondAttribute="bottom" constant="8" id="xuU-eb-ZWW"/>
+                            <constraint firstItem="3AL-f7-ykx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ymJ-xC-byF"/>
                             <constraint firstItem="AqB-ly-1kg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zJl-02-TZx"/>
                         </constraints>
                     </view>

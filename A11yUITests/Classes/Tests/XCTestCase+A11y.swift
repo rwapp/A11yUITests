@@ -28,7 +28,7 @@ extension XCTestCase {
         // Valid tests for any interactive elements, eg. buttons, cells, switches, text fields etc.
         // Note: Many standard Apple controls fail these tests.
 
-        [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated, .buttonTrait, .conflictingTraits]
+        [.minimumInteractiveSize, .labelPresence, .buttonLabel, .labelLength, .duplicated, .buttonTrait, .disabled, .conflictingTraits]
     }
 
     public var a11yTestSuiteLabels: [A11yTests] {
