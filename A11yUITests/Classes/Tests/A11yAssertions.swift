@@ -235,7 +235,7 @@ class A11yAssertions {
 
         guard element1.isControl,
               element2.isControl,
-              element1.underlyingElement != element2.underlyingElement else { return }
+              element1.id != element2.id else { return }
 
         XCTAssertNotEqual(element1.label,
                           element2.label,
