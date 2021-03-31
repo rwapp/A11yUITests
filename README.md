@@ -108,6 +108,10 @@ Note: This test is not localised.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 
+### Header
+`header` checks the screen has at least one text element with a header trait.
+Headers are used by VoiceOver users to orientate and quickly navigate content.
+
 ### Disabled Elements
 `disabled` checks that elements aren't disabled.
 Disabled elements can be confusing if it is not clear why the element is disabled. Ideally keep the element enabled and clearly message if your app is not ready to process the action.

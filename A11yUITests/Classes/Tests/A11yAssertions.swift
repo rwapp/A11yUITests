@@ -9,6 +9,8 @@ import XCTest
 
 class A11yAssertions {
 
+    private var hasHeader = false
+
     // MARK: - Test Runner
 
     func a11y(_ tests: [A11yTests],
@@ -17,68 +19,96 @@ class A11yAssertions {
               _ file: StaticString,
               _ line: UInt) {
 
+        setupTests()
+
         for element in elements.filter( { !$0.shouldIgnore } ) {
+            runTests(tests,
+                     elements,
+                     element,
+                     minLength,
+                     file,
+                     line)
+        }
 
-            if tests.contains(.minimumSize) {
-                validSizeFor(element,
-                             file,
-                             line)
-            }
+        if tests.contains(.header) {
+            checkHeader(file, line)
+        }
+    }
 
-            if tests.contains(.minimumInteractiveSize) {
-                validSizeFor(interactiveElement: element,
-                             file,
-                             line)
-            }
+    private func runTests(_ tests: [A11yTests],
+                          _ elements: [A11yElement],
+                          _ element: A11yElement,
+                          _ minLength: Int,
+                          _ file: StaticString,
+                          _ line: UInt) {
 
-            if tests.contains(.labelPresence) {
-                validLabelFor(element,
-                              minLength,
-                              file,
-                              line)
-            }
-
-            if tests.contains(.buttonLabel) {
-                validLabelFor(interactiveElement: element,
-                              minLength,
-                              file,
-                              line)
-            }
-
-            if tests.contains(.imageLabel) {
-                validLabelFor(image: element,
-                              minLength,
-                              file,
-                              line)
-            }
-
-            if tests.contains(.labelLength) {
-                labelLength(element,
-                            file,
-                            line)
-            }
-
-            if tests.contains(.imageTrait) {
-                validTraitFor(image: element,
-                              file: file,
-                              line: line)
-            }
-
-            if tests.contains(.disabled) {
-                disabled(element,
+        if tests.contains(.minimumSize) {
+            validSizeFor(element,
                          file,
                          line)
-            }
+        }
 
-            for element2 in elements {
-                if tests.contains(.duplicated) {
-                    duplicatedLabels(element,
-                                     element2,
-                                     file,
-                                     line)
-                }
+        if tests.contains(.minimumInteractiveSize) {
+            validSizeFor(interactiveElement: element,
+                         file,
+                         line)
+        }
+
+        if tests.contains(.labelPresence) {
+            validLabelFor(element,
+                          minLength,
+                          file,
+                          line)
+        }
+
+        if tests.contains(.buttonLabel) {
+            validLabelFor(interactiveElement: element,
+                          minLength,
+                          file,
+                          line)
+        }
+
+        if tests.contains(.imageLabel) {
+            validLabelFor(image: element,
+                          minLength,
+                          file,
+                          line)
+        }
+
+        if tests.contains(.labelLength) {
+            labelLength(element,
+                        file,
+                        line)
+        }
+
+        if tests.contains(.imageTrait) {
+            validTraitFor(image: element,
+                          file: file,
+                          line: line)
+        }
+
+        if tests.contains(.header) {
+            hasHeader(element)
+        }
+
+        if tests.contains(.disabled) {
+            disabled(element,
+                     file,
+                     line)
+        }
+
+        for element2 in elements {
+            if tests.contains(.duplicated) {
+                duplicatedLabels(element,
+                                 element2,
+                                 file,
+                                 line)
             }
         }
+    }
+
+    private func setupTests() {
+        hasHeader = false
     }
 
     // MARK: - Tests
@@ -219,9 +249,24 @@ class A11yAssertions {
                                     line: line)
     }
 
+    func hasHeader(_ element: A11yElement) {
+        guard !hasHeader,
+              element.traits?.contains(.header) ?? false else { return }
+        hasHeader = true
+    }
+
+    private func checkHeader(_ file: StaticString, _ line: UInt) {
+        XCTAssert(hasHeader,
+                  "Accessibility Failure: Screen has no element with a header trait",
+                  file: file,
+                  line: line)
+    }
+
     func disabled(_ element: A11yElement,
                   _ file: StaticString,
                   _ line: UInt) {
+
+        guard element.isControl else { return }
         XCTAssert(element.enabled,
                   "Accessibility Failure: Element disabled: \(element.description)",
                   file: file,
