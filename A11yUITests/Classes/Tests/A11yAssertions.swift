@@ -91,6 +91,12 @@ class A11yAssertions {
             hasHeader(element)
         }
 
+        if tests.contains(.disabled) {
+            disabled(element,
+                     file,
+                     line)
+        }
+
         for element2 in elements {
             if tests.contains(.duplicated) {
                 duplicatedLabels(element,
@@ -256,6 +262,17 @@ class A11yAssertions {
                   line: line)
     }
 
+    func disabled(_ element: A11yElement,
+                  _ file: StaticString,
+                  _ line: UInt) {
+
+        guard element.isControl else { return }
+        XCTAssert(element.enabled,
+                  "Accessibility Failure: Element disabled: \(element.description)",
+                  file: file,
+                  line: line)
+    }
+
     func duplicatedLabels(_ element1: A11yElement,
                           _ element2: A11yElement,
                           _ file: StaticString,
@@ -263,7 +280,7 @@ class A11yAssertions {
 
         guard element1.isControl,
               element2.isControl,
-              element1.underlyingElement != element2.underlyingElement else { return }
+              element1.id != element2.id else { return }
 
         XCTAssertNotEqual(element1.label,
                           element2.label,
