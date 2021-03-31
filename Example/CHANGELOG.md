@@ -1,5 +1,16 @@
 #  Changelog
 
+## 0.4.0
+
+* Added checks for traits
+    * Buttons
+    * Headers
+    * Images
+* Added a check for disabled interactive elements
+* Removed references to individual tests from the docs as a soft deprecation
+
+* Note: Checking for traits uses a private property on the iOS SDK. Be careful not to include this code in your shipped app as it may be rejected by Apple.
+
 ## 0.3.1
 
 * Minor code quality improvements and clarification to the readme
