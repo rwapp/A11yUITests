@@ -8,10 +8,14 @@
 import XCTest
 
 struct A11yElement {
+
+    typealias A11ySnapshot = XCUIElementSnapshot & NSObject
+
     let label: String
     let frame: CGRect
     let type: XCUIElement.ElementType
     let underlyingElement: XCUIElement
+    let traits: UIAccessibilityTraits?
     let id = UUID()
 
     var shouldIgnore: Bool {
@@ -54,10 +58,17 @@ struct A11yElement {
         return "\"\(self.label)\" \(self.type.name())"
     }
 
-    init(element: XCUIElement) {
+    init(_ element: XCUIElement) {
         label = element.label
         frame = element.frame
         type = element.elementType
         underlyingElement = element
+
+        guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
+            traits = nil
+            return
+        }
+
+        traits = snapshot.getTraits()
     }
 }

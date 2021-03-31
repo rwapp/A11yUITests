@@ -138,6 +138,11 @@ target 'My_Application' do
 end
 ```
 
+## Note
+
+* This library accesses a private property in the iOS SDK, so care should be taken when adding it to your project to ensure you are not shipping this code. If you submit this code to app review you will likely receive a rejection from Apple.
+* This library uses method swizzling of the `value(forUndefinedKey:)` method on NSObject to guard against potential crashes if Apple changes their private API in future. Any calls to this function will return `nil` after running any tests which access accessibility traits. This affects your test suite only, not your app.
+
 ## Known Issues
 
 If two elements of the same type have the same identifier this will cause the tests to crash on iOS 13+. eg, two buttons both labeled 'Next'.
