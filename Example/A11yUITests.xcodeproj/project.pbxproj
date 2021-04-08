@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		368D7F1C18B401E09270BF57 /* Pods_A11yUITests_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_A11yUITests_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		36E9AAF0265EA2E9AF0CCAE9 /* A11yUITests.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = A11yUITests.podspec; path = ../A11yUITests.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		36E9AAF0265EA2E9AF0CCAE9 /* A11yUITests.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = A11yUITests.podspec; path = ../A11yUITests.podspec; sourceTree = "<group>"; };
 		39F0907E47DD673D44D13A65 /* Pods-A11yUITests_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A11yUITests_Tests.release.xcconfig"; path = "Target Support Files/Pods-A11yUITests_Tests/Pods-A11yUITests_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		58A9A9460C5B7598B1DD3C90 /* Pods-A11yUITests_ExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A11yUITests_ExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-A11yUITests_ExampleUITests/Pods-A11yUITests_ExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* A11yUITests_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A11yUITests_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
