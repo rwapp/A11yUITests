@@ -18,7 +18,7 @@ let package = Package(
         .target(
             name: "A11yUITests",
             dependencies: [],
-            path: "Sources"
+            path: "Sources/A11yUITests"
         ),
     ],
     swiftLanguageVersions: [.v5]
