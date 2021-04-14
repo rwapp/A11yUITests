@@ -5,6 +5,8 @@
 //  Created by Rob Whitaker on 27/03/2021.
 //
 
+import UIKit
+
 extension UIAccessibilityTraits {
     func name() -> String {
         switch self {
