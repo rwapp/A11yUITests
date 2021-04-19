@@ -1,5 +1,16 @@
 #  Changelog
 
+## 0.5.0
+
+* Adds the ability to specify minimum size and maximum label length
+* Reduces the default minimum size value to 14
+* Improved failure messages - issues that are not strict failures but require investigation are now marked as 'Warning'
+* Now defaults to checking all interactive elements for minimum size of 44px. Can be overridden by setting `allInteractiveElements` to false.
+
+## 0.4.1
+
+* Swift Package Manager support
+
 ## 0.4.0
 
 * Added checks for traits
