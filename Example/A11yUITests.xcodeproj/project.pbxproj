@@ -44,10 +44,10 @@
 		9B2355B8F6DC8DC1A71D81C9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		AA5911E12232347529BA4905 /* Pods-A11yUITests_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A11yUITests_Example.release.xcconfig"; path = "Target Support Files/Pods-A11yUITests_Example/Pods-A11yUITests_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B29200CCF9092577797F1B2A /* Pods-A11yUITests_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A11yUITests_Example.debug.xcconfig"; path = "Target Support Files/Pods-A11yUITests_Example/Pods-A11yUITests_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B5B0890625C9FC21001BD5B2 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B5B61DF623995BEE0096085C /* A11yUITests_ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = A11yUITests_ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B61DF823995BEE0096085C /* A11yUITests_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A11yUITests_ExampleUITests.swift; sourceTree = "<group>"; };
 		B5B61DFA23995BEE0096085C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FD2A77262A16C40008309E /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +118,8 @@
 			children = (
 				36E9AAF0265EA2E9AF0CCAE9 /* A11yUITests.podspec */,
 				8C78D33CFE20D29A24ABD246 /* README.md */,
-				B5B0890625C9FC21001BD5B2 /* CHANGELOG.md */,
 				9B2355B8F6DC8DC1A71D81C9 /* LICENSE */,
+				B5FD2A77262A16C40008309E /* CHANGELOG.md */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";

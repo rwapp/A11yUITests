@@ -20,15 +20,15 @@ struct A11yElement {
     let id = UUID()
 
     var shouldIgnore: Bool {
-        return self.type == .window ||
-            self.type == .scrollBar ||
-            self.type == .other ||
-            self.type == .navigationBar ||
-            self.type == .table ||
-            self.type == .scrollView ||
-            self.type == .key ||
-            self.type == .keyboard ||
-            self.type == .tabBar
+        return type == .window ||
+            type == .scrollBar ||
+            type == .other ||
+            type == .navigationBar ||
+            type == .table ||
+            type == .scrollView ||
+            type == .key ||
+            type == .keyboard ||
+            type == .tabBar
     }
 
     var isInteractive: Bool {
@@ -40,19 +40,20 @@ struct A11yElement {
     }
 
     var isControl: Bool {
-        return self.type == .button ||
-            self.type == .slider ||
-            self.type == .stepper ||
-            self.type == .segmentedControl ||
-            self.type == .textField ||
-            self.type == .switch ||
-            self.type == .pageIndicator ||
-            self.type == .link ||
-            self.type == .searchField ||
-            self.type == .secureTextField ||
-            self.type == .datePicker ||
-            self.type == .picker ||
-            self.type == .pickerWheel
+        return type == .button ||
+            type == .slider ||
+            type == .stepper ||
+            type == .segmentedControl ||
+            type == .textField ||
+            type == .switch ||
+            type == .pageIndicator ||
+            type == .link ||
+            type == .searchField ||
+            type == .secureTextField ||
+            type == .datePicker ||
+            type == .picker ||
+            type == .pickerWheel ||
+            type == .cell
     }
 
     var description: String {

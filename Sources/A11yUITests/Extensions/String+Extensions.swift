@@ -19,7 +19,7 @@ extension String {
 
         for word in words {
             XCTAssertFalse(self.containsCaseInsensitive(word),
-                           "\(error). Offending word: \(word)",
+                           "\(error) Offending word: \(word).",
                            file: file,
                            line: line)
         }
