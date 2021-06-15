@@ -5,7 +5,7 @@
 //  Created by Rob Whitaker on 19/04/2021.
 //
 
-import Foundation
+import CoreGraphics
 
 public struct A11yValues {
     public static let minSize = 14
