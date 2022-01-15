@@ -68,6 +68,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Warning: Label not meaningful: " " Button. Minimum length: 2.
         // Accessibility Failure: Button should have Button or Link trait: "No trait" Button.
         // Accessibility Warning: Element disabled: "Disabled" Button.
+        // Accessibility Failure: Elements shouldn't have both Button and Link traits: "Conflicting traits" Button.
 
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteInteractive, on: buttons)
