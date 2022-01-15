@@ -95,9 +95,7 @@ extension XCTestCase {
                      file: StaticString = #file,
                      line: UInt = #line) {
 
-        var a11yElements = [A11yElement]()
-        elements.forEach { a11yElements.append(A11yElement($0)) }
-
+        let a11yElements = elements.map { A11yElement($0) }
         testRunner.a11y(tests,
                         a11yElements,
                         minLength,
