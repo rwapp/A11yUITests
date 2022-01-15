@@ -269,6 +269,8 @@ class A11yAssertions {
             }
         }
 
-        return "Accessibility \(type.rawValue.capitalized): \(message)\(elementMessage)\(reasonMessage)"
+        let prefix = type == .warning ? "⚠️" : "❌"
+
+        return "\(prefix) Accessibility \(type.rawValue.capitalized): \(message)\(elementMessage)\(reasonMessage)"
     }
 }
