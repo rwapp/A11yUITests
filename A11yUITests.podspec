@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'A11yUITests'
-  s.version          = '0.3.1'
+  s.version          = '0.5.2'
   s.summary          = 'Accessibility tests for XCUI Testing.'
 
   s.description      = <<-DESC
@@ -17,7 +17,7 @@ A library of common accessibility tests for use with XCUI Tests
   s.ios.deployment_target = '11.0'
   s.swift_version = '5.0'
 
-  s.source_files = 'A11yUITests/Classes/**/*'
+  s.source_files = 'Sources/A11yUITests/**/*'
 
    s.frameworks = 'XCTest'
 end
