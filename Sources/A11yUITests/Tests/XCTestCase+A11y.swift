@@ -40,11 +40,15 @@ extension XCTestCase {
 
     /// Run all checks on every element on screen
     public func a11yCheckAllOnScreen(file: StaticString = #file,
-                                     line: UInt = #line) {
+                                     line: UInt = #line,
+                                     ignoringElementIdentifiers: [String] = [String]()) {
 
         let elements = XCUIApplication()
             .descendants(matching: .any)
             .allElementsBoundByAccessibilityElement
+            .filter ({
+                !ignoringElementIdentifiers.contains($0.identifier)
+            })
 
         a11yAllTestsOn(elements: elements,
                        file: file,
@@ -92,10 +96,7 @@ extension XCTestCase {
                      line: UInt = #line) {
 
         var a11yElements = [A11yElement]()
-
-        for element in elements {
-            a11yElements.append(A11yElement(element))
-        }
+        elements.forEach { a11yElements.append(A11yElement($0)) }
 
         testRunner.a11y(tests,
                         a11yElements,

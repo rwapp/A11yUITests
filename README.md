@@ -22,7 +22,7 @@ Failures are fails against WCAG or the HIG. Warnings may be acceptable, but requ
 add `import A11yUITests` to the top of your test file.
 
 
-## Running tests
+## Running Tests
 
 Tests can be run individually or in suites.
 
@@ -55,6 +55,10 @@ func test_individualTest_individualButton() {
 }
 ```
 
+### Ignoring Elements
+
+When running `a11yCheckAllOnScreen()` it is possible to ignore elements using their accessibility idenfiers by passing any identifiers you wish to ignore with the `ignoringElementIdentifiers: [String]` argument.
+
 ## Test Suites
 
 A11yUITests contains 4 pre-built test suites with tests suitable for different elements.
@@ -77,7 +81,7 @@ Alternatively you can create an array of `A11yTests` enum values for the tests y
 `minimumSize` or checks an element is at least 14px x 14px.
 Severity: Warning
 
-Note: 18px is arbitrary.
+Note: 14px is arbitrary.
 
 ### Minimum Interactive Size
 
@@ -185,7 +189,7 @@ end
 
 ## Known Issues
 
-If two elements of the same type have the same identifier this will cause the tests to crash on iOS 13+. eg, two buttons both labeled 'Next'.
+If two elements of the same type have the same identifier (eg, two buttons both labeled 'Next') this will cause the tests to crash on some iOS versions. This was an issue on ios 13 and appears fixed as of iOS 15.
 
 ## Author
 
