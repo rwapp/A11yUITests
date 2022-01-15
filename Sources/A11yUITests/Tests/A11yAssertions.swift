@@ -165,11 +165,30 @@ class A11yAssertions {
                   line: line)
 
         XCTAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
-                  failureMessage("Elements shouldn't have both Static Text and Updates Frequently traits:",
+                  failureMessage("Elements shouldn't have both Static Text and Updates Frequently traits",
                                  .failure,
                                  element),
                   file: file,
                   line: line)
+
+        var interactiveTraits = UIAccessibilityTraits.none
+
+        if traits.contains(.causesPageTurn) {
+            interactiveTraits.insert(.causesPageTurn)
+        }
+        if traits.contains(.playsSound) {
+            interactiveTraits.insert(.playsSound)
+        }
+        if traits.contains(.startsMediaSession) {
+            interactiveTraits.insert(.startsMediaSession)
+        }
+
+        XCTAssert(traits.contains(.button) || interactiveTraits.isEmpty,
+                       failureMessage("Elements with \(interactiveTraits.name()) traits should also have a Button trait",
+                                      .warning,
+                                      element),
+                       file: file,
+                       line: line)
     }
 
     func labelLength(_ element: A11yElement,
