@@ -13,8 +13,14 @@ import A11yUITests
 
 class A11yUITestsExampleUITests: XCTestCase {
 
+    let snapshots = A11ySnapshot()
+
     override func setUp() {
         XCUIApplication().launch()
+    }
+
+    func test_snapshotTest() {
+        snapshots.a11ySnapshot(from: self)
     }
 
     func test_allTests() {

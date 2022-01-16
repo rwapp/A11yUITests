@@ -7,7 +7,14 @@
 
 import XCTest
 
-extension String {
+internal extension String {
+
+    init(_ staticString: StaticString) {
+        self = staticString.withUTF8Buffer {
+            String(decoding: $0, as: UTF8.self)
+        }
+    }
+
     func containsCaseInsensitive(_ substring: String) -> Bool {
         return self.lowercased().contains(substring.lowercased())
     }

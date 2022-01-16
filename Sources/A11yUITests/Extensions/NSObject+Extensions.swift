@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NSObject {
+internal extension NSObject {
     @objc
     func nilValue(_ key: String) -> Any? {
         print("Unable to get property \"\(key)\". This is likely due to a change in Apple's private API. Please raise an issue https://github.com/rwapp/A11yUITests/issues")

@@ -7,7 +7,7 @@
 
 import XCTest
 
-class A11yAssertions {
+final class A11yAssertions {
 
     private var hasHeader = false
 

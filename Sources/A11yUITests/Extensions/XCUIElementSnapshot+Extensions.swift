@@ -7,7 +7,7 @@
 
 import XCTest
 
-extension XCUIElementSnapshot where Self: NSObject {
+internal extension XCUIElementSnapshot where Self: NSObject {
     private func swizzle() {
         guard let undefinedKey = class_getInstanceMethod(NSObject.self,
                                                          #selector(NSObject.value(forUndefinedKey:))),
