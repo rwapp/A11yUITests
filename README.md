@@ -140,6 +140,10 @@ Severity: Error
 This follows [Apple's guide for using traits](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html).
 Severity: Error
 
+### Conflicting Traits
+`conflictingTraits` checks elements don't have conflicting traits.
+Elements can't be both a button and a link, or static text and updates frequently
+
 ### Disabled Elements
 `disabled` checks that elements aren't disabled.
 Disabled elements can be confusing if it is not clear why the element is disabled. Ideally keep the element enabled and clearly message if your app is not ready to process the action.

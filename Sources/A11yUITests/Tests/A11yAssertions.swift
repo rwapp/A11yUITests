@@ -131,7 +131,6 @@ class A11yAssertions {
     func validTraitFor(image: A11yElement,
                        _ file: StaticString,
                        _ line: UInt) {
-
         guard image.type == .image else { return }
         XCTAssert(image.traits?.contains(.image) ?? false,
                   failureMessage("Image should have Image trait",
@@ -146,12 +145,50 @@ class A11yAssertions {
                        _ line: UInt) {
         guard button.type == .button else { return }
         XCTAssert(button.traits?.contains(.button) ?? false ||
-                    button.traits?.contains(.link) ?? false,
+                  button.traits?.contains(.link) ?? false,
                   failureMessage("Button should have Button or Link trait",
                                  .failure,
                                  button),
                   file: file,
                   line: line)
+    }
+
+    func conflictingTraits(_ element: A11yElement,
+                           _ file: StaticString,
+                           _ line: UInt) {
+        guard let traits = element.traits else { return }
+        XCTAssert(!traits.contains(.button) || !traits.contains(.link),
+                  failureMessage("Elements shouldn't have both Button and Link traits",
+                                 .failure,
+                                 element),
+                  file: file,
+                  line: line)
+
+        XCTAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
+                  failureMessage("Elements shouldn't have both Static Text and Updates Frequently traits",
+                                 .failure,
+                                 element),
+                  file: file,
+                  line: line)
+
+        var interactiveTraits = UIAccessibilityTraits.none
+
+        if traits.contains(.causesPageTurn) {
+            interactiveTraits.insert(.causesPageTurn)
+        }
+        if traits.contains(.playsSound) {
+            interactiveTraits.insert(.playsSound)
+        }
+        if traits.contains(.startsMediaSession) {
+            interactiveTraits.insert(.startsMediaSession)
+        }
+
+        XCTAssert(traits.contains(.button) || interactiveTraits.isEmpty,
+                       failureMessage("Elements with \(interactiveTraits.name()) traits should also have a Button trait",
+                                      .warning,
+                                      element),
+                       file: file,
+                       line: line)
     }
 
     func labelLength(_ element: A11yElement,

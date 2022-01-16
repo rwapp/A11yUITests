@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 17 failures
+        // Produces 18 failures
 
         // Accessibility Failure: Button should not contain the word button in the accessibility label: "Ends with button" Button.
         // Accessibility Warning: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button.
@@ -37,6 +37,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Screen has no element with a header trait.
         // Accessibility Failure: Button should have Button or Link trait: "No trait" Button.
         // Accessibility Warning: Element disabled: "Disabled" Button.
+        // Accessibility Failure: Elements shouldn't have both Button and Link traits: "Conflicting traits" Button.
 
         a11yCheckAllOnScreen()
     }
@@ -54,7 +55,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_buttons() {
-        // produces 11 failures
+        // produces 12 failures
 
         // Accessibility Failure: Button should not contain the word button in the accessibility label: "Ends with button" Button.
         // Accessibility Warning: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button.
@@ -67,6 +68,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Warning: Label not meaningful: " " Button. Minimum length: 2.
         // Accessibility Failure: Button should have Button or Link trait: "No trait" Button.
         // Accessibility Warning: Element disabled: "Disabled" Button.
+        // Accessibility Failure: Elements shouldn't have both Button and Link traits: "Conflicting traits" Button.
 
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteInteractive, on: buttons)

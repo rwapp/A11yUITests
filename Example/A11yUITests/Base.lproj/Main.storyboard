@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -135,6 +135,17 @@
                                 </constraints>
                                 <state key="normal" title="Disabled"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqB-ly-1kg">
+                                <rect key="frame" x="20" y="739.33333333333337" width="114" height="44"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" link="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="eQX-Iw-ddh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="old-HA-1zQ"/>
+                                </constraints>
+                                <state key="normal" title="Conflicting traits"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -156,6 +167,7 @@
                             <constraint firstItem="lme-nc-64l" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dWD-0U-PNn"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fTX-uW-itu"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="fyo-Fb-ZbR"/>
+                            <constraint firstItem="AqB-ly-1kg" firstAttribute="top" secondItem="3AL-f7-ykx" secondAttribute="bottom" constant="8" id="iIk-Qu-8nJ"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="width" secondItem="aPJ-3W-qDK" secondAttribute="height" multiplier="200:271" id="ki3-7L-2mY"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="l7Y-xc-Srn"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="m8Y-jL-NGP"/>
@@ -165,6 +177,7 @@
                             <constraint firstItem="XFT-69-rUL" firstAttribute="top" secondItem="TC2-DV-qmK" secondAttribute="bottom" constant="8" id="x8C-7U-BMt"/>
                             <constraint firstItem="B8l-93-lXx" firstAttribute="top" secondItem="gbJ-jp-Hev" secondAttribute="bottom" constant="8" id="xuU-eb-ZWW"/>
                             <constraint firstItem="3AL-f7-ykx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ymJ-xC-byF"/>
+                            <constraint firstItem="AqB-ly-1kg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zJl-02-TZx"/>
                         </constraints>
                     </view>
                 </viewController>

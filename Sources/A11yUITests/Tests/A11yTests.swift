@@ -16,5 +16,6 @@ public enum A11yTests: CaseIterable {
          imageTrait,
          header,
          buttonTrait,
+         conflictingTraits,
          disabled
 }
