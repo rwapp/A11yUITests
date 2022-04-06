@@ -29,7 +29,7 @@ class A11yAssertions {
                                     failureMessage("Element not tall enough",
                                                    .warning,
                                                    element,
-                                                   reason: "Minimum size: \(minSize)"),
+                                                   reason: "Minimum size: \(minSize). Element size is \(element.frame.size.height)"),
                                     file: file,
                                     line: line)
 
@@ -38,7 +38,7 @@ class A11yAssertions {
                                     failureMessage("Element not wide enough",
                                                    .warning,
                                                    element,
-                                                   reason: "Minimum size: \(minSize)"),
+                                                   reason: "Minimum size: \(minSize). Element size is \(element.frame.size.width)"),
                                     file: file,
                                     line: line)
     }
@@ -56,7 +56,7 @@ class A11yAssertions {
                              failureMessage("Label not meaningful",
                                             .warning,
                                             element,
-                                            reason: "Minimum length: \(length)"),
+                                            reason: "Minimum length: \(length). Element label is \"\(element.label)\""),
                              file: file,
                              line: line)
     }
@@ -75,7 +75,7 @@ class A11yAssertions {
 
         // TODO: Localise this check
         XCTAssertFalse(element.label.containsCaseInsensitive("button"),
-                       failureMessage("Button should not contain the word button in the accessibility label",
+                       failureMessage("Button should not contain the word button in the accessibility label. Element label is \"\(element.label)\"",
                                       .failure,
                                       element),
                        file: file,
@@ -83,7 +83,7 @@ class A11yAssertions {
 
         if let first = element.label.first {
             XCTAssert(first.isUppercase,
-                      failureMessage("Buttons should begin with a capital letter",
+                      failureMessage("Buttons should begin with a capital letter. Button label is \"\(element.label)\"",
                                      .failure,
                                      element),
                       file: file,
@@ -91,7 +91,7 @@ class A11yAssertions {
         }
 
         XCTAssertNil(element.label.range(of: "."),
-                     failureMessage("Button accessibility labels shouldn't contain punctuation",
+                     failureMessage("Button accessibility labels shouldn't contain punctuation. Button label is \"\(element.label)\"",
                                     .failure,
                                     element),
                      file: file,
@@ -113,7 +113,7 @@ class A11yAssertions {
         // TODO: Localise this test
         let avoidWords = ["image", "picture", "graphic", "icon"]
         image.label.doesNotContain(avoidWords,
-                                   failureMessage("Images should not contain image words in the accessibility label",
+                                   failureMessage("Images should not contain image words in the accessibility label. Image label is \"\(image.label)\"",
                                                   .failure,
                                                   image),
                                    file,
@@ -133,7 +133,7 @@ class A11yAssertions {
                        _ line: UInt) {
         guard image.type == .image else { return }
         XCTAssert(image.traits?.contains(.image) ?? false,
-                  failureMessage("Image should have Image trait",
+                  failureMessage("Image should have Image trait. Current trait is \(image.traits)",
                                  .failure,
                                  image),
                   file: file,
@@ -146,7 +146,7 @@ class A11yAssertions {
         guard button.type == .button else { return }
         XCTAssert(button.traits?.contains(.button) ?? false ||
                   button.traits?.contains(.link) ?? false,
-                  failureMessage("Button should have Button or Link trait",
+                  failureMessage("Button should have Button or Link trait. Current trait is \(button.traits)",
                                  .failure,
                                  button),
                   file: file,
@@ -205,7 +205,7 @@ class A11yAssertions {
                                  failureMessage("Label is too long",
                                                 .warning,
                                                 element,
-                                                reason: "Max length: \(maxLength)"),
+                                                reason: "Max length: \(maxLength). Label is \"\(element.label)\" with \(element.label.count) length"),
                                  file: file,
                                  line: line)
     }
@@ -220,7 +220,7 @@ class A11yAssertions {
 
         XCTAssertGreaterThanOrEqual(interactiveElement.frame.size.height,
                                     A11yValues.minInteractiveSize,
-                                    failureMessage("Interactive element not tall enough",
+                                    failureMessage("Interactive element not tall enough. Current size: \(interactiveElement.frame.size.height)",
                                                    .failure,
                                                    interactiveElement),
                                     file: file,
@@ -228,7 +228,7 @@ class A11yAssertions {
 
         XCTAssertGreaterThanOrEqual(interactiveElement.frame.size.width,
                                     A11yValues.minInteractiveSize,
-                                    failureMessage("Interactive element not wide enough",
+                                    failureMessage("Interactive element not wide enough. Current size: \(interactiveElement.frame.size.width)",
                                                    .failure,
                                                    interactiveElement),
                                     file: file,
@@ -255,7 +255,7 @@ class A11yAssertions {
 
         guard element.isControl else { return }
         XCTAssert(element.enabled,
-                  failureMessage("Element disabled",
+                  failureMessage("Element \(element.underlyingElement) disabled",
                                  .warning,
                                  element),
                   file: file,
@@ -300,9 +300,9 @@ class A11yAssertions {
         var elementMessage = "."
         if let element1 = element1 {
             if let element2 = element2 {
-                elementMessage = ": \(element1.description), \(element2.description)."
+                elementMessage = ": Element1 \(element1.description) with identifier \(element1.underlyingElement) and Element2 \(element2.description) with identifier \(element2.underlyingElement)."
             } else {
-                elementMessage = ": \(element1.description)."
+                elementMessage = ": Element \(element1.description) with identifier \(element1.underlyingElement)."
             }
         }
 
@@ -311,3 +311,4 @@ class A11yAssertions {
         return "\(prefix) Accessibility \(type.rawValue.capitalized): \(message)\(elementMessage)\(reasonMessage)"
     }
 }
+
