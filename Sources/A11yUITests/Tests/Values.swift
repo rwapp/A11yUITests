@@ -13,5 +13,5 @@ public struct A11yValues {
     public static let minMeaningfulLength = 2
     public static let maxMeaningfulLength = 40
     public static let allInteractiveElements = true
-    public static let floatComparisonTolerance: CGFloat = 0.001
+    public static let floatComparisonTolerance: CGFloat = 0.1
 }
