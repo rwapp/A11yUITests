@@ -1,5 +1,9 @@
 #  Changelog
 
+## 0.6.1
+
+* Change to floating point assertion accuracy
+
 ## 0.6.0
 
 * Adds a test to flag conflicting accessibility traits
