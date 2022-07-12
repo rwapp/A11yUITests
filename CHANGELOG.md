@@ -1,5 +1,22 @@
 #  Changelog
 
+## 0.6.1
+
+* Change to floating point assertion accuracy
+
+## 0.6.0
+
+* Adds a test to flag conflicting accessibility traits
+* Adds ❌ to failure messages and ⚠️ to warning messages for improved prominence
+
+## 0.5.2
+
+* Adds the ability to ignore elements when running `a11yCheckAllOnScreen()`
+
+## 0.5.1
+
+* Fixed a bug that was causing the library to fail to compile for some users
+
 ## 0.5.0
 
 * Adds the ability to specify minimum size and maximum label length

@@ -114,6 +114,11 @@ final class TestRunner {
                                 line)
         }
 
+        if tests.contains(.conflictingTraits) {
+            assertions.conflictingTraits(element,
+                                         file,
+                                         line)
+        }
         for element2 in elements {
             if tests.contains(.duplicated) {
                 assertions.duplicatedLabels(element,
