@@ -1,5 +1,9 @@
 #  Changelog
 
+## 1.0.0
+
+* Addition of snapshot testing
+
 ## 0.6.1
 
 * Change to floating point assertion accuracy

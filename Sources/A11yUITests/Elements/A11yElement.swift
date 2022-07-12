@@ -10,13 +10,12 @@ import XCTest
 struct A11yElement {
 
     struct CodableElement: Codable {
-
-        static let version = 1.0
+        static let version = 1
 
         let label: String
         let frame: CGRect
         let type: String
-        let traits: [String]?
+        let traits: [String]
         let enabled: Bool
     }
 
@@ -75,10 +74,10 @@ struct A11yElement {
         guard !shouldIgnore else { return nil }
 
         return CodableElement(label: label,
-                       frame: frame,
-                       type: type.name(),
-                       traits: traits?.names(),
-                       enabled: enabled)
+                              frame: frame,
+                              type: type.name(),
+                              traits: traits?.names() ?? UIAccessibilityTraits.none.names(),
+                              enabled: enabled)
     }
 
     init(_ element: XCUIElement) {

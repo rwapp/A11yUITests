@@ -9,17 +9,19 @@ import Foundation
 import XCTest
 
 final public class A11ySnapshot {
-
     private struct SnapshotWrapper: Codable {
-        var nameThisFile: String
-        var version: Double
+        private static let wrapperVersion = 1
+        static let snapshotVersion = "\(SnapshotWrapper.wrapperVersion).\(A11yElement.CodableElement.version)"
+        
+        var filename: String
+        var version: String
         var generated: Date
         let snapshot: [A11yElement.CodableElement]
 
         init(snapshots: [A11yElement.CodableElement], fileName: String) {
-            nameThisFile = fileName
+            filename = fileName
             snapshot = snapshots
-            version = A11yElement.CodableElement.version
+            version = SnapshotWrapper.snapshotVersion
             generated = Date()
         }
     }
@@ -28,7 +30,6 @@ final public class A11ySnapshot {
 
     private var calledInFunction = 0
     private var currentFunction = ""
-    private var test: XCTestCase?
     private var fileName: String {
         var fileName = "\(currentFunction)-\(calledInFunction)"
         fileName.removeAll(where: { forbiddenCharacters.contains($0) })
@@ -41,16 +42,27 @@ final public class A11ySnapshot {
 
     public init() {}
 
-    public func a11ySnapshot(from test: XCTestCase, testName: StaticString = #function, suiteName: StaticString = #file, line: UInt = #line) {
+    public func a11ySnapshot(from test: XCTestCase,
+                             testName: StaticString = #function,
+                             suiteName: StaticString = #file,
+                             line: UInt = #line) {
         let elements = XCUIApplication()
             .descendants(matching: .any)
             .allElementsBoundByAccessibilityElement
             .map { A11yElement($0) }
 
-        makeSnapshot(screen: elements, testName: String(testName), suiteName: suiteName, test: test)
+        makeSnapshot(screen: elements,
+                     testName: String(testName),
+                     suiteName: suiteName,
+                     test: test,
+                     line: line)
     }
 
-    private func makeSnapshot(screen: [A11yElement], testName: String, suiteName: StaticString, test: XCTestCase, line: UInt = #line) {
+    private func makeSnapshot(screen: [A11yElement],
+                              testName: String,
+                              suiteName: StaticString,
+                              test: XCTestCase,
+                              line: UInt) {
 
         if currentFunction == testName {
             calledInFunction += 1
@@ -59,64 +71,109 @@ final public class A11ySnapshot {
             currentFunction = testName
         }
 
-        self.test = test
-
         let snapshot = SnapshotWrapper(snapshots: screen.compactMap { $0.codable }, fileName: fileName)
 
         let path = Bundle(for: type(of: test)).bundleURL.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
 
         if let data = try? Data(contentsOf: path),
            let referenceScreen = try? JSONDecoder().decode(SnapshotWrapper.self, from: data) {
-
-            compareScreens(referenceScreen, snapshot)
+            compareScreens(reference: referenceScreen, snapshot: snapshot, test: test, file: suiteName, line: line)
 
         } else {
-            createNewSnapshot(snapshot)
-            XCTFail("No reference snapshot. Generated new snapshot.",
+            if let docPath = createNewSnapshot(snapshot, test: test, file: suiteName, line: line) {
+                XCTFail(Failure.warning.report("No reference snapshot. Generated new snapshot.\nCheck test report or \(docPath)"),
+                        file: suiteName,
+                        line: line)
+
+                return
+            }
+
+            XCTFail(Failure.failure.report("No reference snapshot. Unable to create new reference."),
                     file: suiteName,
                     line: line)
         }
     }
 
-    private func createNewSnapshot(_ snapshot: SnapshotWrapper) {
+    private func createNewSnapshot(_ snapshot: SnapshotWrapper,
+                                   test: XCTestCase,
+                                   file: StaticString,
+                                   line: UInt) -> URL? {
+        guard let documentDirectory = fileManager.urls(for: .documentDirectory,
+                                                       in: .userDomainMask).first else {
+            XCTFail(Failure.failure.report("Unable get documents directory."),
+                    file: file, line: line)
+            return nil
+        }
+
         do {
-            guard let documentDirectory = fileManager.urls(for: .documentDirectory,
-                                                              in: .userDomainMask).first,
-                  let test = test else {
-                      // TODO: add file & line
-                      XCTFail("Unable to create new snapshot")
-                      return
-                  }
+            let jsonData = try JSONEncoder().encode(snapshot)
 
             do {
-                let jsonData = try JSONEncoder().encode(snapshot)
                 let documentPath = documentDirectory.appendingPathComponent("\(fileName).json")
                 try jsonData.write(to: documentPath)
 
                 let attachment = XCTAttachment(contentsOfFile: documentPath)
                 test.add(attachment)
+
+                return documentPath
+
             } catch {
-                // TODO: add file & line
-                XCTFail("Unable to generate new snapshot.")
+                XCTFail(Failure.failure.report("Unable to write snapshot to disk."))
+                return nil
             }
+
+        } catch {
+            XCTFail(Failure.failure.report("Unable to encode snapshot."))
+            return nil
         }
-        // TODO: Report success/failure
     }
 
-    private func compareScreens(_ screen1: SnapshotWrapper, _ screen2: SnapshotWrapper) {
+    private func compareScreens(reference: SnapshotWrapper,
+                                snapshot: SnapshotWrapper,
+                                test: XCTestCase,
+                                file: StaticString,
+                                line: UInt) {
 
-        if screen1.version < A11yElement.CodableElement.version {
-            createNewSnapshot(screen2)
-            XCTFail("Reference snapshot is older version. Generated new snapshot.")
+        if reference.version < SnapshotWrapper.snapshotVersion {
+            if let docPath = createNewSnapshot(snapshot, test: test, file: file, line: line) {
+                XCTFail(Failure.warning.report("Reference snapshot is outdated. Generated new snapshot. Check for regressions before replacing as reference.\nCheck test report or \(docPath)"),
+                        file: file,
+                        line: line)
+
+                return
+            }
+
+            XCTFail(Failure.failure.report("Reference snapshot is outdated. Unable to create new reference."),
+                    file: file,
+                    line: line)
+            return
         }
 
-        // TODO: make failure reports more useful
-        for i in 0..<screen1.snapshot.count {
-            XCTAssertEqual(screen1.snapshot[i].label, screen2.snapshot[i].label)
-            XCTAssertEqual(screen1.snapshot[i].frame, screen2.snapshot[i].frame)
-            XCTAssertEqual(screen1.snapshot[i].type, screen2.snapshot[i].type)
-            XCTAssertEqual(screen1.snapshot[i].traits, screen2.snapshot[i].traits)
-            XCTAssertEqual(screen1.snapshot[i].enabled, screen2.snapshot[i].enabled)
+        for i in 0..<reference.snapshot.count {
+
+            let snapshotElement = snapshot.snapshot[i]
+            let referenceElement = reference.snapshot[i]
+            let snapshotElementLabel = snapshotElement.label
+
+            XCTAssertEqual(referenceElement.label, snapshotElementLabel,
+                           Failure.failure.report("Label does not match reference snapshot. Reference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)"),
+                           file: file, line: line)
+
+            XCTAssertEqual(referenceElement.frame, snapshotElement.frame,
+                           Failure.failure.report("Frame does not match reference snapshot. Reference: \(referenceElement.frame). Snapshot: \(snapshotElement.frame). Element name: \(snapshotElementLabel)"),
+                           file: file, line: line)
+
+            XCTAssertEqual(referenceElement.type, snapshotElement.type,
+                           Failure.failure.report("Type does not match reference snapshot. Reference: \(referenceElement.type). Snapshot: \(snapshotElement.type). Element name: \(snapshotElementLabel)"),
+                           file: file, line: line)
+
+            XCTAssertEqual(referenceElement.traits, snapshotElement.traits,
+                           Failure.failure.report("Traits do not match reference snapshot. Reference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", ")). Element name: \(snapshotElementLabel)"),
+                           file: file, line: line)
+
+            XCTAssertEqual(referenceElement.enabled, snapshotElement.enabled,
+                           Failure.failure.report("Enabled status does not match reference snapshot. Reference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled). Element name: \(snapshotElementLabel)"),
+                           file: file, line: line)
         }
     }
 }
