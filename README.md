@@ -16,17 +16,25 @@ Good accessibility is not about ticking boxes and conforming to regulations and 
 
 Failures for these tests should be seen as warnings for further investigation, not strict failures. As such i'd recommend always having `continueAfterFailure = true` set.
 
+The library has two types of tests - [assertions](#assertion-tests) and [snapshots](#snapshot-tests).
+Assertion tests check each individual element for potential accessibility failures.
+Snapshot tests creates a snapshot of your app's accessibility tree and stores this as a reference for future tests. If something changes in the accessibility tree in a future test, the test will fail signifying you should validate the change. No assertions are made against the accessibility tree, only a check for any changes since the last snapshot state.
+
 Failures have two categories: Warning and Failure.
 Failures are fails against WCAG or the HIG. Warnings may be acceptable, but require investigation.
 
 add `import A11yUITests` to the top of your test file.
 
 
-## Running Tests
+## Assertion tests
+
+Assertion tests check each individual element for potential accessibility failures.
+
+### Running Tests
 
 Tests can be run individually or in suites.
 
-### Running All Tests on All Elements
+#### Running All Tests on All Elements
 
 ```swift
 func test_allTests() {
@@ -35,7 +43,7 @@ func test_allTests() {
 }
 ```
 
-### Specifying Tests/Elements
+#### Specifying Tests/Elements
 
 To specify elements and tests use  `a11y(tests: [A11yTests], on elements: [XCUIElement])` passing an array of tests to run and an array of elements to run them on. To run all interactive element tests on all buttons:
 
@@ -55,11 +63,11 @@ func test_individualTest_individualButton() {
 }
 ```
 
-### Ignoring Elements
+#### Ignoring Elements
 
 When running `a11yCheckAllOnScreen()` it is possible to ignore elements using their accessibility idenfiers by passing any identifiers you wish to ignore with the `ignoringElementIdentifiers: [String]` argument.
 
-## Test Suites
+### Test Suites
 
 A11yUITests contains 4 pre-built test suites with tests suitable for different elements.
 
@@ -74,16 +82,16 @@ A11yUITests contains 4 pre-built test suites with tests suitable for different e
 
 Alternatively you can create an array of `A11yTests` enum values for the tests you want to run.
 
-## Tests
+### Tests
 
-### Minimum Size
+#### Minimum Size
 
 `minimumSize` or checks an element is at least 14px x 14px.
 Severity: Warning
 
 Note: 14px is arbitrary.
 
-### Minimum Interactive Size
+#### Minimum Interactive Size
 
 `minimumInteractiveSize` checks tappable elements are a minimum of 44px x 44px.
 This satisfies [WCAG 2.1 Success Criteria 2.5.5 Target Size Level AAA](https://www.w3.org/TR/WCAG21/#target-size)
@@ -92,14 +100,14 @@ Severity: Error
 Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s for example.
 For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: XCUIElement)` on any element that your user might interact with, eg. sliders, steppers, switches, segmented controls. But you will need to make your own subclass as Apple's are not strictly adherent to WCAG.
 
-### Label Presence
+#### Label Presence
 
 `labelPresence` checks the element has an accessibility label that is a minimum of 2 characters long. 
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 Severity: Warning
 
-### Button Label
+#### Button Label
 
 `buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
@@ -108,7 +116,7 @@ Severity: Error
 
 Note: This test is not localised.
 
-### Image Label
+#### Image Label
 
 `imageLabel` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
@@ -118,42 +126,51 @@ Severity: Error
 
 Note: This test is not localised.
 
-### Label Length
+#### Label Length
 `labelLength` checks accessibility labels are <= 40 characters.
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 Severity: Warning
 
-### Header
+#### Header
 `header` checks the screen has at least one text element with a header trait.
 Headers are used by VoiceOver users to orientate and quickly navigate content.
 This follows [WCAG 2.1 Success Criterion 2.4.10](https://www.w3.org/WAI/WCAG21/Understanding/section-headings.html)
 Severity: Error
 
-### Button Trait
+#### Button Trait
 `buttonTrait` checks that a button element has the Button or Link trait applied.
 This follows [Apple's guide for using traits](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html).
 Severity: Error
 
-### Image Trait
+#### Image Trait
 `imageTrait` checks that an image element has the Image trait applied.
 This follows [Apple's guide for using traits](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html).
 Severity: Error
 
-### Conflicting Traits
+#### Conflicting Traits
 `conflictingTraits` checks elements don't have conflicting traits.
 Elements can't be both a button and a link, or static text and updates frequently
 
-### Disabled Elements
+#### Disabled Elements
 `disabled` checks that elements aren't disabled.
 Disabled elements can be confusing if it is not clear why the element is disabled. Ideally keep the element enabled and clearly message if your app is not ready to process the action.
 Severity: Warning
 
-### Duplicated Labels
+#### Duplicated Labels
 `duplicated` checks all elements provided for duplication of accessibility labels.
 Duplicated accessibility labels can make your screen confusing to navigate with VoiceOver, and make Voice Control fail. Ideally you should avoid duplication if possible.
 Severity: Warning
 
+## Snapshot tests
+
+Snapshot creates a JSON representation of your screen's accessibility tree on the first run. On subsequent runs this initial snapshot is taken as a reference. The test fails if there are any differences between the reference snapshot and the current snapshot. No assertions are made that the accessibility tree is correct or valid, you must make these checks yourself and generate a known-good reference snapshot to protect against future regressions.
+
+### Running tests
+
+In your UI test call `A11ySnapshot().a11ySnapshot(from: self)`
+On first run the test will fail because no snapshot has been created for this test. A reference snapshot is generated. Grab the reference snapshot from the URL provided in the failure message or find it attached in the test's XCResult. The file should be named correctly, but for reference the required filename is included in the `filename` property of the generated json file. add this file to your **UITest** target maintaining the filename.
+Subsequent test runs will be compared against this snapshot, if you wish to generate a new snapshot, remove the reference from your UITest target, run the test, and a new reference will be generated.
 
 ## Example
 

@@ -34,9 +34,9 @@ final public class A11ySnapshot {
         var fileName = "\(currentFunction)-\(calledInFunction)"
         fileName.removeAll(where: { forbiddenCharacters.contains($0) })
         fileName = fileName.replacingOccurrences(of: "_", with: "-")
+        fileName.append(".json")
         return fileName
     }
-    private let fileExtension = "json"
 
     private let fileManager = FileManager.default
 
@@ -73,7 +73,7 @@ final public class A11ySnapshot {
 
         let snapshot = SnapshotWrapper(snapshots: screen.compactMap { $0.codable }, fileName: fileName)
 
-        let path = Bundle(for: type(of: test)).bundleURL.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
+        let path = Bundle(for: type(of: test)).bundleURL.appendingPathComponent(fileName)
 
         if let data = try? Data(contentsOf: path),
            let referenceScreen = try? JSONDecoder().decode(SnapshotWrapper.self, from: data) {
@@ -109,7 +109,7 @@ final public class A11ySnapshot {
             let jsonData = try JSONEncoder().encode(snapshot)
 
             do {
-                let documentPath = documentDirectory.appendingPathComponent("\(fileName).json")
+                let documentPath = documentDirectory.appendingPathComponent(fileName)
                 try jsonData.write(to: documentPath)
 
                 let attachment = XCTAttachment(contentsOfFile: documentPath)
@@ -156,24 +156,44 @@ final public class A11ySnapshot {
             let snapshotElementLabel = snapshotElement.label
 
             XCTAssertEqual(referenceElement.label, snapshotElementLabel,
-                           Failure.failure.report("Label does not match reference snapshot. Reference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)"),
-                           file: file, line: line)
-
-            XCTAssertEqual(referenceElement.frame, snapshotElement.frame,
-                           Failure.failure.report("Frame does not match reference snapshot. Reference: \(referenceElement.frame). Snapshot: \(snapshotElement.frame). Element name: \(snapshotElementLabel)"),
+                           Failure.failure.report("Label does not match reference snapshot.\nReference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)"),
                            file: file, line: line)
 
             XCTAssertEqual(referenceElement.type, snapshotElement.type,
-                           Failure.failure.report("Type does not match reference snapshot. Reference: \(referenceElement.type). Snapshot: \(snapshotElement.type). Element name: \(snapshotElementLabel)"),
+                           Failure.failure.report("Type does not match reference snapshot.\nReference: \(referenceElement.type). Snapshot: \(snapshotElement.type). Element name: \(snapshotElementLabel)"),
                            file: file, line: line)
 
             XCTAssertEqual(referenceElement.traits, snapshotElement.traits,
-                           Failure.failure.report("Traits do not match reference snapshot. Reference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", ")). Element name: \(snapshotElementLabel)"),
+                           Failure.failure.report("Traits do not match reference snapshot.\nReference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", ")). Element name: \(snapshotElementLabel)"),
                            file: file, line: line)
 
             XCTAssertEqual(referenceElement.enabled, snapshotElement.enabled,
-                           Failure.failure.report("Enabled status does not match reference snapshot. Reference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled). Element name: \(snapshotElementLabel)"),
+                           Failure.failure.report("Enabled status does not match reference snapshot.\nReference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled). Element name: \(snapshotElementLabel)"),
                            file: file, line: line)
+
+            compareFrame(reference: referenceElement.frame, snapshot: snapshotElement.frame, label: snapshotElementLabel, file: file, line: line)
         }
+    }
+
+    private func compareFrame(reference: CGRect, snapshot: CGRect, label: String, file: StaticString, line: UInt) {
+
+        let refX = reference.origin.x
+        let refY = reference.origin.y
+        let refWidth = reference.size.width
+        let refHeight = reference.size.height
+
+        let snapX = snapshot.origin.x
+        let snapY = snapshot.origin.y
+        let snapWidth = snapshot.size.width
+        let snapHeight = snapshot.size.height
+
+        XCTAssertEqual(refX, snapX, accuracy: A11yValues.floatComparisonTolerance, Failure.failure.report("Frame does not match reference snapshot.\nReference x: \(refX). Snapshot x: \(snapX). Element name: \(label)"),
+                       file: file, line: line)
+        XCTAssertEqual(refY, snapY, accuracy: A11yValues.floatComparisonTolerance, Failure.failure.report("Frame does not match reference snapshot.\nReference y: \(refY). Snapshot y: \(snapY). Element name: \(label)"),
+                       file: file, line: line)
+        XCTAssertEqual(refWidth, snapWidth, accuracy: A11yValues.floatComparisonTolerance, Failure.failure.report("Frame does not match reference snapshot.\nReference width: \(refWidth). Snapshot width: \(snapWidth). Element name: \(label)"),
+                       file: file, line: line)
+        XCTAssertEqual(refHeight, snapHeight, accuracy: A11yValues.floatComparisonTolerance, Failure.failure.report("Frame does not match reference snapshot.\nReference height: \(refHeight). Snapshot height: \(snapHeight). Element name: \(label)"),
+                       file: file, line: line)
     }
 }
