@@ -1,5 +1,5 @@
 //
-//  ErrorReporting.swift
+//  Failure.swift
 //  A11yUITests
 //
 //  Created by Rob Whitaker on 12/07/2022.
