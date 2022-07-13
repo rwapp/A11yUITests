@@ -8,7 +8,6 @@
 import XCTest
 
 struct A11yElement {
-
     struct CodableElement: Codable {
         static let version = 1
 
