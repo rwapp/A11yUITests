@@ -51,13 +51,24 @@ final class A11yAssertions {
         guard !element.shouldIgnore,
               element.type != .cell else { return }
 
-        XCTAssertGreaterThan(element.label.count,
-                             length,
-                             Failure.warning.report("Label not meaningful",
-                                                    element,
-                                                    reason: "Minimum length: \(length)"),
-                             file: file,
-                             line: line)
+        if let placeholder = element.placeholder,
+           placeholder.count > 0,
+           element.label.count == 0 {
+            XCTFail(Failure.failure.report("A placeholder is not a label",
+                                           element,
+                                           reason: "No label for element with placeholder \"\(placeholder)\""),
+                    file: file,
+                    line: line)
+        } else {
+
+            XCTAssertGreaterThan(element.label.count,
+                                 length,
+                                 Failure.warning.report("Label not meaningful",
+                                                        element,
+                                                        reason: "Minimum length: \(length)"),
+                                 file: file,
+                                 line: line)
+        }
     }
 
     func validLabelFor(interactiveElement element: A11yElement,

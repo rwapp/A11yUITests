@@ -38,7 +38,6 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Warning: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button. Max length: 40.
         // Accessibility Warning: Label not meaningful: " " Button. Minimum length: 2.
         // Accessibility Warning: Label not meaningful: "" Slider. Minimum length: 2.
-        // Accessibility Warning: Label not meaningful: "" Text Field. Minimum length: 2.
         // Accessibility Failure: Interactive element not tall enough: "" Slider.
         // Accessibility Failure: Interactive element not tall enough: "" Text Field.
         // Accessibility Failure: Image should have Image trait: "A11y_logo" Image.
@@ -46,6 +45,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Button should have Button or Link trait: "No trait" Button.
         // Accessibility Warning: Element disabled: "Disabled" Button.
         // Accessibility Failure: Elements shouldn't have both Button and Link traits: "Conflicting traits" Button.
+        // Accessibility Failure: A placeholder is not a label: "" Text Field. No label for element with placeholder "Placeholder".
 
         a11yCheckAllOnScreen()
     }
