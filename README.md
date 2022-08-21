@@ -168,8 +168,8 @@ Snapshot creates a JSON representation of your screen's accessibility tree on th
 
 ### Running tests
 
-In your UI test call `A11ySnapshot().a11ySnapshot(from: self)`.
-On first run the test will fail because no snapshot has been created for this test. A reference snapshot is generated. Grab the reference snapshot from the URL provided in the failure message or find it attached in the test's XCResult. The file should be named correctly, but for reference the required filename is included in the `filename` property of the generated json file. add this file to your **UITest** target maintaining the filename.
+In your UI test call `a11ySnapshot()`.
+On first run the test will fail because no snapshot has been created for this test. A reference snapshot is generated. Grab the reference snapshot from the URL provided in the failure message or find it attached in the test's XCResult. Add this file to your **UITest** target ensuring the filename matches the `filename` property of the generated json file.
 Subsequent test runs will be compared against this snapshot, if you wish to generate a new snapshot, remove the reference from your UITest target, run the test, and a new reference will be generated.
 
 ### Tests

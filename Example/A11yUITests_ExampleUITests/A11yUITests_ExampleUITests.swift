@@ -18,7 +18,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_snapshotTest() {
-        A11ySnapshot().a11ySnapshot(from: self)
+        a11ySnapshot()
     }
 
     func test_allTests() {

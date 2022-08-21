@@ -8,7 +8,18 @@
 import Foundation
 import XCTest
 
-final public class A11ySnapshot {
+extension XCTestCase {
+    public func a11ySnapshot(testName: StaticString = #function,
+                             testsFile: StaticString = #file,
+                             line: UInt = #line) {
+        A11ySnapshot.shared.a11ySnapshot(from: self, testName: testName, testsFile: testsFile, line: line)
+    }
+}
+
+final class A11ySnapshot {
+
+    static let shared = A11ySnapshot()
+
     private struct SnapshotWrapper: Codable {
         private static let wrapperVersion = 1
         static let snapshotVersion = "\(SnapshotWrapper.wrapperVersion).\(A11yElement.CodableElement.version)"
@@ -30,8 +41,9 @@ final public class A11ySnapshot {
 
     private var calledInFunction = 0
     private var currentFunction = ""
+    private var currentSuite = ""
     private var fileName: String {
-        var fileName = "\(currentFunction)-\(calledInFunction)"
+        var fileName = "\(currentSuite)-\(currentFunction)-\(calledInFunction)"
         fileName.removeAll(where: { forbiddenCharacters.contains($0) })
         fileName = fileName.replacingOccurrences(of: "_", with: "-")
         fileName.append(".json")
@@ -44,7 +56,7 @@ final public class A11ySnapshot {
 
     public func a11ySnapshot(from test: XCTestCase,
                              testName: StaticString = #function,
-                             suiteName: StaticString = #file,
+                             testsFile: StaticString = #file,
                              line: UInt = #line) {
         let elements = XCUIApplication()
             .descendants(matching: .any)
@@ -53,22 +65,25 @@ final public class A11ySnapshot {
 
         makeSnapshot(screen: elements,
                      testName: String(testName),
-                     suiteName: suiteName,
+                     testsFile: testsFile,
                      test: test,
                      line: line)
     }
 
     private func makeSnapshot(screen: [A11yElement],
                               testName: String,
-                              suiteName: StaticString,
+                              testsFile: StaticString,
                               test: XCTestCase,
                               line: UInt) {
 
-        if currentFunction == testName {
+        let suite = ((String(testsFile) as NSString).lastPathComponent as NSString).deletingPathExtension
+        if currentFunction == testName &&
+        currentSuite == suite {
             calledInFunction += 1
         } else {
             calledInFunction = 0
             currentFunction = testName
+            currentSuite = suite
         }
 
         let snapshot = SnapshotWrapper(snapshots: screen.compactMap { $0.codable }, fileName: fileName)
@@ -79,19 +94,19 @@ final public class A11ySnapshot {
 
         if let data = try? Data(contentsOf: path),
            let referenceScreen = try? decoder.decode(SnapshotWrapper.self, from: data) {
-            compareScreens(reference: referenceScreen, snapshot: snapshot, test: test, file: suiteName, line: line)
+            compareScreens(reference: referenceScreen, snapshot: snapshot, test: test, file: testsFile, line: line)
 
         } else {
-            if let docPath = createNewSnapshot(snapshot, test: test, file: suiteName, line: line) {
+            if let docPath = createNewSnapshot(snapshot, test: test, file: testsFile, line: line) {
                 XCTFail(Failure.warning.report("No reference snapshot. Generated new snapshot.\nCheck test report or \(docPath)"),
-                        file: suiteName,
+                        file: testsFile,
                         line: line)
 
                 return
             }
 
             XCTFail(Failure.failure.report("No reference snapshot. Unable to create new reference."),
-                    file: suiteName,
+                    file: testsFile,
                     line: line)
         }
     }
@@ -123,12 +138,12 @@ final public class A11ySnapshot {
                 return documentPath
 
             } catch {
-                XCTFail(Failure.failure.report("Unable to write snapshot to disk."))
+                print("Unable to write snapshot to disk. \(error.localizedDescription)")
                 return nil
             }
 
         } catch {
-            XCTFail(Failure.failure.report("Unable to encode snapshot."))
+            print("Unable to encode snapshot. \(error.localizedDescription)")
             return nil
         }
     }
