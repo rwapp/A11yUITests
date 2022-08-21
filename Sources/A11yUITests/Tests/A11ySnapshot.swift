@@ -106,7 +106,10 @@ final public class A11ySnapshot {
         }
 
         do {
-            let jsonData = try JSONEncoder().encode(snapshot)
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            encoder.dateEncodingStrategy = .iso8601
+            let jsonData = try encoder.encode(snapshot)
 
             do {
                 let documentPath = documentDirectory.appendingPathComponent(fileName)
