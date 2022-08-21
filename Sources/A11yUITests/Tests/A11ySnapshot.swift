@@ -74,9 +74,11 @@ final public class A11ySnapshot {
         let snapshot = SnapshotWrapper(snapshots: screen.compactMap { $0.codable }, fileName: fileName)
 
         let path = Bundle(for: type(of: test)).bundleURL.appendingPathComponent(fileName)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
 
         if let data = try? Data(contentsOf: path),
-           let referenceScreen = try? JSONDecoder().decode(SnapshotWrapper.self, from: data) {
+           let referenceScreen = try? decoder.decode(SnapshotWrapper.self, from: data) {
             compareScreens(reference: referenceScreen, snapshot: snapshot, test: test, file: suiteName, line: line)
 
         } else {
