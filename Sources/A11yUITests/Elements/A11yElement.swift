@@ -16,6 +16,8 @@ struct A11yElement {
         let type: String
         let traits: [String]
         let enabled: Bool
+        let placeholder: String?
+        let value: String?
     }
 
     typealias A11ySnapshot = XCUIElementSnapshot & NSObject
@@ -26,6 +28,8 @@ struct A11yElement {
     let underlyingElement: XCUIElement
     let traits: UIAccessibilityTraits?
     let enabled: Bool
+    let placeholder: String?
+    let value: String?
     let id = UUID()
 
     var shouldIgnore: Bool {
@@ -76,7 +80,9 @@ struct A11yElement {
                               frame: frame,
                               type: type.name(),
                               traits: traits?.names() ?? UIAccessibilityTraits.none.names(),
-                              enabled: enabled)
+                              enabled: enabled,
+                              placeholder: placeholder,
+                              value: value)
     }
 
     init(_ element: XCUIElement) {
@@ -85,6 +91,8 @@ struct A11yElement {
         type = element.elementType
         underlyingElement = element
         enabled = element.isEnabled
+        placeholder = element.placeholderValue
+        value = element.value as? String
 
         guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
             traits = nil
