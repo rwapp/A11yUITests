@@ -107,6 +107,9 @@ Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIEl
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 Severity: Warning
 
+Additionally this tests checks for elements that have a placeholder but no label.
+Severity: Failure
+
 #### Button Label
 
 `buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
@@ -214,12 +217,13 @@ end
 
 ## Note
 
-* This library accesses a private property in the iOS SDK, so care should be taken when adding it to your project to ensure you are not shipping this code. If you submit this code to app review you will likely receive a rejection from Apple.
-* This library uses method swizzling of the `value(forUndefinedKey:)` method on NSObject to guard against potential crashes if Apple changes their private API in future. Any calls to this function will return `nil` after running any tests. This affects your test suite only, not your app.
+* This library accesses a private property in the iOS SDK, so care should be taken when adding it to your project to ensure you are not shipping this code. If you submit this code to app review you will likely receive a rejection from Apple. If you do submit this code then you've installed it wrong, go take another look at [Installation](#installation).
 
 ## Known Issues
 
-If two elements of the same type have the same identifier (eg, two buttons both labeled 'Next') this will cause the tests to crash on some iOS versions. This was an issue on ios 13 and appears fixed as of iOS 15.
+If two elements of the same type have the same identifier (eg, two buttons both labeled 'Next') this can cause the tests to crash on some iOS versions. This was an issue on iOS 13 and appears fixed as of iOS 15.
+
+Elements that are hidden from accessibility are still assessed by these tests. This is due to how XCUI presents elements to the test runner, I'm not currently aware of a way to detect elements hidden from accessibility.
 
 ## Author
 

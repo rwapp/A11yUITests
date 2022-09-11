@@ -1,5 +1,10 @@
 #  Changelog
 
+## 1.1.0
+
+* New rule for elements with a placeholder and no label.
+* Improved method for fetching traits meaning no swizzling - thank you [Chris Kolbu](https://github.com/nesevis)
+
 ## 1.0.0
 
 * Addition of snapshot testing
