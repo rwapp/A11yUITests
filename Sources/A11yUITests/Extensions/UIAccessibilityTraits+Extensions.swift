@@ -7,11 +7,14 @@
 
 import UIKit
 
-extension UIAccessibilityTraits {
-    func name() -> String {
+internal extension UIAccessibilityTraits {
+    func nameString() -> String {
+        names().joined(separator: ", ")
+    }
 
+    func names() -> [String] {
         if self == .none {
-            return "None"
+            return ["None"]
         }
 
         var traits = [String]()
@@ -68,6 +71,6 @@ extension UIAccessibilityTraits {
             traits.append("Tab Bar")
         }
 
-        return traits.joined(separator: ", ")
+        return traits
     }
 }

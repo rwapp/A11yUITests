@@ -8,6 +8,17 @@
 import XCTest
 
 struct A11yElement {
+    struct CodableElement: Codable {
+        static let version = 1
+
+        let label: String
+        let frame: CGRect
+        let type: String
+        let traits: [String]
+        let enabled: Bool
+        let placeholder: String?
+        let value: String?
+    }
 
     typealias A11ySnapshot = XCUIElementSnapshot & NSObject
 
@@ -17,6 +28,8 @@ struct A11yElement {
     let underlyingElement: XCUIElement
     let traits: UIAccessibilityTraits?
     let enabled: Bool
+    let placeholder: String?
+    let value: String?
     let id = UUID()
 
     var shouldIgnore: Bool {
@@ -60,12 +73,26 @@ struct A11yElement {
         return "\"\(self.label)\" \(self.type.name())"
     }
 
+    var codable: CodableElement? {
+        guard !shouldIgnore else { return nil }
+
+        return CodableElement(label: label,
+                              frame: frame,
+                              type: type.name(),
+                              traits: traits?.names() ?? UIAccessibilityTraits.none.names(),
+                              enabled: enabled,
+                              placeholder: placeholder,
+                              value: value)
+    }
+
     init(_ element: XCUIElement) {
         label = element.label
         frame = element.frame
         type = element.elementType
         underlyingElement = element
         enabled = element.isEnabled
+        placeholder = element.placeholderValue
+        value = element.value as? String
 
         guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
             traits = nil

@@ -17,8 +17,12 @@ class A11yUITestsExampleUITests: XCTestCase {
         XCUIApplication().launch()
     }
 
+    func test_snapshotTest() {
+        a11ySnapshot()
+    }
+
     func test_allTests() {
-        // Produces 18 failures
+        // Produces 22 failures
 
         // Accessibility Failure: Button should not contain the word button in the accessibility label: "Ends with button" Button.
         // Accessibility Warning: Elements have duplicated labels: "Duplicated" Button, "Duplicated" Button.
@@ -33,6 +37,10 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure: Interactive element not wide enough: "Too Small" Button.
         // Accessibility Warning: Label is too long: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button. Max length: 40.
         // Accessibility Warning: Label not meaningful: " " Button. Minimum length: 2.
+        // Accessibility Warning: Label not meaningful: "" Slider. Minimum length: 2.
+        // Accessibility Warning: Label not meaningful: "" Text Field. Minimum length: 2.
+        // Accessibility Failure: Interactive element not tall enough: "" Slider.
+        // Accessibility Failure: Interactive element not tall enough: "" Text Field.
         // Accessibility Failure: Image should have Image trait: "A11y_logo" Image.
         // Accessibility Failure: Screen has no element with a header trait.
         // Accessibility Failure: Button should have Button or Link trait: "No trait" Button.

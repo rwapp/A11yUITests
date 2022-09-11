@@ -23,6 +23,8 @@
 		AC7A76C487EB50547D3CAB8A6CD04A23 /* Pods-A11yUITests_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6418B7E6BB7698182C01F81569F93979 /* Pods-A11yUITests_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD1C9031E67DCEFE485222C2131D1771 /* TestRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D1A78C80EFCB672C720D162DB9C112 /* TestRunner.swift */; };
 		B1673AF35C6124D631BA641990C598AD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC8F300895E39EA0DF6D6B2B5E6BCD /* XCTest.framework */; };
+		B560F8E0287E0FE0007A8A3F /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560F8DF287E0FE0007A8A3F /* Failure.swift */; };
+		B595722827933969008F4598 /* A11ySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595722727933969008F4598 /* A11ySnapshot.swift */; };
 		C9BDE38F4D37D96E128DB3CAAC355B7B /* A11yAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF977B85485A2EF20653681BFD405C /* A11yAssertions.swift */; };
 		CC1A27C919C04C57E92B0790C1A0F8B1 /* Pods-A11yUITests_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F5BE202F945BDD5F08D62226B8979 /* Pods-A11yUITests_Example-dummy.m */; };
 		DE66DA9F1A05CA0A5825D3E08D24F446 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C79B69187886A4BB403762D2C67E4 /* String+Extensions.swift */; };
@@ -76,8 +78,10 @@
 		9DE797E11D7B87A77104322293C1ED86 /* XCTestCase+A11y.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCTestCase+A11y.swift"; sourceTree = "<group>"; };
 		A03C76D4957732DC2D03CAC031A739A2 /* Pods-A11yUITests_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-A11yUITests_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A71AA3D763FE779414D35604E1318C0A /* NSObject+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
-		B1A62BFE1597C60A0DBCBBCDC6FC92D9 /* A11yUITests.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = A11yUITests.podspec; sourceTree = "<group>"; tabWidth = 2; };
+		B1A62BFE1597C60A0DBCBBCDC6FC92D9 /* A11yUITests.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = A11yUITests.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B4972C8E763424498973A9289FC050CC /* A11yUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "A11yUITests-Info.plist"; sourceTree = "<group>"; };
+		B560F8DF287E0FE0007A8A3F /* Failure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
+		B595722727933969008F4598 /* A11ySnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A11ySnapshot.swift; sourceTree = "<group>"; };
 		B8CB243D68E343282AB2BFB05512AEBC /* Pods-A11yUITests_ExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BBB074577B238FA8A80076F691C78162 /* A11yTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = A11yTests.swift; sourceTree = "<group>"; };
 		BCA42AF9766943558108BC586923734E /* Pods-A11yUITests_ExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -171,12 +175,12 @@
 		47C49C40777560214F11BBB398D5602C /* A11yUITests */ = {
 			isa = PBXGroup;
 			children = (
+				B560F8DE287E0FD3007A8A3F /* Helpers */,
 				392C88DB66D948D6CB64E671FD02D23A /* Elements */,
 				61452A78B2AF7D0561068A57859E4EDB /* Extensions */,
 				7D3CEAD9A9942DEEFE0A31A4D1709484 /* Pod */,
 				51BA19E1E1EA868DCAAFD8D2DC36BB8A /* Support Files */,
 				C0AC85F3E875503462383AF4F3345B1B /* Tests */,
-				C08509403C36C91CE378363DB12276F4 /* Traits */,
 			);
 			name = A11yUITests;
 			path = ../..;
@@ -216,6 +220,7 @@
 		61452A78B2AF7D0561068A57859E4EDB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0676D91A9E38B0010AFED9531352B2E1 /* UIAccessibilityTraits+Extensions.swift */,
 				A71AA3D763FE779414D35604E1318C0A /* NSObject+Extensions.swift */,
 				440C79B69187886A4BB403762D2C67E4 /* String+Extensions.swift */,
 				F7A2ADB54FAA23D9D8BB49802C122F66 /* XCUIElementSnapshot+Extensions.swift */,
@@ -260,19 +265,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		C08509403C36C91CE378363DB12276F4 /* Traits */ = {
+		B560F8DE287E0FD3007A8A3F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0676D91A9E38B0010AFED9531352B2E1 /* UIAccessibilityTraits+Extensions.swift */,
+				B560F8DF287E0FE0007A8A3F /* Failure.swift */,
 			);
-			name = Traits;
-			path = Sources/A11yUITests/Traits;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C0AC85F3E875503462383AF4F3345B1B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				19BF977B85485A2EF20653681BFD405C /* A11yAssertions.swift */,
+				B595722727933969008F4598 /* A11ySnapshot.swift */,
 				BBB074577B238FA8A80076F691C78162 /* A11yTests.swift */,
 				41D1A78C80EFCB672C720D162DB9C112 /* TestRunner.swift */,
 				4C9D2B99E12E6758D2A550B0B882F6DA /* Values.swift */,
@@ -448,6 +453,8 @@
 				C9BDE38F4D37D96E128DB3CAAC355B7B /* A11yAssertions.swift in Sources */,
 				983A54CB11BB538277364A35597EC747 /* A11yElement.swift in Sources */,
 				795E33FB45D8395690BFD4DFF321FB53 /* A11yTests.swift in Sources */,
+				B560F8E0287E0FE0007A8A3F /* Failure.swift in Sources */,
+				B595722827933969008F4598 /* A11ySnapshot.swift in Sources */,
 				751DD6BC80A5A3D40984CCEA3F43A787 /* A11yUITests-dummy.m in Sources */,
 				35CB7B007CB7C0B13B9ADC9B6EBE81B1 /* NSObject+Extensions.swift in Sources */,
 				DE66DA9F1A05CA0A5825D3E08D24F446 /* String+Extensions.swift in Sources */,

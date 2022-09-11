@@ -8,7 +8,7 @@
 import Foundation
 
 
-class TestRunner {
+final class TestRunner {
 
     let assertions = A11yAssertions()
 
