@@ -22,25 +22,31 @@ final class A11yAssertions {
 
         guard !element.shouldIgnore else { return }
 
-        let minFloatSize = CGFloat(minSize)
+      let height = element.frame.size.height
+      let width = element.frame.size.width
+      let minimumSize = A11yValues.minInteractiveSize
 
-        let heightDifference = element.frame.size.height - minFloatSize
-        XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yValues.floatComparisonTolerance,
-                                    Failure.warning.report("Element not tall enough",
-                                                           element,
-                                                           reason: "Minimum size: \(minSize)"),
-                                    file: file,
-                                    line: line)
+      let tolerance = A11yValues.floatComparisonTolerance
+      let isValidHeight = height.isMoreThanOrEqual(to: minimumSize, tolerance: tolerance)
+      let isValidWidth = width.isMoreThanOrEqual(to: minimumSize, tolerance: tolerance)
 
-        let widthDifference = element.frame.size.width - minFloatSize
-        XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yValues.floatComparisonTolerance,
-                                    Failure.warning.report("Element not wide enough",
-                                                           element,
-                                                           reason: "Minimum size: \(minSize)"),
-                                    file: file,
-                                    line: line)
+      if !isValidHeight {
+        let message = Failure.warning.report(
+          "Element too short",
+          element,
+          reason: "Minimum: \(minimumSize). Current: \(height)"
+        )
+        _XCTPreformattedFailureHandler(nil, false, String(file), Int(line), message, "")
+      }
+
+      if !isValidWidth {
+        let message = Failure.warning.report(
+          "Element too narrow",
+          element,
+          reason: "Minimum: \(minimumSize). Current: \(height)"
+        )
+        _XCTPreformattedFailureHandler(nil, false, String(file), Int(line), message, "")
+      }
     }
 
     func validLabelFor(_ element: A11yElement,
@@ -206,21 +212,31 @@ final class A11yAssertions {
         if (!allElements && !interactiveElement.isInteractive) ||
             !interactiveElement.isControl { return }
 
-        let heightDifference = interactiveElement.frame.size.height - A11yValues.minInteractiveSize
-        XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yValues.floatComparisonTolerance,
-                                    Failure.failure.report("Interactive element not tall enough",
-                                                           interactiveElement),
-                                    file: file,
-                                    line: line)
+      let height = interactiveElement.frame.size.height
+      let width = interactiveElement.frame.size.width
+      let minimumSize = A11yValues.minInteractiveSize
 
-        let widthDifference = interactiveElement.frame.size.width - A11yValues.minInteractiveSize
-        XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yValues.floatComparisonTolerance,
-                                    Failure.failure.report("Interactive element not wide enough",
-                                                           interactiveElement),
-                                    file: file,
-                                    line: line)
+      let tolerance = A11yValues.floatComparisonTolerance
+      let isValidHeight = height.isMoreThanOrEqual(to: minimumSize, tolerance: tolerance)
+      let isValidWidth = width.isMoreThanOrEqual(to: minimumSize, tolerance: tolerance)
+
+      if !isValidHeight {
+        let message = Failure.failure.report(
+          "Interactive element too short",
+          interactiveElement,
+          reason: "Minimum: \(minimumSize). Current: \(height)"
+        )
+        _XCTPreformattedFailureHandler(nil, false, String(file), Int(line), message, "")
+      }
+
+      if !isValidWidth {
+        let message = Failure.failure.report(
+          "Interactive element too narrow",
+          interactiveElement,
+          reason: "Minimum: \(minimumSize). Current: \(height)"
+        )
+        _XCTPreformattedFailureHandler(nil, false, String(file), Int(line), message, "")
+      }
     }
 
     func hasHeader(_ element: A11yElement) {
