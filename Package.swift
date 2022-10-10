@@ -20,6 +20,10 @@ let package = Package(
             dependencies: [],
             path: "Sources/A11yUITests"
         ),
+        .testTarget(
+          name: "A11yPackageTests",
+          dependencies: ["A11yUITests"]
+        )
     ],
     swiftLanguageVersions: [.v5]
 )
