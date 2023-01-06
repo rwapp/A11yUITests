@@ -70,7 +70,7 @@ struct A11yElement {
     }
 
     var description: String {
-        return "\"\(self.label)\" \(self.type.name())"
+        return "\"\(self.label)\" \(self.type.name()) \(self.identifier)"
     }
 
     var codable: CodableElement? {
@@ -86,6 +86,7 @@ struct A11yElement {
     }
 
     init(_ element: XCUIElement) {
+        identifier = element.identifier
         label = element.label
         frame = element.frame
         type = element.elementType

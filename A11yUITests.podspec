@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'A11yUITests'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Accessibility tests for XCUI Testing.'
 
   s.description      = <<-DESC

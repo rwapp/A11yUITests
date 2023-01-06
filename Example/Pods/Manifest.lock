@@ -1,5 +1,5 @@
 PODS:
-  - A11yUITests (1.0.0)
+  - A11yUITests (1.0.1)
 
 DEPENDENCIES:
   - A11yUITests (from `../`)
