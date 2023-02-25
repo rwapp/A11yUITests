@@ -38,6 +38,10 @@ final class TestRunner {
         if tests.contains(.header) {
             assertions.checkHeader(file, line)
         }
+
+        if tests.contains(.duplicated) {
+            assertions.checkDuplicates(file, line)
+        }
     }
 
     private func runTests(_ tests: [A11yTests],
@@ -122,9 +126,7 @@ final class TestRunner {
         for element2 in elements {
             if tests.contains(.duplicated) {
                 assertions.duplicatedLabels(element,
-                                            element2,
-                                            file,
-                                            line)
+                                            element2)
             }
         }
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TC2-DV-qmK">
-                                <rect key="frame" x="20" y="64" width="43" height="43"/>
+                                <rect key="frame" x="20" y="67" width="43" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="Fga-gE-HBH"/>
                                     <constraint firstAttribute="height" constant="43" id="qYy-77-VJb"/>
@@ -28,7 +28,7 @@
                                 <state key="normal" title="Too Small"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFT-69-rUL">
-                                <rect key="frame" x="20" y="115" width="84" height="44"/>
+                                <rect key="frame" x="20" y="118" width="84" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="dNk-1S-voQ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="spO-XS-Vs7"/>
@@ -36,7 +36,7 @@
                                 <state key="normal" title="Punctuated."/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-jp-Hev">
-                                <rect key="frame" x="20" y="167" width="116" height="44"/>
+                                <rect key="frame" x="20" y="170" width="116" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="IK0-Xu-r0M"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="LSX-ry-o54"/>
@@ -44,7 +44,7 @@
                                 <state key="normal" title="Ends with button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8l-93-lXx">
-                                <rect key="frame" x="20" y="219" width="69" height="44"/>
+                                <rect key="frame" x="20" y="222" width="69" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="eKU-Tu-wNx"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="jN3-nK-q8K"/>
@@ -52,7 +52,7 @@
                                 <state key="normal" title="lowercase"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Biz-z4-Rs6">
-                                <rect key="frame" x="20" y="271" width="144" height="44"/>
+                                <rect key="frame" x="20" y="274" width="144" height="44"/>
                                 <accessibility key="accessibilityConfiguration" label=" "/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="4cH-eZ-uL8"/>
@@ -61,7 +61,7 @@
                                 <state key="normal" title="No accessibility label"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bg-cb-wuu">
-                                <rect key="frame" x="20" y="323" width="159" height="44"/>
+                                <rect key="frame" x="20" y="326" width="159" height="44"/>
                                 <accessibility key="accessibilityConfiguration" label="A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="9U0-ja-dxd"/>
@@ -70,7 +70,7 @@
                                 <state key="normal" title="Long accessibility label"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label too small" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lme-nc-64l">
-                                <rect key="frame" x="20" y="375" width="13" height="13"/>
+                                <rect key="frame" x="20" y="378" width="13" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="Nov-yU-qnT"/>
                                     <constraint firstAttribute="width" constant="13" id="aMO-hP-anN"/>
@@ -80,7 +80,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A11y_logo" translatesAutoresizingMaskIntoConstraints="NO" id="lJw-cj-fHr">
-                                <rect key="frame" x="20" y="396" width="44" height="59.666666666666686"/>
+                                <rect key="frame" x="20" y="399" width="44" height="59.666666666666686"/>
                                 <accessibility key="accessibilityConfiguration" label="A11y_logo">
                                     <accessibilityTraits key="traits" none="YES"/>
                                     <bool key="isElement" value="YES"/>
@@ -91,7 +91,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A11y_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aPJ-3W-qDK">
-                                <rect key="frame" x="20" y="463.66666666666669" width="44" height="59.666666666666686"/>
+                                <rect key="frame" x="20" y="466.66666666666669" width="44" height="59.666666666666686"/>
                                 <accessibility key="accessibilityConfiguration" label="image of the Mobile A11y logo">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -101,7 +101,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExF-yl-Ptx">
-                                <rect key="frame" x="20" y="531.33333333333337" width="74" height="44"/>
+                                <rect key="frame" x="20" y="534.33333333333337" width="74" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="1A7-hq-8fg"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="p3v-gF-xH7"/>
@@ -109,7 +109,7 @@
                                 <state key="normal" title="Duplicated"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbt-uh-813">
-                                <rect key="frame" x="20" y="583.33333333333337" width="74" height="44"/>
+                                <rect key="frame" x="20" y="586.33333333333337" width="74" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="2PO-zd-on5"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="L86-lL-sRg"/>
@@ -117,7 +117,7 @@
                                 <state key="normal" title="Duplicated"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-Oo-XLH">
-                                <rect key="frame" x="20" y="635.33333333333337" width="51" height="44"/>
+                                <rect key="frame" x="20" y="638.33333333333337" width="51" height="44"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES"/>
                                 </accessibility>
@@ -128,7 +128,7 @@
                                 <state key="normal" title="No trait"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3AL-f7-ykx">
-                                <rect key="frame" x="20" y="687.33333333333337" width="60" height="44"/>
+                                <rect key="frame" x="20" y="690.33333333333337" width="60" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="AIv-1J-xnS"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="UcJ-z0-oQj"/>
@@ -136,7 +136,7 @@
                                 <state key="normal" title="Disabled"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqB-ly-1kg">
-                                <rect key="frame" x="20" y="739.33333333333337" width="114" height="44"/>
+                                <rect key="frame" x="20" y="742.33333333333337" width="114" height="44"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" link="YES"/>
                                 </accessibility>
@@ -147,13 +147,10 @@
                                 <state key="normal" title="Conflicting traits"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xMo-Ac-duC">
-                                <rect key="frame" x="20" y="791.33333333333337" width="388" height="34"/>
+                                <rect key="frame" x="20" y="794.33333333333337" width="388" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MkL-U8-Drv">
-                                <rect key="frame" x="18" y="833.33333333333337" width="392" height="31"/>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -169,18 +166,15 @@
                             <constraint firstItem="gbJ-jp-Hev" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="RqE-t5-cCU"/>
                             <constraint firstItem="B8l-93-lXx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ulk-GB-hC0"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="top" secondItem="Biz-z4-Rs6" secondAttribute="bottom" constant="8" id="VtF-a3-lnD"/>
-                            <constraint firstItem="MkL-U8-Drv" firstAttribute="top" secondItem="xMo-Ac-duC" secondAttribute="bottom" constant="8" id="WFc-3B-h38"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="top" secondItem="ExF-yl-Ptx" secondAttribute="bottom" constant="8" id="Xf2-xA-0AW"/>
                             <constraint firstItem="hEj-Oo-XLH" firstAttribute="top" secondItem="Rbt-uh-813" secondAttribute="bottom" constant="8" id="YeW-sk-53P"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ygu-tg-wij"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aqD-ey-eNr"/>
-                            <constraint firstItem="MkL-U8-Drv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ceQ-P6-O6b"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="top" secondItem="lme-nc-64l" secondAttribute="bottom" constant="8" id="ckv-J0-9TD"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dWD-0U-PNn"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fTX-uW-itu"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="fyo-Fb-ZbR"/>
                             <constraint firstItem="AqB-ly-1kg" firstAttribute="top" secondItem="3AL-f7-ykx" secondAttribute="bottom" constant="8" id="iIk-Qu-8nJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MkL-U8-Drv" secondAttribute="trailing" id="kAj-j7-Tjs"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="width" secondItem="aPJ-3W-qDK" secondAttribute="height" multiplier="200:271" id="ki3-7L-2mY"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="l7Y-xc-Srn"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="m8Y-jL-NGP"/>
