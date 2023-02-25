@@ -26,22 +26,25 @@ final class A11yAssertions {
         let minFloatSize = CGFloat(minSize)
 
         let heightDifference = element.frame.size.height - minFloatSize
-        XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yTestValues.floatComparisonTolerance,
-                                    Failure.warning.report("Element not tall enough",
-                                                           [element],
-                                                           reason: "Minimum size: \(minSize)"),
-                                    file: file,
-                                    line: line)
+
+        A11yAssertGreaterThanOrEqual(heightDifference,
+                                     -A11yTestValues.floatComparisonTolerance,
+                                     message: "Element not tall enough",
+                                     elements: [element],
+                                     reason: "Minimum size: \(minSize)",
+                                     severity: .warning,
+                                     file: file,
+                                     line: line)
 
         let widthDifference = element.frame.size.width - minFloatSize
-        XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yTestValues.floatComparisonTolerance,
-                                    Failure.warning.report("Element not wide enough",
-                                                           [element],
-                                                           reason: "Minimum size: \(minSize)"),
-                                    file: file,
-                                    line: line)
+        A11yAssertGreaterThanOrEqual(widthDifference,
+                                     -A11yTestValues.floatComparisonTolerance,
+                                     message: "Element not wide enough",
+                                     elements: [element],
+                                     reason: "Minimum size: \(minSize)",
+                                     severity: .warning,
+                                     file: file,
+                                     line: line)
     }
 
     func validLabelFor(_ element: A11yElement,
@@ -55,20 +58,18 @@ final class A11yAssertions {
         if let placeholder = element.placeholder,
            placeholder.count > 0,
            element.label.count == 0 {
-            XCTFail(Failure.failure.report("A placeholder is not a label",
-                                           [element],
-                                           reason: "No label for element with placeholder \"\(placeholder)\""),
-                    file: file,
-                    line: line)
+
+            A11yFail(message: "No label for element with placeholder \"\(placeholder)\"", elements: [element], severity: .failure, file: file, line: line)
         } else {
 
-            XCTAssertGreaterThan(element.label.count,
-                                 length,
-                                 Failure.warning.report("Label not meaningful",
-                                                        [element],
-                                                        reason: "Minimum length: \(length)"),
-                                 file: file,
-                                 line: line)
+            A11yAssertGreaterThan(element.label.count,
+                                  length,
+                                  message: "Label not meaningful",
+                                  elements: [element],
+                                  reason: "Minimum length: \(length)",
+                                  severity: .warning,
+                                  file: file,
+                                  line: line)
         }
     }
 
@@ -85,25 +86,28 @@ final class A11yAssertions {
                       line)
 
         // TODO: Localise this check
-        XCTAssertFalse(element.label.containsCaseInsensitive("button"),
-                       Failure.failure.report("Button should not contain the word button in the accessibility label",
-                                              [element]),
-                       file: file,
-                       line: line)
+        A11yAssertFalse(element.label.containsCaseInsensitive("button"),
+                        message: "Button should not contain the word 'button' in the accessibility label",
+                        elements: [element],
+                        severity: .failure,
+                        file: file,
+                        line: line)
 
         if let first = element.label.first {
-            XCTAssert(first.isUppercase,
-                      Failure.failure.report("Buttons should begin with a capital letter",
-                                             [element]),
-                      file: file,
-                      line: line)
+            A11yAssert(first.isUppercase,
+                       message: "Buttons should begin with a capital letter",
+                       elements: [element],
+                       severity: .failure,
+                       file: file,
+                       line: line)
         }
 
-        XCTAssertNil(element.label.range(of: "."),
-                     Failure.failure.report("Button accessibility labels shouldn't contain punctuation",
-                                            [element]),
-                     file: file,
-                     line: line)
+        A11yAssertNil(element.label.range(of: "."),
+                      message: "Button accessibility labels shouldn't contain punctuation",
+                      elements: [element],
+                      severity: .failure,
+                      file: file,
+                      line: line)
     }
 
     func validLabelFor(image: A11yElement,
@@ -120,76 +124,65 @@ final class A11yAssertions {
 
         // TODO: Localise this test
         let avoidWords = ["image", "picture", "graphic", "icon"]
-        image.label.doesNotContain(avoidWords,
-                                   Failure.failure.report("Images should not contain image words in the accessibility label",
-                                                          [image]),
-                                   file,
-                                   line)
 
-        let possibleFilenames = ["_", "-", ".png", ".jpg", ".jpeg", ".pdf", ".avci", ".heic", ".heif"]
-        image.label.doesNotContain(possibleFilenames,
-                                   Failure.failure.report("Image file name is used as the accessibility label",
-                                                          [image]),
-                                   file,
-                                   line)
+        let contained = image.label.containsWords(avoidWords)
+        contained.forEach {
+            A11yFail(message: "Images should not contain image words in the accessibility label", reason: "Offending word: \($0).", severity: .failure, file: file, line: line)
+        }
+
+        let possibleFilenames = ["_", "-", "png", "jpg", "jpeg", "pdf", "avci", "heic", "heif", "svg"]
+
+        let containedFilenames = image.label.containsWords(possibleFilenames)
+        containedFilenames.forEach {
+            A11yFail(message: "Image file name is used as the accessibility label", reason: "Offending word: \($0).", severity: .failure, file: file, line: line)
+        }
     }
 
     func validTraitFor(image: A11yElement,
                        _ file: StaticString,
                        _ line: UInt) {
         guard image.type == .image else { return }
-        XCTAssert(image.traits?.contains(.image) ?? false,
-                  Failure.failure.report("Image should have Image trait",
-                                         [image]),
-                  file: file,
-                  line: line)
+
+        A11yAssert(image.traits?.contains(.image) ?? false,
+                   message: "Image should have Image trait",
+                   elements: [image],
+                   severity: .failure,
+                   file: file,
+                   line: line)
     }
 
     func validTraitFor(button: A11yElement,
                        _ file: StaticString,
                        _ line: UInt) {
         guard button.type == .button else { return }
-        XCTAssert(button.traits?.contains(.button) ?? false ||
-                  button.traits?.contains(.link) ?? false,
-                  Failure.failure.report("Button should have Button or Link trait",
-                                         [button]),
-                  file: file,
-                  line: line)
+
+        A11yAssert(button.traits?.contains(.button) ?? false ||
+                   button.traits?.contains(.link) ?? false,
+                   message: "Button should have Button or Link trait",
+                   elements: [button],
+                   severity: .failure,
+                   file: file,
+                   line: line)
     }
 
     func conflictingTraits(_ element: A11yElement,
                            _ file: StaticString,
                            _ line: UInt) {
         guard let traits = element.traits else { return }
-        XCTAssert(!traits.contains(.button) || !traits.contains(.link),
-                  Failure.failure.report("Elements shouldn't have both Button and Link traits",
-                                         [element]),
-                  file: file,
-                  line: line)
 
-        XCTAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
-                  Failure.failure.report("Elements shouldn't have both Static Text and Updates Frequently traits",
-                                         [element]),
-                  file: file,
-                  line: line)
+        A11yAssert(!traits.contains(.button) || !traits.contains(.link),
+                   message: "Elements shouldn't have both Button and Link traits",
+                   elements: [element],
+                   severity: .failure,
+                   file: file,
+                   line: line)
 
-        var interactiveTraits = UIAccessibilityTraits.none
-
-        if traits.contains(.causesPageTurn) {
-            interactiveTraits.insert(.causesPageTurn)
-        }
-        if traits.contains(.playsSound) {
-            interactiveTraits.insert(.playsSound)
-        }
-        if traits.contains(.startsMediaSession) {
-            interactiveTraits.insert(.startsMediaSession)
-        }
-
-        XCTAssert(traits.contains(.button) || interactiveTraits.isEmpty,
-                  Failure.warning.report("Elements with \(interactiveTraits.nameString()) traits should also have a Button trait",
-                                         [element]),
-                  file: file,
-                  line: line)
+        A11yAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
+                   message: "Elements shouldn't have both Static Text and Updates Frequently traits",
+                   elements: [element],
+                   severity: .failure,
+                   file: file,
+                   line: line)
     }
 
     func labelLength(_ element: A11yElement,
@@ -201,13 +194,14 @@ final class A11yAssertions {
               element.type != .textView,
               !element.shouldIgnore else { return }
 
-        XCTAssertLessThanOrEqual(element.label.count,
-                                 maxLength,
-                                 Failure.warning.report("Label is too long",
-                                                        [element],
-                                                        reason: "Max length: \(maxLength)"),
-                                 file: file,
-                                 line: line)
+        A11yAssertLessThanOrEqual(element.label.count,
+                                  maxLength,
+                                  message: "Label is too long",
+                                  elements: [element],
+                                  reason: "Max length: \(maxLength)",
+                                  severity: .warning,
+                                  file: file,
+                                  line: line)
     }
 
     func validSizeFor(interactiveElement: A11yElement,
@@ -219,20 +213,23 @@ final class A11yAssertions {
             !interactiveElement.isControl { return }
 
         let heightDifference = interactiveElement.frame.size.height - A11yTestValues.minInteractiveSize
-        XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yTestValues.floatComparisonTolerance,
-                                    Failure.failure.report("Interactive element not tall enough",
-                                                           [interactiveElement]),
-                                    file: file,
-                                    line: line)
+
+        A11yAssertGreaterThanOrEqual(heightDifference,
+                                     -A11yTestValues.floatComparisonTolerance,
+                                     message: "Interactive element not tall enough",
+                                     elements: [interactiveElement],
+                                     severity: .failure,
+                                     file: file,
+                                     line: line)
 
         let widthDifference = interactiveElement.frame.size.width - A11yTestValues.minInteractiveSize
-        XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yTestValues.floatComparisonTolerance,
-                                    Failure.failure.report("Interactive element not wide enough",
-                                                           [interactiveElement]),
-                                    file: file,
-                                    line: line)
+        A11yAssertGreaterThanOrEqual(widthDifference,
+                                     -A11yTestValues.floatComparisonTolerance,
+                                     message: "Interactive element not wide enough",
+                                     elements: [interactiveElement],
+                                     severity: .failure,
+                                     file: file,
+                                     line: line)
     }
 
     func hasHeader(_ element: A11yElement) {
@@ -242,10 +239,11 @@ final class A11yAssertions {
     }
 
     func checkHeader(_ file: StaticString, _ line: UInt) {
-        XCTAssert(hasHeader,
-                  Failure.failure.report("Screen has no element with a header trait"),
-                  file: file,
-                  line: line)
+        A11yAssert(hasHeader,
+                   message: "Screen has no element with a header trait",
+                   severity: .failure,
+                   file: file,
+                   line: line)
     }
 
     func disabled(_ element: A11yElement,
@@ -253,11 +251,13 @@ final class A11yAssertions {
                   _ line: UInt) {
 
         guard element.isControl else { return }
-        XCTAssert(element.enabled,
-                  Failure.warning.report("Element disabled",
-                                         [element]),
-                  file: file,
-                  line: line)
+
+        A11yAssert(element.enabled,
+                   message: "Element disabled",
+                   elements: [element],
+                   severity: .warning,
+                   file: file,
+                   line: line)
     }
 
     func duplicatedLabels(_ element1: A11yElement,
@@ -281,7 +281,7 @@ final class A11yAssertions {
                          _ line: UInt) {
         for duplicatePair in duplicatedItems.enumerated() {
             let element = duplicatePair.element.value
-            XCTFail(Failure.warning.report("Elements have duplicated labels", Array(element)), file: file, line: line)
+            A11yFail(message: "Elements have duplicated labels", elements: Array(element), severity: .warning, file: file, line: line)
         }
     }
 }

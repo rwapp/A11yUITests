@@ -28,6 +28,7 @@
 		8E3E1CD6FE7730051804AB1E03B18365 /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD316ABE953A851F64274D60AB4CFC4 /* Values.swift */; };
 		96E3DD27029B0CCFBB4314CC510EE0E3 /* A11ySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818899D18C1C55CEB8B08544F21BA24D /* A11ySnapshot.swift */; };
 		A7E74E087DF362B7D0BFDEC879AAB7E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8B94E9D3B433157168D1EECCEC11CD /* Foundation.framework */; };
+		B574354929AA3BC1003E077A /* XCTest+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574354829AA3BC1003E077A /* XCTest+extensions.swift */; };
 		D477E37CF14AF319305184A16E2B5F55 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AEE66AFD1AFED6E6CCAAAC140E75C0 /* Failure.swift */; };
 		FCA4D31DBB3A43D7C2B64776E31A08AB /* A11yElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D6503FF64B33C74F6C7072D6340FD /* A11yElement.swift */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		A3189CD00B02C7674C5C0329F6A04407 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AA571919F1C24A1FF9C981ADE6C15CD7 /* A11yTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = A11yTests.swift; sourceTree = "<group>"; };
 		B0F7A495F3E70B94110AB67E40E0C33C /* NSObject+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
+		B574354829AA3BC1003E077A /* XCTest+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+extensions.swift"; sourceTree = "<group>"; };
 		B8CB243D68E343282AB2BFB05512AEBC /* Pods-A11yUITests_ExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B9DA61CD1C94B157A741AB9549AC8B94 /* XCTestCase+A11y.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCTestCase+A11y.swift"; sourceTree = "<group>"; };
 		BCA42AF9766943558108BC586923734E /* Pods-A11yUITests_ExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-A11yUITests_ExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				2565A65844EDD8B489BA9976915D4DA7 /* String+Extensions.swift */,
 				5661872E3513F051E79EF0B643777E42 /* UIAccessibilityTraits+Extensions.swift */,
 				3ACA07E49A454084A01A00FAC5E14FC5 /* XCUIElementSnapshot+Extensions.swift */,
+				B574354829AA3BC1003E077A /* XCTest+extensions.swift */,
 			);
 			name = Extensions;
 			path = Sources/A11yUITests/Extensions;
@@ -459,6 +462,7 @@
 				D477E37CF14AF319305184A16E2B5F55 /* Failure.swift in Sources */,
 				3F27A667C6E9B253F9DE85BF13DEA0F9 /* NSObject+Extensions.swift in Sources */,
 				17FDB1F0B86F11EFDFA84279CF4AA057 /* String+Extensions.swift in Sources */,
+				B574354929AA3BC1003E077A /* XCTest+extensions.swift in Sources */,
 				8BE342D78F958D3B0C22E3FE1D594B35 /* TestRunner.swift in Sources */,
 				4506F6D361FD18CF8BBE40CDB5A5F967 /* UIAccessibilityTraits+Extensions.swift in Sources */,
 				8E3E1CD6FE7730051804AB1E03B18365 /* Values.swift in Sources */,
