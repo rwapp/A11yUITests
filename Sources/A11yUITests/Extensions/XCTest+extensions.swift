@@ -109,6 +109,19 @@ func A11yAssertLessThanOrEqual<T>(_ expression1: @autoclosure () -> T,
     fail(severity.message, report(message, elements, reason), file, line)
 }
 
+func A11yAssertNotEqual<T>(_ expression1: @autoclosure () -> T,
+                           _ expression2: @autoclosure () -> T,
+                           message: String,
+                           elements: [A11yElement]? = nil,
+                           reason: String? = nil,
+                           severity: Failure,
+                           file: StaticString,
+                           line: UInt) where T : Equatable {
+    guard expression1() == expression2() else { return }
+
+    fail(severity.message, report(message, elements, reason), file, line)
+}
+
 func A11yFail(message: String,
               elements: [A11yElement]? = nil,
               reason: String? = nil,

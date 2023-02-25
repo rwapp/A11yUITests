@@ -71,6 +71,19 @@ final class A11yAssertions {
                                   file: file,
                                   line: line)
         }
+
+        let notLetters = CharacterSet.uppercaseLetters.inverted
+        let capitalised = element.label.uppercased()
+
+        if capitalised.trimmingCharacters(in: notLetters).count > 0 {
+            A11yAssertNotEqual(capitalised,
+                               element.label,
+                               message: "Label is uppercased.",
+                               elements: [element],
+                               severity: .warning,
+                               file: file,
+                               line: line)
+        }
     }
 
     func validLabelFor(interactiveElement element: A11yElement,
@@ -84,7 +97,7 @@ final class A11yAssertions {
         let nondescriptiveLabels = ["click here", "tap here", "more"]
         let contained = element.label.containsWords(nondescriptiveLabels)
         contained.forEach {
-            A11yFail(message: "Button label may not be descriptive",
+            A11yFail(message: "Button label may not be descriptive.",
                      elements: [element],
                      reason: "Offending word: \($0)",
                      severity: .failure,
@@ -115,6 +128,40 @@ final class A11yAssertions {
                       severity: .failure,
                       file: file,
                       line: line)
+
+        if element.type == .textView || element.type == .textField || element.type == .searchField || element.type == .secureTextField {
+            A11yAssertFalse(element.label.containsCaseInsensitive("field"),
+                            message: "Text fields should not include their type in the label.",
+                            elements: [element],
+                            severity: .failure,
+                            file: file,
+                            line: line)
+        }
+
+        if element.traits?.contains(.link) ?? false || element.type == .link {
+            A11yAssertFalse(element.label.containsCaseInsensitive("link"),
+                            message: "Links should not include their type in the label.",
+                            elements: [element],
+                            severity: .failure,
+                            file: file,
+                            line: line)
+        }
+
+        if element.traits?.contains(.adjustable) ?? false || element.type == .slider {
+            A11yAssertFalse(element.label.containsCaseInsensitive("adjustable"),
+                            message: "Links should not include their type in the label.",
+                            elements: [element],
+                            severity: .failure,
+                            file: file,
+                            line: line)
+
+            A11yAssertFalse(element.label.containsCaseInsensitive("slider"),
+                            message: "Links should not include their type in the label.",
+                            elements: [element],
+                            severity: .failure,
+                            file: file,
+                            line: line)
+        }
     }
 
     func validLabelFor(image: A11yElement,
@@ -125,7 +172,7 @@ final class A11yAssertions {
         guard image.type == .image else { return }
 
         // TODO: Localise this test
-        let avoidWords = ["image", "picture", "graphic", "icon"]
+        let avoidWords = ["image", "picture", "graphic", "icon", "photo"]
 
         let contained = image.label.containsWords(avoidWords)
         contained.forEach {
