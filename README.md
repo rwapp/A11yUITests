@@ -108,14 +108,14 @@ Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIEl
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 Severity: Warning
 
-Additionally this tests checks for elements that have a placeholder but no label.
+Additionally this tests checks for elements that have a placeholder but no label and that the label is not uppercased.
 Severity: Failure
 
 Note: A length of 2 is arbitrary
 
 #### Button Label
 
-`buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long. Checks the button doesn't contain common non-descriptive titles.
+`buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long. Checks the button doesn't contain common non-descriptive titles. This also checks that other interactive elements don't include their type in their label. 
 Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.  Or to set a minimum length for all tests set a value to `A11yTestValues.minMeaningfulLength`
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html).
 This follows [WCAG 2.1 Success Criterion 2.4.9 Link Purpose](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only)

@@ -22,9 +22,9 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 20 failures
+        // Produces 22 failures
 
-        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "Ends with button" Button.
+        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "ENDS WITH BUTTON" Button.
         // Accessibility Warning - Elements have duplicated labels. Label: "Duplicated" Button, Label: "Duplicated" Button.
         // Accessibility Failure - Image file name is used as the accessibility label. Offending word: _.
         // Accessibility Failure - Images should not contain image words in the accessibility label. Offending word: image.
@@ -44,12 +44,14 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Warning - Element disabled. Label: "Disabled" Button.
         // Accessibility Failure - Elements shouldn't have both Button and Link traits. Label: "Conflicting traits" Button.
         // Accessibility Failure - No label for element with placeholder "Placeholder". [No identifier] Text Field.
+        // Accessibility Warning - Label is uppercased. Label: "ENDS WITH BUTTON" Button.
+        // Accessibility Failure - Button label may not be descriptive. Label: "Click here" Button. Offending word: click here
 
         a11yCheckAllOnScreen()
     }
 
     func test_images() {
-        // produces 5 failures
+        // produces 4 failures
 
         // Accessibility Failure - Image file name is used as the accessibility label. Offending word: _.
         // Accessibility Failure - Images should not contain image words in the accessibility label. Offending word: image.
@@ -61,9 +63,9 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_buttons() {
-        // produces 12 failures
+        // produces 14 failures
 
-        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label Label: "Ends with button" Button.
+        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label Label: "ENDS WITH BUTTON" Button.
         // Accessibility Warning - Elements have duplicated labels. Label: "Duplicated" Button, Label: "Duplicated" Button.
         // Accessibility Failure - Button accessibility labels shouldn't contain punctuation Label: "Punctuated." Button.
         // Accessibility Failure - Buttons should begin with a capital letter. Label: " " Button.
@@ -75,6 +77,8 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure - Button should have Button or Link trait. Label: "No trait" Button.
         // Accessibility Warning - Element disabled. Label: "Disabled" Button.
         // Accessibility Failure - Elements shouldn't have both Button and Link traits. Label: "Conflicting traits" Button.
+        // Accessibility Warning - Label is uppercased. Label: "ENDS WITH BUTTON" Button.
+        // Accessibility Failure - Button label may not be descriptive. Label: "Click here" Button. Offending word: click here
 
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteInteractive, on: buttons)
@@ -91,11 +95,12 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_individualTest_individualButton() {
-        // produces 1 failure
+        // produces 2 failures
 
-        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "Ends with button" Button.
+        // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "ENDS WITH BUTTON" Button.
+        // Accessibility Warning - Label is uppercased. Label: "ENDS WITH BUTTON" Button.
 
-        let button = XCUIApplication().buttons["Ends with button"]
+        let button = XCUIApplication().buttons["ENDS WITH BUTTON"]
         a11y(tests: [.buttonLabel], on: [button])
     }
 }

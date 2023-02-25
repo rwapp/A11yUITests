@@ -37,6 +37,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-jp-Hev">
                                 <rect key="frame" x="20" y="170" width="116" height="44"/>
+                                <accessibility key="accessibilityConfiguration" label="ENDS WITH BUTTON"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="IK0-Xu-r0M"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="LSX-ry-o54"/>
@@ -118,7 +119,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-Oo-XLH">
                                 <rect key="frame" x="20" y="638.33333333333337" width="51" height="44"/>
-                                <accessibility key="accessibilityConfiguration">
+                                <accessibility key="accessibilityConfiguration" label="Click here">
                                     <accessibilityTraits key="traits" none="YES"/>
                                 </accessibility>
                                 <constraints>
