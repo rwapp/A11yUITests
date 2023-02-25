@@ -9,6 +9,6 @@ import Foundation
 
 extension CGFloat {
     var printable: String {
-        String(format: "%.2f", self)
+        String(format: "%.1f", self)
     }
 }

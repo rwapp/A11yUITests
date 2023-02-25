@@ -132,7 +132,7 @@ private func report(_ message: String,
 
     var reasonMessage = ""
     if let reason = reason {
-        reasonMessage = "\n\(reason)."
+        reasonMessage = "\n\(reason)"
     }
 
     let elementMessage = elements?.compactMap { $0 }
@@ -141,7 +141,7 @@ private func report(_ message: String,
         .description
         .appending(".")
         .prepending("\n")
-    ?? "."
+    ?? ""
 
     return "\(message)\(elementMessage)\(reasonMessage)"
 }

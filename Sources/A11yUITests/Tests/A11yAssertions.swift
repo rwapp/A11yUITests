@@ -29,7 +29,7 @@ final class A11yAssertions {
 
         A11yAssertGreaterThanOrEqual(heightDifference,
                                      -A11yTestValues.floatComparisonTolerance,
-                                     message: "Element not tall enough",
+                                     message: "Element may not be tall enough.",
                                      elements: [element],
                                      reason: "Minimum height: \(minSize). Current height: \(element.frame.size.height.printable)",
                                      severity: .warning,
@@ -39,7 +39,7 @@ final class A11yAssertions {
         let widthDifference = element.frame.size.width - minFloatSize
         A11yAssertGreaterThanOrEqual(widthDifference,
                                      -A11yTestValues.floatComparisonTolerance,
-                                     message: "Element not wide enough",
+                                     message: "Element may not be wide enough.",
                                      elements: [element],
                                      reason: "Minimum width: \(minSize). Current width: \(element.frame.size.width.printable)",
                                      severity: .warning,
@@ -59,12 +59,12 @@ final class A11yAssertions {
            placeholder.count > 0,
            element.label.count == 0 {
 
-            A11yFail(message: "No label for element with placeholder \"\(placeholder)\"", elements: [element], severity: .failure, file: file, line: line)
+            A11yFail(message: "No label for element with placeholder \"\(placeholder)\".", elements: [element], severity: .failure, file: file, line: line)
         } else {
 
             A11yAssertGreaterThan(element.label.count,
                                   length,
-                                  message: "Label not meaningful",
+                                  message: "Label not meaningful.",
                                   elements: [element],
                                   reason: "Minimum length: \(length)",
                                   severity: .warning,
@@ -87,7 +87,7 @@ final class A11yAssertions {
 
         // TODO: Localise this check
         A11yAssertFalse(element.label.containsCaseInsensitive("button"),
-                        message: "Button should not contain the word 'button' in the accessibility label",
+                        message: "Button should not contain the word 'button' in the accessibility label.",
                         elements: [element],
                         severity: .failure,
                         file: file,
@@ -95,7 +95,7 @@ final class A11yAssertions {
 
         if let first = element.label.first {
             A11yAssert(first.isUppercase,
-                       message: "Buttons should begin with a capital letter",
+                       message: "Buttons should begin with a capital letter.",
                        elements: [element],
                        severity: .failure,
                        file: file,
@@ -103,7 +103,7 @@ final class A11yAssertions {
         }
 
         A11yAssertNil(element.label.range(of: "."),
-                      message: "Button accessibility labels shouldn't contain punctuation",
+                      message: "Button accessibility labels shouldn't contain punctuation.",
                       elements: [element],
                       severity: .failure,
                       file: file,
@@ -127,14 +127,25 @@ final class A11yAssertions {
 
         let contained = image.label.containsWords(avoidWords)
         contained.forEach {
-            A11yFail(message: "Images should not contain image words in the accessibility label", reason: "Offending word: \($0)", severity: .failure, file: file, line: line)
+            A11yFail(message: "Images should not contain image words in the accessibility label.",
+
+                     elements: [image],
+                     reason: "Offending word: \($0)",
+                     severity: .failure,
+                     file: file,
+                     line: line)
         }
 
         let possibleFilenames = ["_", "-", "png", "jpg", "jpeg", "pdf", "avci", "heic", "heif", "svg"]
 
         let containedFilenames = image.label.containsWords(possibleFilenames)
         containedFilenames.forEach {
-            A11yFail(message: "Image file name is used as the accessibility label", reason: "Offending word: \($0)", severity: .failure, file: file, line: line)
+            A11yFail(message: "Image file name is used as the accessibility label.",
+                     elements: [image],
+                     reason: "Offending word: \($0)",
+                     severity: .failure,
+                     file: file,
+                     line: line)
         }
     }
 
@@ -144,7 +155,7 @@ final class A11yAssertions {
         guard image.type == .image else { return }
 
         A11yAssert(image.traits?.contains(.image) ?? false,
-                   message: "Image should have Image trait",
+                   message: "Image should have Image trait.",
                    elements: [image],
                    severity: .failure,
                    file: file,
@@ -158,7 +169,7 @@ final class A11yAssertions {
 
         A11yAssert(button.traits?.contains(.button) ?? false ||
                    button.traits?.contains(.link) ?? false,
-                   message: "Button should have Button or Link trait",
+                   message: "Button should have Button or Link trait.",
                    elements: [button],
                    severity: .failure,
                    file: file,
@@ -171,14 +182,14 @@ final class A11yAssertions {
         guard let traits = element.traits else { return }
 
         A11yAssert(!traits.contains(.button) || !traits.contains(.link),
-                   message: "Elements shouldn't have both Button and Link traits",
+                   message: "Elements shouldn't have both Button and Link traits.",
                    elements: [element],
                    severity: .failure,
                    file: file,
                    line: line)
 
         A11yAssert(!traits.contains(.staticText) || !traits.contains(.updatesFrequently),
-                   message: "Elements shouldn't have both Static Text and Updates Frequently traits",
+                   message: "Elements shouldn't have both Static Text and Updates Frequently traits.",
                    elements: [element],
                    severity: .failure,
                    file: file,
@@ -196,7 +207,7 @@ final class A11yAssertions {
 
         A11yAssertLessThanOrEqual(element.label.count,
                                   maxLength,
-                                  message: "Label is too long",
+                                  message: "Label may be too long.",
                                   elements: [element],
                                   reason: "Max length: \(maxLength)",
                                   severity: .warning,
@@ -216,7 +227,7 @@ final class A11yAssertions {
 
         A11yAssertGreaterThanOrEqual(heightDifference,
                                      -A11yTestValues.floatComparisonTolerance,
-                                     message: "Interactive element not tall enough",
+                                     message: "Interactive element not tall enough.",
                                      elements: [interactiveElement],
                                      reason: "Minimum height: \(A11yTestValues.minInteractiveSize). Current height: \(interactiveElement.frame.size.height.printable)",
                                      severity: .failure,
@@ -226,7 +237,7 @@ final class A11yAssertions {
         let widthDifference = interactiveElement.frame.size.width - A11yTestValues.minInteractiveSize
         A11yAssertGreaterThanOrEqual(widthDifference,
                                      -A11yTestValues.floatComparisonTolerance,
-                                     message: "Interactive element not wide enough",
+                                     message: "Interactive element not wide enough.",
                                      elements: [interactiveElement],
                                      reason: "Minimum width: \(A11yTestValues.minInteractiveSize). Current width: \(interactiveElement.frame.size.width.printable)",
                                      severity: .failure,
@@ -242,7 +253,7 @@ final class A11yAssertions {
 
     func checkHeader(_ file: StaticString, _ line: UInt) {
         A11yAssert(hasHeader,
-                   message: "Screen has no element with a header trait",
+                   message: "Screen has no element with a header trait.",
                    severity: .failure,
                    file: file,
                    line: line)
@@ -255,7 +266,7 @@ final class A11yAssertions {
         guard element.isControl else { return }
 
         A11yAssert(element.enabled,
-                   message: "Element disabled",
+                   message: "Element disabled.",
                    elements: [element],
                    severity: .warning,
                    file: file,
@@ -283,7 +294,7 @@ final class A11yAssertions {
                          _ line: UInt) {
         for duplicatePair in duplicatedItems.enumerated() {
             let element = duplicatePair.element.value
-            A11yFail(message: "Elements have duplicated labels", elements: Array(element), severity: .warning, file: file, line: line)
+            A11yFail(message: "Elements have duplicated labels.", elements: Array(element), severity: .warning, file: file, line: line)
         }
     }
 }
