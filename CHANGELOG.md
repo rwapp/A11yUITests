@@ -6,6 +6,7 @@
 * Added the ability to specify accessibility label or accessibility identifier reported in failure messages
 * New rule for elements with a placeholder and no label.
 * Improved method for fetching traits meaning no swizzling - thank you [Chris Kolbu](https://github.com/nesevis)
+* Improved error reporting - thank you [Ryan Ferrell](https://github.com/importRyan)
 * Fixed a crash when performing a snapshot test on a screen with fewer elements that the reference
 * Fixes an issue where some tests were run more than once
 

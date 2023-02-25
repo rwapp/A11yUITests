@@ -98,16 +98,11 @@ final class A11ySnapshot {
 
         } else {
             if let docPath = createNewSnapshot(snapshot, test: test, file: testsFile, line: line) {
-                XCTFail(Failure.warning.report("No reference snapshot. Generated new snapshot.\nCheck test report or \(docPath)"),
-                        file: testsFile,
-                        line: line)
-
+                A11yFail(message: "No reference snapshot. Generated new snapshot.\nCheck test report or \(docPath)", severity: .warning, file: testsFile, line: line)
                 return
             }
 
-            XCTFail(Failure.failure.report("No reference snapshot. Unable to create new reference."),
-                    file: testsFile,
-                    line: line)
+            A11yFail(message: "No reference snapshot. Unable to create new reference", severity: .failure, file: testsFile, line: line)
         }
     }
 
@@ -117,8 +112,7 @@ final class A11ySnapshot {
                                    line: UInt) -> URL? {
         guard let documentDirectory = fileManager.urls(for: .documentDirectory,
                                                        in: .userDomainMask).first else {
-            XCTFail(Failure.failure.report("Unable get documents directory."),
-                    file: file, line: line)
+            A11yFail(message: "Unable get documents directory", severity: .failure, file: file, line: line)
             return nil
         }
 
@@ -156,20 +150,21 @@ final class A11ySnapshot {
 
         if reference.version < SnapshotWrapper.snapshotVersion {
             if let docPath = createNewSnapshot(snapshot, test: test, file: file, line: line) {
-                XCTFail(Failure.warning.report("Reference snapshot is outdated. Generated new snapshot. Check for regressions before replacing as reference.\nCheck test report or \(docPath)"),
-                        file: file,
-                        line: line)
+                A11yFail(message: "Reference snapshot is outdated. Generated new snapshot. Check for regressions before replacing as reference.\nCheck test report or \(docPath)", severity: .warning, file: file, line: line)
 
                 return
             }
 
-            XCTFail(Failure.failure.report("Reference snapshot is outdated. Unable to create new reference."),
-                    file: file,
-                    line: line)
+            A11yFail(message: "Reference snapshot is outdated. Unable to create new reference", severity: .failure, file: file, line: line)
             return
         }
 
-        XCTAssertEqual(reference.snapshot.count, snapshot.snapshot.count, Failure.failure.report("Snapshots contain a different number of items. This screen has changed."), file: file, line: line)
+        A11yAssertEqual(reference.snapshot.count,
+                        snapshot.snapshot.count,
+                        message: "Snapshots contain a different number of items. This screen has changed",
+                        severity: .failure,
+                        file: file,
+                        line: line)
 
         for i in 0..<reference.snapshot.count {
 
@@ -179,21 +174,37 @@ final class A11ySnapshot {
             let referenceElement = reference.snapshot[i]
             let snapshotElementLabel = snapshotElement.label
 
-            XCTAssertEqual(referenceElement.label, snapshotElementLabel,
-                           Failure.failure.report("Label does not match reference snapshot.\nReference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)"),
-                           file: file, line: line)
+            A11yAssertEqual(referenceElement.label,
+                            snapshotElementLabel,
+                            message: "Label does not match reference snapshot",
+                            reason: "Reference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)",
+                            severity: .failure,
+                            file: file,
+                            line: line)
 
-            XCTAssertEqual(referenceElement.type, snapshotElement.type,
-                           Failure.failure.report("Type does not match reference snapshot.\nReference: \(referenceElement.type). Snapshot: \(snapshotElement.type). Element name: \(snapshotElementLabel)"),
-                           file: file, line: line)
+            A11yAssertEqual(referenceElement.type,
+                            snapshotElement.type,
+                            message: "Type does not match reference snapshot",
+                            reason: "Reference: \(referenceElement.type). Snapshot: \(snapshotElement.type)",
+                            severity: .failure,
+                            file: file,
+                            line: line)
 
-            XCTAssertEqual(referenceElement.traits, snapshotElement.traits,
-                           Failure.failure.report("Traits do not match reference snapshot.\nReference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", ")). Element name: \(snapshotElementLabel)"),
-                           file: file, line: line)
+            A11yAssertEqual(referenceElement.traits,
+                            snapshotElement.traits,
+                            message: "Traits do not match reference snapshot",
+                            reason: "Reference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", "))",
+                            severity: .failure,
+                            file: file,
+                            line: line)
 
-            XCTAssertEqual(referenceElement.enabled, snapshotElement.enabled,
-                           Failure.failure.report("Enabled status does not match reference snapshot.\nReference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled). Element name: \(snapshotElementLabel)"),
-                           file: file, line: line)
+            A11yAssertEqual(referenceElement.enabled,
+                            snapshotElement.enabled,
+                            message: "Enabled status does not match reference snapshot",
+                            reason: "Reference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled)",
+                            severity: .failure,
+                            file: file,
+                            line: line)
 
             compareFrame(reference: referenceElement.frame, snapshot: snapshotElement.frame, label: snapshotElementLabel, file: file, line: line)
         }
@@ -211,20 +222,24 @@ final class A11ySnapshot {
         let snapWidth = snapshot.size.width
         let snapHeight = snapshot.size.height
 
-        XCTAssertEqual(refX, snapX, accuracy: A11yTestValues.floatComparisonTolerance,
-                       Failure.failure.report("Frame does not match reference snapshot.\nReference x: \(refX). Snapshot x: \(snapX). Element name: \(label)"),
-                       file: file, line: line)
+        A11yAssertEqual(refX, snapX, accuracy: A11yTestValues.floatComparisonTolerance,
+                        message: "Frame does not match reference snapshot",
+                        reason: "Reference x: \(refX). Snapshot x: \(snapX)",
+                        severity: .failure, file: file, line: line)
 
-        XCTAssertEqual(refY, snapY, accuracy: A11yTestValues.floatComparisonTolerance,
-                       Failure.failure.report("Frame does not match reference snapshot.\nReference y: \(refY). Snapshot y: \(snapY). Element name: \(label)"),
-                       file: file, line: line)
+        A11yAssertEqual(refY, snapY, accuracy: A11yTestValues.floatComparisonTolerance,
+                        message: "Frame does not match reference snapshot",
+                        reason: "Reference y: \(refY). Snapshot y: \(snapY)",
+                        severity: .failure, file: file, line: line)
 
-        XCTAssertEqual(refWidth, snapWidth, accuracy: A11yTestValues.floatComparisonTolerance,
-                       Failure.failure.report("Frame does not match reference snapshot.\nReference width: \(refWidth). Snapshot width: \(snapWidth). Element name: \(label)"),
-                       file: file, line: line)
+        A11yAssertEqual(refWidth, snapWidth, accuracy: A11yTestValues.floatComparisonTolerance,
+                        message: "Frame does not match reference snapshot",
+                        reason: "Reference width: \(refWidth). Snapshot width: \(snapWidth)",
+                        severity: .failure, file: file, line: line)
 
-        XCTAssertEqual(refHeight, snapHeight, accuracy: A11yTestValues.floatComparisonTolerance,
-                       Failure.failure.report("Frame does not match reference snapshot.\nReference height: \(refHeight). Snapshot height: \(snapHeight). Element name: \(label)"),
-                       file: file, line: line)
+        A11yAssertEqual(refHeight, snapHeight, accuracy: A11yTestValues.floatComparisonTolerance,
+                        message: "Frame does not match reference snapshot",
+                        reason: "Reference height: \(refHeight). Snapshot height: \(snapHeight)",
+                        severity: .failure, file: file, line: line)
     }
 }

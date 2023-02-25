@@ -19,17 +19,16 @@ internal extension String {
         return self.lowercased().contains(substring.lowercased())
     }
 
-    func doesNotContain(_ words : [String],
-                        _ error: String,
-                        _ file: StaticString,
-                        _ line: UInt) {
+    func containsWords(_ words : [String]) -> [String] {
+        var contained = [String]()
 
         for word in words {
-            XCTAssertFalse(self.containsCaseInsensitive(word),
-                           "\(error) Offending word: \(word).",
-                           file: file,
-                           line: line)
+            if self.containsCaseInsensitive(word) {
+                contained.append(word)
+            }
         }
+
+        return contained
     }
 }
 
