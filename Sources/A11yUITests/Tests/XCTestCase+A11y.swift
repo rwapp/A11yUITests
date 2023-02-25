@@ -61,10 +61,10 @@ extension XCTestCase {
     ///   - elements: Array of elements to run checks against
     ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yAllTestsOn(elements: [XCUIElement],
-                               minMeaningfulLength length: Int = A11yValues.minMeaningfulLength,
-                               maxMeaningfulLength maxLength: Int = A11yValues.maxMeaningfulLength,
-                               minSize: Int = A11yValues.minSize,
-                               allInteractiveElements: Bool = A11yValues.allInteractiveElements,
+                               minMeaningfulLength length: Int = A11yTestValues.minMeaningfulLength,
+                               maxMeaningfulLength maxLength: Int = A11yTestValues.maxMeaningfulLength,
+                               minSize: Int = A11yTestValues.minSize,
+                               allInteractiveElements: Bool = A11yTestValues.allInteractiveElements,
                                file: StaticString = #file,
                                line: UInt = #line) {
 
@@ -88,10 +88,10 @@ extension XCTestCase {
     ///   - allInteractiveElements: An optional parameter to run interactive element size check on all interactive elements. Default is true
     public func a11y(tests: [A11yTests],
                      on elements: [XCUIElement],
-                     minMeaningfulLength minLength: Int = A11yValues.minMeaningfulLength,
-                     maxMeaningfulLength maxLength: Int = A11yValues.maxMeaningfulLength,
-                     minSize: Int = A11yValues.minSize,
-                     allInteractiveElements: Bool = A11yValues.allInteractiveElements,
+                     minMeaningfulLength minLength: Int = A11yTestValues.minMeaningfulLength,
+                     maxMeaningfulLength maxLength: Int = A11yTestValues.maxMeaningfulLength,
+                     minSize: Int = A11yTestValues.minSize,
+                     allInteractiveElements: Bool = A11yTestValues.allInteractiveElements,
                      file: StaticString = #file,
                      line: UInt = #line) {
 
@@ -114,7 +114,7 @@ extension XCTestCase {
     ///   - element: Element to run check against
     ///   - minSize: An optional parameter to specify the minimum size for the element. Default is 14
     public func a11yCheckValidSizeFor(element: XCUIElement,
-                                      minSize: Int = A11yValues.minSize,
+                                      minSize: Int = A11yTestValues.minSize,
                                       file: StaticString = #file,
                                       line: UInt = #line) {
 
@@ -132,7 +132,7 @@ extension XCTestCase {
     ///   - element: Element to run check against
     ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(element: XCUIElement,
-                                       minMeaningfulLength length: Int = A11yValues.minMeaningfulLength,
+                                       minMeaningfulLength length: Int = A11yTestValues.minMeaningfulLength,
                                        file: StaticString = #file,
                                        line: UInt = #line) {
 
@@ -150,7 +150,7 @@ extension XCTestCase {
     ///   - interactiveElement: Interactive element to run check against
     ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(interactiveElement: XCUIElement,
-                                       minMeaningfulLength length: Int = A11yValues.minMeaningfulLength,
+                                       minMeaningfulLength length: Int = A11yTestValues.minMeaningfulLength,
                                        file: StaticString = #file,
                                        line: UInt = #line) {
 
@@ -168,7 +168,7 @@ extension XCTestCase {
     ///   - image: Image element to run the check against
     ///   - minMeaningfulLength: An optional parameter to specify the minimum label length for controls. Default is 2
     public func a11yCheckValidLabelFor(image: XCUIElement,
-                                       minMeaningfulLength length: Int = A11yValues.minMeaningfulLength,
+                                       minMeaningfulLength length: Int = A11yTestValues.minMeaningfulLength,
                                        file: StaticString = #file,
                                        line: UInt = #line) {
 
@@ -186,7 +186,7 @@ extension XCTestCase {
     ///   - element: Element to run check against
     ///   - maxLength: An optional parameter to specify the maximum label length for controls. Default is 40
     public func a11yCheckLabelLength(element: XCUIElement,
-                                     maxLength: Int = A11yValues.maxMeaningfulLength,
+                                     maxLength: Int = A11yTestValues.maxMeaningfulLength,
                                      file: StaticString = #file,
                                      line: UInt = #line) {
 
@@ -204,7 +204,7 @@ extension XCTestCase {
     ///   - interactiveElement: Interactive element to run check against
     ///   - allElements: An optional parameter to run interactive element size check on all interactive elements. Default is true
     public func a11yCheckValidSizeFor(interactiveElement: XCUIElement,
-                                      allElements: Bool = A11yValues.allInteractiveElements,
+                                      allElements: Bool = A11yTestValues.allInteractiveElements,
                                       file: StaticString = #file,
                                       line: UInt = #line) {
 

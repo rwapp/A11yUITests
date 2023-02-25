@@ -31,6 +31,7 @@ struct A11yElement {
     let placeholder: String?
     let value: String?
     let id = UUID()
+    let axIdentifier: String
 
     var shouldIgnore: Bool {
         return type == .window ||
@@ -70,7 +71,31 @@ struct A11yElement {
     }
 
     var description: String {
-        return "\"\(self.label)\" \(self.type.name())"
+        "\(itemLabel) \(self.type.name())"
+    }
+
+    var itemLabel: String {
+        let noIdentifier = "[No identifier]"
+        var itemLabel: String
+
+        let label = self.label.count > 0 ? "Label: \"\(self.label)\"" : nil
+        let identifier = self.axIdentifier.count > 0 ? "Identifier: \"\(axIdentifier)\"" : nil
+
+        switch A11yTestValues.preferredItemLabel {
+        case .label:
+            itemLabel = label ?? identifier ?? noIdentifier
+        case .identifier:
+            itemLabel = identifier ?? label ?? noIdentifier
+        case .both:
+            itemLabel = [label, identifier].compactMap { $0 }
+                .joined(separator: ", ")
+
+            if itemLabel.count < 1 {
+                itemLabel = noIdentifier
+            }
+        }
+
+        return itemLabel
     }
 
     var codable: CodableElement? {
@@ -93,6 +118,8 @@ struct A11yElement {
         enabled = element.isEnabled
         placeholder = element.placeholderValue
         value = element.value as? String
+        axIdentifier = element.identifier
+
 
         guard let snapshot = try? element.snapshot() as? A11ySnapshot else {
             traits = nil
