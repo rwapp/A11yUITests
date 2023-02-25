@@ -247,8 +247,6 @@ If two elements of the same type have the same identifier (eg, two buttons both 
 
 Elements that are hidden from accessibility are still assessed by these tests. This is due to how XCUI presents elements to the test runner, I'm not currently aware of a way to detect elements hidden from accessibility.
 
-Some tests sometimes create duplicate failure messages. I haven't yet looked at why.
-
 ## Author
 
 Rob Whitaker, rw@rwapp.co.uk\

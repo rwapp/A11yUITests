@@ -7,6 +7,7 @@
 * New rule for elements with a placeholder and no label.
 * Improved method for fetching traits meaning no swizzling - thank you [Chris Kolbu](https://github.com/nesevis)
 * Fixed a crash when performing a snapshot test on a screen with fewer elements that the reference
+* Fixes an issue where some tests were run more than once
 
 ## 1.0.0
 
