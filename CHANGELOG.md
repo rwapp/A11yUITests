@@ -7,6 +7,7 @@
 * New rule for elements with a placeholder and no label.
 * Improved method for fetching traits meaning no swizzling - thank you [Chris Kolbu](https://github.com/nesevis)
 * Improved error reporting - thank you [Ryan Ferrell](https://github.com/importRyan)
+* Added a test for common non-descriptive button titles following [SC 2.4.9: Link Purpose (Link Only) (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only)
 * Fixed a crash when performing a snapshot test on a screen with fewer elements that the reference
 * Fixes an issue where some tests were run more than once
 

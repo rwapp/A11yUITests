@@ -81,6 +81,17 @@ final class A11yAssertions {
         guard element.isControl else { return }
 
         // TODO: Localise this check
+        let nondescriptiveLabels = ["click here", "tap here", "more"]
+        nondescriptiveLabels.forEach {
+            A11yFail(message: "Button label may not be descriptive",
+                     elements: [element],
+                     reason: "Offending word: \($0)",
+                     severity: .failure,
+                     file: file,
+                     line: line)
+        }
+
+        // TODO: Localise this check
         A11yAssertFalse(element.label.containsCaseInsensitive("button"),
                         message: "Button should not contain the word 'button' in the accessibility label.",
                         elements: [element],
@@ -118,7 +129,6 @@ final class A11yAssertions {
         let contained = image.label.containsWords(avoidWords)
         contained.forEach {
             A11yFail(message: "Images should not contain image words in the accessibility label.",
-
                      elements: [image],
                      reason: "Offending word: \($0)",
                      severity: .failure,
