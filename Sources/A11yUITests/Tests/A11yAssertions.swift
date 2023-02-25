@@ -64,7 +64,7 @@ final class A11yAssertions {
 
             A11yAssertGreaterThan(element.label.count,
                                   length,
-                                  message: "Label not meaningful.",
+                                  message: "Label may not be meaningful.",
                                   elements: [element],
                                   reason: "Minimum length: \(length)",
                                   severity: .warning,

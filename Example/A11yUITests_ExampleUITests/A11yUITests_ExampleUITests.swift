@@ -36,7 +36,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure - Interactive element not tall enough. Label: "Too Small" Button. Minimum height: 44.0. Current height: 43.0.
         // Accessibility Failure - Interactive element not wide enough. Label: "Too Small" Button. Minimum width: 44.0. Current width: 43.0.
         // Accessibility Warning - Label may be too long. Label: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button. Max length: 40.
-        // Accessibility Warning - Label not meaningful. Label: " " Button. Minimum length: 2.
+        // Accessibility Warning - Label may not be meaningful. Label: " " Button. Minimum length: 2.
         // Accessibility Failure - Interactive element not tall enough. [No identifier] Text Field. Minimum height: 44.0. Current height: 34.00.
         // Accessibility Failure - Image should have Image trait. Label: "A11y_logo" Image.
         // Accessibility Failure - Screen has no element with a header trait.
@@ -53,7 +53,7 @@ class A11yUITestsExampleUITests: XCTestCase {
 
         // Accessibility Failure - Image file name is used as the accessibility label. Offending word: _.
         // Accessibility Failure - Images should not contain image words in the accessibility label. Offending word: image.
-        // Accessibility Warning - Label not meaningful. Label: "A11y_logo" Image. Minimum length: 10.
+        // Accessibility Warning - Label may not be meaningful. Label: "A11y_logo" Image. Minimum length: 10.
         // Accessibility Failure - Image should have Image trait. Label: "A11y_logo" Image.
 
         let images = XCUIApplication().images.allElementsBoundByIndex
@@ -71,7 +71,7 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure - Interactive element not tall enough. Label: "Too Small" Button. Minimum height: 44.0. Current height: 43.0.
         // Accessibility Failure - Interactive element not wide enough. Label: "Too Small" Button. Minimum width: 44.0. Current width: 43.0.
         // Accessibility Warning - Label is too long. Label: "A very long overly descriptive label that isn't required use context instead to infer meaning or add a hint if required" Button. Max length: 40.
-        // Accessibility Warning - Label not meaningful. Label: " " Button. Minimum length: 2.
+        // Accessibility Warning - Label may not be meaningful. Label: " " Button. Minimum length: 2.
         // Accessibility Failure - Button should have Button or Link trait. Label: "No trait" Button.
         // Accessibility Warning - Element disabled. Label: "Disabled" Button.
         // Accessibility Failure - Elements shouldn't have both Button and Link traits. Label: "Conflicting traits" Button.
