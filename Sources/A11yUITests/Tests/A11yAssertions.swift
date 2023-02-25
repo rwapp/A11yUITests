@@ -31,7 +31,7 @@ final class A11yAssertions {
                                      -A11yTestValues.floatComparisonTolerance,
                                      message: "Element not tall enough",
                                      elements: [element],
-                                     reason: "Minimum size: \(minSize)",
+                                     reason: "Minimum height: \(minSize). Current height: \(element.frame.size.height.printable)",
                                      severity: .warning,
                                      file: file,
                                      line: line)
@@ -41,7 +41,7 @@ final class A11yAssertions {
                                      -A11yTestValues.floatComparisonTolerance,
                                      message: "Element not wide enough",
                                      elements: [element],
-                                     reason: "Minimum size: \(minSize)",
+                                     reason: "Minimum width: \(minSize). Current width: \(element.frame.size.width.printable)",
                                      severity: .warning,
                                      file: file,
                                      line: line)
@@ -127,14 +127,14 @@ final class A11yAssertions {
 
         let contained = image.label.containsWords(avoidWords)
         contained.forEach {
-            A11yFail(message: "Images should not contain image words in the accessibility label", reason: "Offending word: \($0).", severity: .failure, file: file, line: line)
+            A11yFail(message: "Images should not contain image words in the accessibility label", reason: "Offending word: \($0)", severity: .failure, file: file, line: line)
         }
 
         let possibleFilenames = ["_", "-", "png", "jpg", "jpeg", "pdf", "avci", "heic", "heif", "svg"]
 
         let containedFilenames = image.label.containsWords(possibleFilenames)
         containedFilenames.forEach {
-            A11yFail(message: "Image file name is used as the accessibility label", reason: "Offending word: \($0).", severity: .failure, file: file, line: line)
+            A11yFail(message: "Image file name is used as the accessibility label", reason: "Offending word: \($0)", severity: .failure, file: file, line: line)
         }
     }
 
@@ -218,6 +218,7 @@ final class A11yAssertions {
                                      -A11yTestValues.floatComparisonTolerance,
                                      message: "Interactive element not tall enough",
                                      elements: [interactiveElement],
+                                     reason: "Minimum height: \(A11yTestValues.minInteractiveSize). Current height: \(interactiveElement.frame.size.height.printable)",
                                      severity: .failure,
                                      file: file,
                                      line: line)
@@ -227,6 +228,7 @@ final class A11yAssertions {
                                      -A11yTestValues.floatComparisonTolerance,
                                      message: "Interactive element not wide enough",
                                      elements: [interactiveElement],
+                                     reason: "Minimum width: \(A11yTestValues.minInteractiveSize). Current width: \(interactiveElement.frame.size.width.printable)",
                                      severity: .failure,
                                      file: file,
                                      line: line)
