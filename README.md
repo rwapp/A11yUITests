@@ -3,7 +3,6 @@
 [![Version](https://img.shields.io/cocoapods/v/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![License](https://img.shields.io/cocoapods/l/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![Platform](https://img.shields.io/cocoapods/p/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M33JMAY)
 [![Twitter](https://img.shields.io/twitter/follow/MobileA11y?style=flat)](https://twitter.com/mobilea11y)
 
 A11yTests is an extension to `XCTestCase` that adds tests for common accessibility issues that can be run as part of an XCUI Test suite.
@@ -243,6 +242,8 @@ end
 ## Known Issues
 
 If two elements of the same type have the same identifier (eg, two buttons both labeled 'Next') this will cause the tests to crash on some iOS versions. This was an issue on ios 13 and appears fixed as of iOS 15.
+
+Some tests sometimes create duplicate failure messages. I haven't yet looked at why.
 
 ## Author
 

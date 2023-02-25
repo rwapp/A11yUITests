@@ -129,3 +129,9 @@ struct A11yElement {
         traits = snapshot.getTraits()
     }
 }
+
+extension A11yElement: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
