@@ -126,7 +126,7 @@ struct A11yElement {
             return
         }
 
-        traits = snapshot.getTraits()
+        traits = snapshot.traits
     }
 }
 
