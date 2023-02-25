@@ -3,7 +3,6 @@
 [![Version](https://img.shields.io/cocoapods/v/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![License](https://img.shields.io/cocoapods/l/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![Platform](https://img.shields.io/cocoapods/p/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M33JMAY)
 [![Twitter](https://img.shields.io/twitter/follow/MobileA11y?style=flat)](https://twitter.com/mobilea11y)
 
 A11yTests is an extension to `XCTestCase` that adds tests for common accessibility issues that can be run as part of an XCUI Test suite.
@@ -65,7 +64,7 @@ func test_individualTest_individualButton() {
 
 #### Ignoring Elements
 
-When running `a11yCheckAllOnScreen()` it is possible to ignore elements using their accessibility idenfiers by passing any identifiers you wish to ignore with the `ignoringElementIdentifiers: [String]` argument.
+When running `a11yCheckAllOnScreen()` it is possible to ignore elements using their accessibility identifiers by passing any identifiers you wish to ignore with the `ignoringElementIdentifiers: [String]` argument.
 
 ### Test Suites
 
@@ -87,6 +86,7 @@ Alternatively you can create an array of `A11yTests` enum values for the tests y
 #### Minimum Size
 
 `minimumSize` or checks an element is at least 14px x 14px.
+To specify a minimum size set a value to `A11yTestValues.minSize`
 Severity: Warning
 
 Note: 14px is arbitrary.
@@ -95,6 +95,7 @@ Note: 14px is arbitrary.
 
 `minimumInteractiveSize` checks tappable elements are a minimum of 44px x 44px.
 This satisfies [WCAG 2.1 Success Criteria 2.5.5 Target Size Level AAA](https://www.w3.org/TR/WCAG21/#target-size)
+To specify a custom minimum interactive size set a value to `A11yTestValues.minInteractiveSize`. This is not recommended.
 Severity: Error
 
 Note: Many of Apple's controls fail this requirement. For this reason, when running a suite of tests with `minimumInteractiveSize` only buttons and cells are checked. This may still result in some failures for `UITabBarButton`s for example.
@@ -103,37 +104,44 @@ For full compliance, you should run `a11yCheckValidSizeFor(interactiveElement: X
 #### Label Presence
 
 `labelPresence` checks the element has an accessibility label that is a minimum of 2 characters long. 
-Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(element: XCUIElement, minMeaningfulLength: Int )` to change the minimum length. Or to set a minimum length for all tests set a value to `A11yTestValues.minMeaningfulLength`
 This counts towards [WCAG 2.1 Guideline 1.1 Text Alternatives](https://www.w3.org/TR/WCAG21/#text-alternatives) but does not guarantee compliance.
 Severity: Warning
 
 Additionally this tests checks for elements that have a placeholder but no label.
 Severity: Failure
 
+Note: A length of 2 is arbitrary
+
 #### Button Label
 
 `buttonLabel` checks labels for interactive elements begin with a capital letter and don't contain a period or the word button. Checks the label is a minimum of 2 characters long.
-Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(interactiveElement: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.  Or to set a minimum length for all tests set a value to `A11yTestValues.minMeaningfulLength`
 This follows [Apple's guidance for writing accessibility labels](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html).
 Severity: Error
 
 Note: This test is not localised.
+Note: A length of 2 is arbitrary
 
 #### Image Label
 
 `imageLabel` checks accessible images don't contain the words image, picture, graphic, or icon, and checks that the label isn't reusing the image filename. Checks the label is a minimum of 2 characters long.
-Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length.
+Pass a `minMeaningfulLength` argument to `a11yCheckValidLabelFor(image: XCUIElement, minMeaningfulLength: Int )` to change the minimum length. Or to set a minimum length for all tests set a value to `A11yTestValues.minMeaningfulLength`
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/). Care should be given when deciding whether to make images accessible to avoid creating unnecessary noise.
 Severity: Error
 
 
 Note: This test is not localised.
+Note: A length of 2 is arbitrary
 
 #### Label Length
 `labelLength` checks accessibility labels are <= 40 characters.
+To set a maiximum length for all tests set a value to `A11yTestValues.maxMeaningfulLength`
 This follows [Apple's guidelines for writing accessibility labels](https://developer.apple.com/videos/play/wwdc2019/254/).
 Ideally, labels should be as short as possible while retaining meaning. If you feel your element needs more context consider adding an accessibility hint.
 Severity: Warning
+
+Note: A length of 40 is arbitrary
 
 #### Header
 `header` checks the screen has at least one text element with a header trait.
@@ -184,6 +192,20 @@ Snapshot testing checks for changes in the following:
 * Control type
 * Accessibility traits
 
+### Test properties
+
+Use `A11yTestValues` to set various default values for all tests.
+
+Property | Default | Purpose
+---|---|---
+`minSize` | 14 | Minimum element size on screen for accessible elements. arbitrary.
+`minInteractiveSize` | 44 | Minimum size on screen for interactive elements. 44 is specified by [WCAG](https://www.w3.org/TR/WCAG21/#target-size)
+`minMeaningfulLength` | 2 | Minimum length of an accessible string. arbitrary.
+`maxMeaningfulLength` | 40 | Maximum length of an accessible string. arbitrary.
+`allInteractiveElements` | true | When false this skips the 44px size test on interactive elements. This is useful when relying heavily on standard iOS components that do not have valid sizes. Note: Using these elements is still a failure under WCAG, you should customise their appearance so they are large enough. 
+`floatComparisonTolerance` | 0.1 | Float comparison threshold
+`preferredItemLabel` | label | Failure messages prefer reporting the items label, accessibility Identifier, or both.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -224,6 +246,8 @@ end
 If two elements of the same type have the same identifier (eg, two buttons both labeled 'Next') this can cause the tests to crash on some iOS versions. This was an issue on iOS 13 and appears fixed as of iOS 15.
 
 Elements that are hidden from accessibility are still assessed by these tests. This is due to how XCUI presents elements to the test runner, I'm not currently aware of a way to detect elements hidden from accessibility.
+
+Some tests sometimes create duplicate failure messages. I haven't yet looked at why.
 
 ## Author
 

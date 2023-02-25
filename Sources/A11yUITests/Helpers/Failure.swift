@@ -11,8 +11,7 @@ enum Failure: String {
     case failure, warning
 
     func report(_ message: String,
-                _ element1: A11yElement? = nil,
-                _ element2: A11yElement? = nil,
+                _ elements: [A11yElement]? = nil,
                 reason: String? = nil
     ) -> String {
 
@@ -21,14 +20,13 @@ enum Failure: String {
             reasonMessage = " \(reason)."
         }
 
-        var elementMessage = "."
-        if let element1 = element1 {
-            if let element2 = element2 {
-                elementMessage = ": \(element1.description), \(element2.description)."
-            } else {
-                elementMessage = ": \(element1.description)."
-            }
-        }
+        let elementMessage = elements?.compactMap { $0 }
+            .map { "\($0.description)" }
+            .joined(separator: ", ")
+            .description
+            .appending(".")
+            .prepending(": ")
+             ?? "."
 
         let prefix = self == .warning ? "⚠️" : "❌"
 

@@ -32,3 +32,9 @@ internal extension String {
         }
     }
 }
+
+extension StringProtocol {
+    func prepending<T>(_ aString: T) -> String where T : StringProtocol {
+        "\(aString)\(self)"
+    }
+}
