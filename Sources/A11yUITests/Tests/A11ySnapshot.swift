@@ -207,19 +207,19 @@ final class A11ySnapshot {
         let snapWidth = snapshot.size.width
         let snapHeight = snapshot.size.height
 
-        XCTAssertEqual(refX, snapX, accuracy: A11yValues.floatComparisonTolerance,
+        XCTAssertEqual(refX, snapX, accuracy: A11yTestValues.floatComparisonTolerance,
                        Failure.failure.report("Frame does not match reference snapshot.\nReference x: \(refX). Snapshot x: \(snapX). Element name: \(label)"),
                        file: file, line: line)
 
-        XCTAssertEqual(refY, snapY, accuracy: A11yValues.floatComparisonTolerance,
+        XCTAssertEqual(refY, snapY, accuracy: A11yTestValues.floatComparisonTolerance,
                        Failure.failure.report("Frame does not match reference snapshot.\nReference y: \(refY). Snapshot y: \(snapY). Element name: \(label)"),
                        file: file, line: line)
 
-        XCTAssertEqual(refWidth, snapWidth, accuracy: A11yValues.floatComparisonTolerance,
+        XCTAssertEqual(refWidth, snapWidth, accuracy: A11yTestValues.floatComparisonTolerance,
                        Failure.failure.report("Frame does not match reference snapshot.\nReference width: \(refWidth). Snapshot width: \(snapWidth). Element name: \(label)"),
                        file: file, line: line)
 
-        XCTAssertEqual(refHeight, snapHeight, accuracy: A11yValues.floatComparisonTolerance,
+        XCTAssertEqual(refHeight, snapHeight, accuracy: A11yTestValues.floatComparisonTolerance,
                        Failure.failure.report("Frame does not match reference snapshot.\nReference height: \(refHeight). Snapshot height: \(snapHeight). Element name: \(label)"),
                        file: file, line: line)
     }

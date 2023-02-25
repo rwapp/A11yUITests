@@ -27,7 +27,7 @@ final class A11yAssertions {
 
         let heightDifference = element.frame.size.height - minFloatSize
         XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yValues.floatComparisonTolerance,
+                                    -A11yTestValues.floatComparisonTolerance,
                                     Failure.warning.report("Element not tall enough",
                                                            [element],
                                                            reason: "Minimum size: \(minSize)"),
@@ -36,7 +36,7 @@ final class A11yAssertions {
 
         let widthDifference = element.frame.size.width - minFloatSize
         XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yValues.floatComparisonTolerance,
+                                    -A11yTestValues.floatComparisonTolerance,
                                     Failure.warning.report("Element not wide enough",
                                                            [element],
                                                            reason: "Minimum size: \(minSize)"),
@@ -207,17 +207,17 @@ final class A11yAssertions {
         if (!allElements && !interactiveElement.isInteractive) ||
             !interactiveElement.isControl { return }
 
-        let heightDifference = interactiveElement.frame.size.height - A11yValues.minInteractiveSize
+        let heightDifference = interactiveElement.frame.size.height - A11yTestValues.minInteractiveSize
         XCTAssertGreaterThanOrEqual(heightDifference,
-                                    -A11yValues.floatComparisonTolerance,
+                                    -A11yTestValues.floatComparisonTolerance,
                                     Failure.failure.report("Interactive element not tall enough",
                                                            [interactiveElement]),
                                     file: file,
                                     line: line)
 
-        let widthDifference = interactiveElement.frame.size.width - A11yValues.minInteractiveSize
+        let widthDifference = interactiveElement.frame.size.width - A11yTestValues.minInteractiveSize
         XCTAssertGreaterThanOrEqual(widthDifference,
-                                    -A11yValues.floatComparisonTolerance,
+                                    -A11yTestValues.floatComparisonTolerance,
                                     Failure.failure.report("Interactive element not wide enough",
                                                            [interactiveElement]),
                                     file: file,

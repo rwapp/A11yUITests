@@ -1,5 +1,10 @@
 #  Changelog
 
+## 1.1.0
+
+* Added the ability to change default values for tests
+* Added the ability to specify accessibility label or accessibility identifier reported in failure messages
+
 ## 1.0.0
 
 * Addition of snapshot testing
