@@ -80,11 +80,6 @@ final class A11yAssertions {
 
         guard element.isControl else { return }
 
-        validLabelFor(element,
-                      length,
-                      file,
-                      line)
-
         // TODO: Localise this check
         A11yAssertFalse(element.label.containsCaseInsensitive("button"),
                         message: "Button should not contain the word 'button' in the accessibility label.",
@@ -116,11 +111,6 @@ final class A11yAssertions {
                        _ line: UInt) {
 
         guard image.type == .image else { return }
-
-        validLabelFor(image,
-                      length,
-                      file,
-                      line)
 
         // TODO: Localise this test
         let avoidWords = ["image", "picture", "graphic", "icon"]

@@ -22,7 +22,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 22 failures
+        // Produces 20 failures
 
         // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "Ends with button" Button.
         // Accessibility Warning - Elements have duplicated labels. Label: "Duplicated" Button, Label: "Duplicated" Button.

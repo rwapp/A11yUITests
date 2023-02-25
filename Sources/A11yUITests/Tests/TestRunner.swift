@@ -54,6 +54,11 @@ final class TestRunner {
                           _ file: StaticString,
                           _ line: UInt) {
 
+        var tests = tests
+        if tests.contains(.buttonLabel) || tests.contains(.imageLabel) {
+            tests.append(.labelPresence)
+        }
+
         if tests.contains(.minimumSize) {
             assertions.validSizeFor(element,
                                     minSize,
