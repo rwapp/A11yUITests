@@ -169,7 +169,11 @@ final class A11ySnapshot {
             return
         }
 
+        XCTAssertEqual(reference.snapshot.count, snapshot.snapshot.count, Failure.failure.report("Snapshots contain a different number of items. This screen has changed."), file: file, line: line)
+
         for i in 0..<reference.snapshot.count {
+
+            guard snapshot.snapshot.count > i else { return }
 
             let snapshotElement = snapshot.snapshot[i]
             let referenceElement = reference.snapshot[i]
