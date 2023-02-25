@@ -82,7 +82,8 @@ final class A11yAssertions {
 
         // TODO: Localise this check
         let nondescriptiveLabels = ["click here", "tap here", "more"]
-        nondescriptiveLabels.forEach {
+        let contained = element.label.containsWords(nondescriptiveLabels)
+        contained.forEach {
             A11yFail(message: "Button label may not be descriptive",
                      elements: [element],
                      reason: "Offending word: \($0)",
