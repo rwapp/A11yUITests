@@ -5,7 +5,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/A11yUITests.svg?style=flat)](https://cocoapods.org/pods/A11yUITests)
 [![Twitter](https://img.shields.io/twitter/follow/MobileA11y?style=flat)](https://twitter.com/mobilea11y)
 
-** This library is no longer maintained and you probably shouldn't use it. **
+**This library is no longer maintained and you probably shouldn't use it.**
 
 Instead consider using one or more of these tools that, tbh, do a better job.
 * [AccessibilitySnapshot](https://github.com/cashapp/AccessibilitySnapshot) - An accessibility snapshot testing library that can cover more than this approach is able to.
