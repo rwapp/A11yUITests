@@ -22,7 +22,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_allTests() {
-        // Produces 22 failures
+        // Produces 24 failures
 
         // Accessibility Failure - Button should not contain the word 'button' in the accessibility label. Label: "ENDS WITH BUTTON" Button.
         // Accessibility Warning - Elements have duplicated labels. Label: "Duplicated" Button, Label: "Duplicated" Button.
@@ -46,6 +46,8 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure - No label for element with placeholder "Placeholder". [No identifier] Text Field.
         // Accessibility Warning - Label is uppercased. Label: "ENDS WITH BUTTON" Button.
         // Accessibility Failure - Button label may not be descriptive. Label: "Click here" Button. Offending word: click here
+        // Accessibility Warning - Controls are closely spaced. Label: "Click here" Button, Label: "Duplicated" Button.
+        // Accessibility Failure - Controls are overlapping. Label: "Conflicting traits" Button, Label: "Overlapping" Button.
 
         a11yCheckAllOnScreen()
     }
@@ -63,7 +65,7 @@ class A11yUITestsExampleUITests: XCTestCase {
     }
 
     func test_buttons() {
-        // produces 14 failures
+        // produces 16 failures
 
         // Accessibility Failure - Button should not contain the word 'button' in the accessibility label Label: "ENDS WITH BUTTON" Button.
         // Accessibility Warning - Elements have duplicated labels. Label: "Duplicated" Button, Label: "Duplicated" Button.
@@ -79,6 +81,8 @@ class A11yUITestsExampleUITests: XCTestCase {
         // Accessibility Failure - Elements shouldn't have both Button and Link traits. Label: "Conflicting traits" Button.
         // Accessibility Warning - Label is uppercased. Label: "ENDS WITH BUTTON" Button.
         // Accessibility Failure - Button label may not be descriptive. Label: "Click here" Button. Offending word: click here
+        // Accessibility Warning - Controls are closely spaced. Label: "Duplicated" Button, Label: "Click here" Button.
+        // Accessibility Failure - Controls are overlapping. Label: "Conflicting traits" Button, Label: "Overlapping" Button.
 
         let buttons = XCUIApplication().buttons.allElementsBoundByIndex
         a11y(tests: a11yTestSuiteInteractive, on: buttons)

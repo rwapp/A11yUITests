@@ -174,6 +174,18 @@ Severity: Warning
 Duplicated accessibility labels can make your screen confusing to navigate with VoiceOver, and make Voice Control fail. Ideally you should avoid duplication if possible.
 Severity: Warning
 
+#### Control Spacing
+
+`controlSpacing` checks that controls have minimum padding between them. This is 8px for iPhone and 12px for iPad.
+12px minimum is recommended for iPad by the [HIG]( https://developer.apple.com/design/human-interface-guidelines/inputs/pointing-devices). 8px is set for iPhone and can be changed by setting a value to `A11yTestValues.iPhonePadding`.
+
+Note: 8px on iPhone is arbitrary.
+
+#### Control Overlap
+
+`controlOverlap` checks that controls don't have overlapping frames.
+Severity: Failure
+
 ## Snapshot tests
 
 Snapshot creates a JSON representation of your screen's accessibility tree on the first run. On subsequent runs this initial snapshot is taken as a reference. The test fails if there are any differences between the reference snapshot and the current snapshot. No assertions are made that the accessibility tree is correct or valid, you must make these checks yourself and generate a known-good reference snapshot to protect against future regressions.

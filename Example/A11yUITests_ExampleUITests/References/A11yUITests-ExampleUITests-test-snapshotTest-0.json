@@ -1,5 +1,5 @@
 {
-  "generated" : "2023-02-25T10:19:38Z",
+  "generated" : "2023-02-26T09:17:02Z",
   "filename" : "A11yUITests-ExampleUITests-test-snapshotTest-0.json",
   "snapshot" : [
     {
@@ -59,7 +59,7 @@
         ]
       ],
       "value" : "",
-      "label" : "Ends with button",
+      "label" : "ENDS WITH BUTTON",
       "type" : "Button"
     },
     {
@@ -231,7 +231,7 @@
       "frame" : [
         [
           16,
-          650.33333333333337
+          642.33333333333337
         ],
         [
           51,
@@ -239,7 +239,7 @@
         ]
       ],
       "value" : "",
-      "label" : "No trait",
+      "label" : "Click here",
       "type" : "Button"
     },
     {
@@ -252,7 +252,7 @@
       "frame" : [
         [
           16,
-          702.33333333333337
+          694.33333333333337
         ],
         [
           60,
@@ -273,15 +273,35 @@
       "frame" : [
         [
           16,
-          754.33333333333337
+          746.33333333333337
         ],
         [
           114,
-          44
+          58.666666666666629
         ]
       ],
       "value" : "",
       "label" : "Conflicting traits",
+      "type" : "Button"
+    },
+    {
+      "traits" : [
+        "Button"
+      ],
+      "placeholder" : "",
+      "enabled" : true,
+      "frame" : [
+        [
+          79,
+          746.33333333333337
+        ],
+        [
+          90,
+          54.333333333333258
+        ]
+      ],
+      "value" : "",
+      "label" : "Overlapping",
       "type" : "Button"
     },
     {
@@ -293,7 +313,7 @@
       "frame" : [
         [
           16,
-          806.33333333333337
+          813
         ],
         [
           361,
@@ -473,7 +493,7 @@
       "frame" : [
         [
           16,
-          663.33333333333337
+          655.33333333333337
         ],
         [
           51,
@@ -493,7 +513,7 @@
       "frame" : [
         [
           16,
-          715.33333333333337
+          707.33333333333337
         ],
         [
           60,
@@ -513,7 +533,7 @@
       "frame" : [
         [
           16,
-          767.33333333333337
+          766.66666666666663
         ],
         [
           114,
@@ -522,6 +542,26 @@
       ],
       "value" : "",
       "label" : "Conflicting traits",
+      "type" : "Label"
+    },
+    {
+      "traits" : [
+        "Static Text"
+      ],
+      "placeholder" : "",
+      "enabled" : true,
+      "frame" : [
+        [
+          94,
+          753.33333333333337
+        ],
+        [
+          59.333333333333343,
+          40.333333333333258
+        ]
+      ],
+      "value" : "",
+      "label" : "Overlapping",
       "type" : "Label"
     }
   ],

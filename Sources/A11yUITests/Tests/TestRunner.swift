@@ -42,6 +42,10 @@ final class TestRunner {
         if tests.contains(.duplicated) {
             assertions.checkDuplicates(file, line)
         }
+
+        if tests.contains(.controlSpacing) || tests.contains(.controlOverlap) {
+            assertions.checkControlSpacing(file, line)
+        }
     }
 
     private func runTests(_ tests: [A11yTests],
@@ -132,6 +136,10 @@ final class TestRunner {
             if tests.contains(.duplicated) {
                 assertions.duplicatedLabels(element,
                                             element2)
+            }
+
+            if tests.contains(.controlSpacing) || tests.contains(.controlOverlap) {
+                assertions.controlSpacing(element, element2, tests: tests)
             }
         }
     }

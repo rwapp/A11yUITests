@@ -118,7 +118,7 @@
                                 <state key="normal" title="Duplicated"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-Oo-XLH">
-                                <rect key="frame" x="20" y="638.33333333333337" width="51" height="44"/>
+                                <rect key="frame" x="20" y="630.33333333333337" width="51" height="44"/>
                                 <accessibility key="accessibilityConfiguration" label="Click here">
                                     <accessibilityTraits key="traits" none="YES"/>
                                 </accessibility>
@@ -129,7 +129,7 @@
                                 <state key="normal" title="No trait"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3AL-f7-ykx">
-                                <rect key="frame" x="20" y="690.33333333333337" width="60" height="44"/>
+                                <rect key="frame" x="20" y="682.33333333333337" width="60" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="AIv-1J-xnS"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="UcJ-z0-oQj"/>
@@ -137,7 +137,7 @@
                                 <state key="normal" title="Disabled"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqB-ly-1kg">
-                                <rect key="frame" x="20" y="742.33333333333337" width="114" height="44"/>
+                                <rect key="frame" x="20" y="734.33333333333337" width="114" height="44"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" link="YES"/>
                                 </accessibility>
@@ -148,16 +148,23 @@
                                 <state key="normal" title="Conflicting traits"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xMo-Ac-duC">
-                                <rect key="frame" x="20" y="794.33333333333337" width="388" height="34"/>
+                                <rect key="frame" x="20" y="786.33333333333337" width="388" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAA-ev-ja2">
+                                <rect key="frame" x="83" y="734.33333333333337" width="117" height="39.666666666666629"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Overlapping"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xMo-Ac-duC" firstAttribute="top" secondItem="VAA-ev-ja2" secondAttribute="bottom" constant="12.33" id="2kv-A7-2gh"/>
                             <constraint firstItem="XFT-69-rUL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="5mJ-J5-i9U"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="9W8-YC-SvW"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="top" secondItem="8bg-cb-wuu" secondAttribute="bottom" constant="8" id="ClV-Xc-dIu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VAA-ev-ja2" secondAttribute="trailing" constant="208" id="Dmz-VH-vz2"/>
                             <constraint firstItem="ExF-yl-Ptx" firstAttribute="top" secondItem="aPJ-3W-qDK" secondAttribute="bottom" constant="8" id="EDZ-jf-2Ag"/>
                             <constraint firstItem="xMo-Ac-duC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="HS6-cX-hCB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xMo-Ac-duC" secondAttribute="trailing" id="HiQ-2L-Hyn"/>
@@ -168,17 +175,19 @@
                             <constraint firstItem="B8l-93-lXx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ulk-GB-hC0"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="top" secondItem="Biz-z4-Rs6" secondAttribute="bottom" constant="8" id="VtF-a3-lnD"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="top" secondItem="ExF-yl-Ptx" secondAttribute="bottom" constant="8" id="Xf2-xA-0AW"/>
-                            <constraint firstItem="hEj-Oo-XLH" firstAttribute="top" secondItem="Rbt-uh-813" secondAttribute="bottom" constant="8" id="YeW-sk-53P"/>
+                            <constraint firstItem="hEj-Oo-XLH" firstAttribute="top" secondItem="Rbt-uh-813" secondAttribute="bottom" id="YeW-sk-53P"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ygu-tg-wij"/>
                             <constraint firstItem="8bg-cb-wuu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aqD-ey-eNr"/>
                             <constraint firstItem="lJw-cj-fHr" firstAttribute="top" secondItem="lme-nc-64l" secondAttribute="bottom" constant="8" id="ckv-J0-9TD"/>
                             <constraint firstItem="lme-nc-64l" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dWD-0U-PNn"/>
                             <constraint firstItem="Biz-z4-Rs6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fTX-uW-itu"/>
                             <constraint firstItem="TC2-DV-qmK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="fyo-Fb-ZbR"/>
+                            <constraint firstItem="VAA-ev-ja2" firstAttribute="top" secondItem="3AL-f7-ykx" secondAttribute="bottom" constant="8" id="grh-j0-qT7"/>
                             <constraint firstItem="AqB-ly-1kg" firstAttribute="top" secondItem="3AL-f7-ykx" secondAttribute="bottom" constant="8" id="iIk-Qu-8nJ"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="width" secondItem="aPJ-3W-qDK" secondAttribute="height" multiplier="200:271" id="ki3-7L-2mY"/>
                             <constraint firstItem="Rbt-uh-813" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="l7Y-xc-Srn"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="m8Y-jL-NGP"/>
+                            <constraint firstItem="VAA-ev-ja2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="63" id="oux-ed-nv8"/>
                             <constraint firstItem="ExF-yl-Ptx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="sbP-Hh-NS0"/>
                             <constraint firstItem="aPJ-3W-qDK" firstAttribute="top" secondItem="lJw-cj-fHr" secondAttribute="bottom" constant="8" id="vTO-mN-7dX"/>
                             <constraint firstItem="xMo-Ac-duC" firstAttribute="top" secondItem="AqB-ly-1kg" secondAttribute="bottom" constant="8" id="wFQ-YK-k0Z"/>
