@@ -19,4 +19,5 @@ public enum A11yTestValues {
     public static let allInteractiveElements = true
     public static let floatComparisonTolerance: CGFloat = 0.1
     public static let preferredItemLabel: ReportValue = .label
+    public static let iPhonePadding = 8
 }

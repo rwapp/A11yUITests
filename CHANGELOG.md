@@ -10,6 +10,9 @@
 * Added a test for common non-descriptive button titles following [SC 2.4.9: Link Purpose (Link Only) (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only)
 * Added a test for uppercase labels
 * Added tests for element types in labels
+* Added a test for closely spaced controls
+* Added a test for overlapping controls
+* Updated interactive suite
 * Fixed a crash when performing a snapshot test on a screen with fewer elements that the reference
 * Fixes an issue where some tests were run more than once
 

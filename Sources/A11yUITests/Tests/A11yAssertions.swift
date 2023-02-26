@@ -11,6 +11,8 @@ final class A11yAssertions {
 
     private var hasHeader = false
     private var duplicatedItems = [String: Set<A11yElement>]()
+    private var closeControls = [Int: Set<A11yElement>]()
+    private var overlappedControls = [Int: Set<A11yElement>]()
 
     func setupTests() {
         hasHeader = false
@@ -344,5 +346,62 @@ final class A11yAssertions {
             let element = duplicatePair.element.value
             A11yFail(message: "Elements have duplicated labels.", elements: Array(element), severity: .warning, file: file, line: line)
         }
+    }
+
+    func controlSpacing(_ element1: A11yElement,
+                        _ element2: A11yElement,
+                        tests: [A11yTests] ) {
+        guard element1.isControl,
+              element2.isControl,
+              element1.id != element2.id else { return }
+
+        let hash = hashElements(element1, element2)
+
+        guard overlappedControls[hash] == nil,
+              closeControls[hash] == nil else { return }
+
+        if element1.frame.intersects(element2.frame) {
+            if tests.contains(.controlOverlap) {
+                overlappedControls[hash] = [element1, element2]
+            }
+
+            return
+        }
+
+        let padding = UIDevice.current.userInterfaceIdiom == .pad ? 12 : A11yTestValues.iPhonePadding
+
+        let expandedFrame1 = CGRect(x: element1.frame.origin.x - CGFloat(padding), y: element1.frame.origin.y - CGFloat(padding), width: element1.frame.size.width + CGFloat(padding * 2), height: element1.frame.size.height + CGFloat(padding * 2))
+
+        if tests.contains(.controlSpacing) && expandedFrame1.intersects(element2.frame) {
+            closeControls[hash] = [element1, element2]
+        }
+    }
+
+    func checkControlSpacing(_ file: StaticString, _ line: UInt) {
+        overlappedControls.values.forEach {
+            A11yFail(message: "Controls are overlapping.",
+                     elements: Array($0),
+                     severity: .failure,
+                     file: file,
+                     line: line)
+        }
+
+        closeControls.values.forEach {
+            A11yFail(message: "Controls are closely spaced.",
+                     elements: Array($0),
+                     severity: .warning,
+                     file: file,
+                     line: line)
+        }
+    }
+
+    private func hashElements(_ element1: A11yElement, _ element2: A11yElement) -> Int {
+        var hasher = Hasher()
+        [element1.id.uuidString, element2.id.uuidString].sorted { $0 > $1}
+            .forEach {
+                hasher.combine($0)
+            }
+
+        return hasher.finalize()
     }
 }
