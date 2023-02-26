@@ -397,7 +397,7 @@ final class A11yAssertions {
 
     private func hashElements(_ element1: A11yElement, _ element2: A11yElement) -> Int {
         var hasher = Hasher()
-        [element1.id.uuidString, element2.id.uuidString].sorted { $0 > $1}
+        [element1.id.uuidString, element2.id.uuidString].sorted { $0 > $1 }
             .forEach {
                 hasher.combine($0)
             }

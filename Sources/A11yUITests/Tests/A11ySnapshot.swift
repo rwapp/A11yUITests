@@ -37,6 +37,17 @@ final class A11ySnapshot {
         }
     }
 
+    private struct Screen {
+        let snapshot: SnapshotWrapper
+        let elements: [A11yElement]
+
+        init(elements: [A11yElement], fileName: String) {
+            self.elements = elements.filter { $0.codable != nil }
+            self.snapshot = SnapshotWrapper(snapshots: elements.compactMap { $0.codable }, fileName: fileName)
+
+        }
+    }
+
     private let forbiddenCharacters: [Character] = ["(", ")",]
 
     private var calledInFunction = 0
@@ -78,7 +89,7 @@ final class A11ySnapshot {
 
         let suite = ((String(testsFile) as NSString).lastPathComponent as NSString).deletingPathExtension
         if currentFunction == testName &&
-        currentSuite == suite {
+            currentSuite == suite {
             calledInFunction += 1
         } else {
             calledInFunction = 0
@@ -86,7 +97,7 @@ final class A11ySnapshot {
             currentSuite = suite
         }
 
-        let snapshot = SnapshotWrapper(snapshots: screen.compactMap { $0.codable }, fileName: fileName)
+        let screen = Screen(elements: screen, fileName: fileName)
 
         let path = Bundle(for: type(of: test)).bundleURL.appendingPathComponent(fileName)
         let decoder = JSONDecoder()
@@ -94,10 +105,10 @@ final class A11ySnapshot {
 
         if let data = try? Data(contentsOf: path),
            let referenceScreen = try? decoder.decode(SnapshotWrapper.self, from: data) {
-            compareScreens(reference: referenceScreen, snapshot: snapshot, test: test, file: testsFile, line: line)
+            compareScreens(reference: referenceScreen, screen: screen, test: test, file: testsFile, line: line)
 
         } else {
-            if let docPath = createNewSnapshot(snapshot, test: test, file: testsFile, line: line) {
+            if let docPath = createNewSnapshot(screen.snapshot, test: test, file: testsFile, line: line) {
                 A11yFail(message: "No reference snapshot. Generated new snapshot.\nCheck test report or \(docPath)", severity: .warning, file: testsFile, line: line)
                 return
             }
@@ -143,13 +154,13 @@ final class A11ySnapshot {
     }
 
     private func compareScreens(reference: SnapshotWrapper,
-                                snapshot: SnapshotWrapper,
+                                screen: Screen,
                                 test: XCTestCase,
                                 file: StaticString,
                                 line: UInt) {
 
         if reference.version < SnapshotWrapper.snapshotVersion {
-            if let docPath = createNewSnapshot(snapshot, test: test, file: file, line: line) {
+            if let docPath = createNewSnapshot(screen.snapshot, test: test, file: file, line: line) {
                 A11yFail(message: "Reference snapshot is outdated. Generated new snapshot. Check for regressions before replacing as reference.\nCheck test report or \(docPath)", severity: .warning, file: file, line: line)
 
                 return
@@ -160,7 +171,7 @@ final class A11ySnapshot {
         }
 
         A11yAssertEqual(reference.snapshot.count,
-                        snapshot.snapshot.count,
+                        screen.snapshot.snapshot.count,
                         message: "Snapshots contain a different number of items. This screen has changed",
                         severity: .failure,
                         file: file,
@@ -168,32 +179,35 @@ final class A11ySnapshot {
 
         for i in 0..<reference.snapshot.count {
 
-            guard snapshot.snapshot.count > i else { return }
+            guard screen.snapshot.snapshot.count > i else { return }
 
-            let snapshotElement = snapshot.snapshot[i]
+            let snapshotElement = screen.elements[i]
             let referenceElement = reference.snapshot[i]
             let snapshotElementLabel = snapshotElement.label
 
             A11yAssertEqual(referenceElement.label,
                             snapshotElementLabel,
                             message: "Label does not match reference snapshot",
+                            elements: [snapshotElement],
                             reason: "Reference: \(referenceElement.label). Snapshot: \(snapshotElementLabel)",
                             severity: .failure,
                             file: file,
                             line: line)
 
             A11yAssertEqual(referenceElement.type,
-                            snapshotElement.type,
+                            snapshotElement.type.name(),
                             message: "Type does not match reference snapshot",
+                            elements: [snapshotElement],
                             reason: "Reference: \(referenceElement.type). Snapshot: \(snapshotElement.type)",
                             severity: .failure,
                             file: file,
                             line: line)
 
             A11yAssertEqual(referenceElement.traits,
-                            snapshotElement.traits,
+                            snapshotElement.traits?.names() ?? [],
                             message: "Traits do not match reference snapshot",
-                            reason: "Reference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits.joined(separator: ", "))",
+                            elements: [snapshotElement],
+                            reason: "Reference: \(referenceElement.traits.joined(separator: ", ")). Snapshot: \(snapshotElement.traits?.nameString() ?? "")",
                             severity: .failure,
                             file: file,
                             line: line)
@@ -201,45 +215,50 @@ final class A11ySnapshot {
             A11yAssertEqual(referenceElement.enabled,
                             snapshotElement.enabled,
                             message: "Enabled status does not match reference snapshot",
+                            elements: [snapshotElement],
                             reason: "Reference: \(referenceElement.enabled). Snapshot: \(snapshotElement.enabled)",
                             severity: .failure,
                             file: file,
                             line: line)
 
-            compareFrame(reference: referenceElement.frame, snapshot: snapshotElement.frame, label: snapshotElementLabel, file: file, line: line)
+            compareFrame(reference: referenceElement.frame, snapshot: snapshotElement, label: snapshotElementLabel, file: file, line: line)
         }
     }
 
-    private func compareFrame(reference: CGRect, snapshot: CGRect, label: String, file: StaticString, line: UInt) {
+    private func compareFrame(reference: CGRect, snapshot: A11yElement, label: String, file: StaticString, line: UInt) {
 
         let refX = reference.origin.x
         let refY = reference.origin.y
         let refWidth = reference.size.width
         let refHeight = reference.size.height
 
-        let snapX = snapshot.origin.x
-        let snapY = snapshot.origin.y
-        let snapWidth = snapshot.size.width
-        let snapHeight = snapshot.size.height
+        let snapX = snapshot.frame.origin.x
+        let snapY = snapshot.frame.origin.y
+        let snapWidth = snapshot.frame.size.width
+        let snapHeight = snapshot.frame.size.height
 
         A11yAssertEqual(refX, snapX, accuracy: A11yTestValues.floatComparisonTolerance,
                         message: "Frame does not match reference snapshot",
-                        reason: "Reference x: \(refX). Snapshot x: \(snapX)",
+                        elements: [snapshot],
+                        reason: "Reference x: \(refX.printable). Snapshot x: \(snapX.printable)",
                         severity: .failure, file: file, line: line)
 
         A11yAssertEqual(refY, snapY, accuracy: A11yTestValues.floatComparisonTolerance,
                         message: "Frame does not match reference snapshot",
-                        reason: "Reference y: \(refY). Snapshot y: \(snapY)",
+                        elements: [snapshot],
+                        reason: "Reference y: \(refY.printable). Snapshot y: \(snapY.printable)",
                         severity: .failure, file: file, line: line)
 
         A11yAssertEqual(refWidth, snapWidth, accuracy: A11yTestValues.floatComparisonTolerance,
                         message: "Frame does not match reference snapshot",
-                        reason: "Reference width: \(refWidth). Snapshot width: \(snapWidth)",
+                        elements: [snapshot],
+                        reason: "Reference width: \(refWidth.printable). Snapshot width: \(snapWidth.printable)",
                         severity: .failure, file: file, line: line)
 
         A11yAssertEqual(refHeight, snapHeight, accuracy: A11yTestValues.floatComparisonTolerance,
                         message: "Frame does not match reference snapshot",
-                        reason: "Reference height: \(refHeight). Snapshot height: \(snapHeight)",
+                        elements: [snapshot],
+                        reason: "Reference height: \(refHeight.printable). Snapshot height: \(snapHeight.printable)",
                         severity: .failure, file: file, line: line)
     }
 }
